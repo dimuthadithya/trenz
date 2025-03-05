@@ -18,6 +18,11 @@ Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name
 
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+Route::get('/women', function () {
+    return view('pages.women');
+})->name('women');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
