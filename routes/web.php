@@ -8,6 +8,10 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register');

@@ -69,13 +69,21 @@
     <script src="{{ asset('assets/js/notyf.js') }}"></script>
 
     <!-- login sucess message -->
-    @if (session('login_success'))
+    @if(session('login_success'))
     <script>
-        notyf.success("Login Successful!");
+        notyf.open({
+            type: "login",
+            message: "{{ session('login_success') }}"
+        });
     </script>
-    @elseif (session('logout_success'))
+    @endif
+
+    @if(session('logout_success'))
     <script>
-        notyf.warning("Logout Successful!");
+        notyf.open({
+            type: "logout",
+            message: "{{ session('logout_success') }}"
+        });
     </script>
     @endif
     <!-- login sucess message end -->

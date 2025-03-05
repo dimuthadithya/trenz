@@ -6,23 +6,14 @@ const notyf = new Notyf({
     },
     types: [
         {
-            type: "warning",
-            background: "orange",
-            icon: {
-                className: "material-icons",
-                tagName: "i",
-                text: "warning",
-            },
-        },
-        {
-            type: "success",
-            background: "rgb(61, 199, 99)",
+            type: "login",
+            background: "rgb(61, 199, 99)", // Green for login success
             duration: 5000,
             dismissible: true,
         },
         {
-            type: "warning",
-            background: "red",
+            type: "logout",
+            background: "rgb(255, 69, 58)", // Red for logout success
             duration: 5000,
             dismissible: true,
         },
