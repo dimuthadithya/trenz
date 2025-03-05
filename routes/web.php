@@ -22,6 +22,16 @@ Route::get('/women', function () {
     return view('pages.women');
 })->name('women');
 
+Route::get('/men', function () {
+    return view('pages.men');
+})->name('men');
+
+Route::get('/kids', function () {
+    return view('pages.kids');
+})->name('kids');
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

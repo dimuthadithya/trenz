@@ -44,7 +44,8 @@
                        <ul>
                            <li class="active"><a href="{{ route('home') }}">Home</a></li>
                            <li><a href="{{ route('women') }}">Women’s</a></li>
-                           <li><a href="#">Men’s</a></li>
+                           <li><a href="{{ route('men') }}">Men’s</a></li>
+                           <li><a href="{{ route('kids') }}">Kid's</a></li>
                            <li><a href="./shop.html">Shop</a></li>
                            <li>
                                <a href="#">Pages</a>
