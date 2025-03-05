@@ -18,6 +18,10 @@ Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name
 
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+Route::get('/checkout', function () {
+    return view('pages.checkout');
+})->name('checkout');
+
 Route::get('/women', function () {
     return view('pages.women');
 })->name('women');
@@ -28,7 +32,7 @@ Route::get('/men', function () {
 
 Route::get('/kids', function () {
     return view('pages.kids');
-})->name('kids');
+})->name('kid');
 
 
 
