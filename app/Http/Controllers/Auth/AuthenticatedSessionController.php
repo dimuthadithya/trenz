@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -24,11 +25,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
 
+
+        $request->authenticate();
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        Session::flash('login_success', 'You have successfully logged in!');
+        return redirect()->intended(route('home', absolute: false));
     }
 
     /**
@@ -41,6 +44,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        Session::flash('logout_success', 'You have been logged out successfully!');
 
         return redirect('/');
     }

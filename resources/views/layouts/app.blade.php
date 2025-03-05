@@ -15,6 +15,9 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
 
+    <!-- Notyf -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}" type="text/css" />
@@ -49,6 +52,8 @@
     </div>
     <!-- Search End -->
 
+    <!-- notyf -->
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
     <!-- Js Plugins -->
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
@@ -61,6 +66,19 @@
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/notyf.js') }}"></script>
+
+    <!-- login sucess message -->
+    @if (session('login_success'))
+    <script>
+        notyf.success("Login Successful!");
+    </script>
+    @elseif (session('logout_success'))
+    <script>
+        notyf.warning("Logout Successful!");
+    </script>
+    @endif
+    <!-- login sucess message end -->
 </body>
 
 </html>
