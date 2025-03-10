@@ -10,21 +10,31 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
     public function indexMen()
     {
-        return view('pages.men');
+        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('categories.parent_category_id', 2)
+            ->get();
+
+        return view('pages.men', compact('products'));
     }
+
     public function indexWomen()
     {
-        return view('pages.women');
+        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('categories.parent_category_id', 1)
+            ->get();
+
+        return view('pages.women', compact('products'));
     }
+
     public function indexKid()
     {
-        return view('pages.kids');
+        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('categories.parent_category_id', 3)
+            ->get();
+
+        return view('pages.kids', compact('products'));
     }
 
     /**
