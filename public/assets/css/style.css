@@ -322,9 +322,9 @@ ol {
 	box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 }
 
-.header__logo {
+/* .header__logo {
 	padding: 26px 0;
-}
+} */
 
 .header__logo a {
 	display: inline-block;
@@ -3679,4 +3679,17 @@ ol {
 		width: 100%;
 		font-size: 24px;
 	}
+}
+
+.logo{
+object-fit: cover;
+width: 150px;
+height: auto;
+}
+
+.header__logo{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	height: 100%;
 }

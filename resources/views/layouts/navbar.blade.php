@@ -22,7 +22,7 @@
          </ul>
          <div class="offcanvas__logo">
              <a href="{{ route('home') }}">
-                 <span>Trenz</span>
+                 <img class="logo" src="{{ asset('assets/img/logo/logo.png') }}" alt="">
              </a>
          </div>
          <div id="mobile-menu-wrap"></div>
@@ -38,9 +38,9 @@
          <div class="container-fluid">
              <div class="row">
                  <div class="col-xl-3 col-lg-2">
-                     <div class="header__logo">
+                     <div class=" header__logo">
                          <a href="{{ route('home') }}">
-                             <span class="brand_text text-dark h1">Trenz</span>
+                             <img class="logo" src="{{ asset('assets/img/logo/logo.png') }}" alt="">
                          </a>
                      </div>
                  </div>
