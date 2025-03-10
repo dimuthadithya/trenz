@@ -14,6 +14,18 @@ class ProductController extends Controller
     {
         //
     }
+    public function indexMen()
+    {
+        return view('pages.men');
+    }
+    public function indexWomen()
+    {
+        return view('pages.women');
+    }
+    public function indexKid()
+    {
+        return view('pages.kids');
+    }
 
     /**
      * Show the form for creating a new resource.

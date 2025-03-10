@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,17 +23,9 @@ Route::get('/checkout', function () {
     return view('pages.checkout');
 })->name('checkout');
 
-Route::get('/women', function () {
-    return view('pages.women');
-})->name('women');
-
-Route::get('/men', function () {
-    return view('pages.men');
-})->name('men');
-
-Route::get('/kids', function () {
-    return view('pages.kids');
-})->name('kid');
+Route::get('/men', [ProductController::class, 'indexMen'])->name('men');
+Route::get('/women', [ProductController::class, 'indexWomen'])->name('women');
+Route::get('/kids', [ProductController::class, 'indexKid'])->name('kid');
 
 
 
