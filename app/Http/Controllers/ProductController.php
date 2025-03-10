@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,27 +13,30 @@ class ProductController extends Controller
      */
     public function indexMen()
     {
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
-            ->where('categories.parent_category_id', 2)
-            ->get();
+        $menCategoryIds = Category::where('parent_category_id', 2)->pluck('id');
+
+        // Get products that belong to these categories
+        $products = Product::whereIn('category_id', $menCategoryIds)->get();
 
         return view('pages.men', compact('products'));
     }
 
     public function indexWomen()
     {
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
-            ->where('categories.parent_category_id', 1)
-            ->get();
+        $menCategoryIds = Category::where('parent_category_id', 1)->pluck('id');
+
+        // Get products that belong to these categories
+        $products = Product::whereIn('category_id', $menCategoryIds)->get();
 
         return view('pages.women', compact('products'));
     }
 
     public function indexKid()
     {
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
-            ->where('categories.parent_category_id', 3)
-            ->get();
+        $menCategoryIds = Category::where('parent_category_id', 3)->pluck('id');
+
+        // Get products that belong to these categories
+        $products = Product::whereIn('category_id', $menCategoryIds)->get();
 
         return view('pages.kids', compact('products'));
     }
@@ -59,6 +63,7 @@ class ProductController extends Controller
     public function show(Product $id)
     {
         $product = Product::findOrFail($id->id);
+
 
         // Pass the product to the view
         return view('pages.product-details', compact('product'));

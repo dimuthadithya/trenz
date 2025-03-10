@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <div class="product__item__text">
-                <h6><a href="#">{{ $product->name ?? 'Buttons tweed blazer' }}</a></h6>
+                <h6><a href="#">{{ $product->name ?? 'Buttons tweed blazer' }}{{ $product->id }}</a></h6>
                 <div class="rating">
                     @php
                     $rating = $rating ?? 0;
