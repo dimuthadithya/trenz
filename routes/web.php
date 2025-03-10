@@ -26,6 +26,7 @@ Route::get('/checkout', function () {
 Route::get('/men', [ProductController::class, 'indexMen'])->name('men');
 Route::get('/women', [ProductController::class, 'indexWomen'])->name('women');
 Route::get('/kids', [ProductController::class, 'indexKid'])->name('kid');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 
 

@@ -3693,3 +3693,8 @@ height: auto;
 	align-items: center;
 	height: 100%;
 }
+
+.page_redirect{
+	height: 100%;
+	display: block;
+}
