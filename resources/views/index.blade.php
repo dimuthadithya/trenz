@@ -8,7 +8,7 @@
             class="categories__item categories__large__item set-bg"
             data-setbg="{{ asset('assets/img/categories/category-1.jpg ')}}">
             <div class="categories__text">
-              <h1>Women’s fTrenz</h1>
+              <h1>Women’s fashion</h1>
               <p>
                 Sitamet, consectetur adipiscing elit, sed do eiusmod tempor
                 incidid-unt labore edolore magna aliquapendisse ultrices
@@ -25,7 +25,7 @@
                 class="categories__item set-bg"
                 data-setbg="{{ asset('assets/img/categories/category-2.jpg') }}">
                 <div class="categories__text">
-                  <h4>Men’s fTrenz</h4>
+                  <h4>Men’s fashion</h4>
                   <p>358 items</p>
                   <a href="#">Shop now</a>
                 </div>
@@ -36,7 +36,7 @@
                 class="categories__item set-bg"
                 data-setbg="{{ asset('assets/img/categories/category-3.jpg') }}">
                 <div class="categories__text">
-                  <h4>Kid’s fTrenz</h4>
+                  <h4>Kid’s fashion</h4>
                   <p>273 items</p>
                   <a href="#">Shop now</a>
                 </div>

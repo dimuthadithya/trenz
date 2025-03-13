@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,8 @@ Route::get('/men', [ProductController::class, 'indexMen'])->name('men');
 Route::get('/women', [ProductController::class, 'indexWomen'])->name('women');
 Route::get('/kids', [ProductController::class, 'indexKid'])->name('kid');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
 
 
 
