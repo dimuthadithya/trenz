@@ -31,6 +31,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         Session::flash('login_success', 'You have successfully logged in!');
+
+        if (Auth::user()->role == 'admin') {
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
+
         return redirect()->intended(route('home', absolute: false));
     }
 
