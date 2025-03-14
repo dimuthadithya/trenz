@@ -358,12 +358,16 @@
                 <div
                     class="pt-2 pb-4 d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h3 class="mb-3 fw-bold">Dashboard</h3>
-                        <h6 class="mb-2 op-7">Free Bootstrap 5 Admin Dashboard</h6>
+                        <h3 class="mb-1 fw-bold">Dashboard</h3>
+                        <h5 class=" op-7">
+                            Welcome to @auth
+                            {{ auth()->user()->name }}'s
+                            @endauth dashboard,
+                        </h5>
                     </div>
                     <div class="py-2 ms-md-auto py-md-0">
                         <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-                        <a href="#" class="btn btn-primary btn-round">Add Customer</a>
+                        <a href="#" class="btn btn-primary btn-round">Add Admin</a>
                     </div>
                 </div>
                 <div class="row">
@@ -379,7 +383,7 @@
                                     </div>
                                     <div class="col col-stats ms-3 ms-sm-0">
                                         <div class="numbers">
-                                            <p class="card-category">Visitors</p>
+                                            <p class="card-category">Users</p>
                                             <h4 class="card-title">1,294</h4>
                                         </div>
                                     </div>
@@ -654,7 +658,7 @@
                         <div class="card card-round">
                             <div class="card-body">
                                 <div class="card-head-row card-tools-still-right">
-                                    <div class="card-title">New Customers</div>
+                                    <div class="card-title">New Users</div>
                                     <div class="card-tools">
                                         <div class="dropdown">
                                             <button

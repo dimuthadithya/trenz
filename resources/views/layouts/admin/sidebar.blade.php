@@ -54,225 +54,227 @@
                           <h4 class="text-section">Components</h4>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#base">
+                          <a data-bs-toggle="collapse" href="#users">
                               <i class="fas fa-layer-group"></i>
-                              <p>Base</p>
+                              <p>Users</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="base">
+                          <div class="collapse" id="users">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="components/avatars.html">
-                                          <span class="sub-item">Avatars</span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="components/buttons.html">
-                                          <span class="sub-item">Buttons</span>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="components/gridsystem.html">
-                                          <span class="sub-item">Grid System</span>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="components/panels.html">
-                                          <span class="sub-item">Panels</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="components/notifications.html">
-                                          <span class="sub-item">Notifications</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="components/sweetalert.html">
-                                          <span class="sub-item">Sweet Alert</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="components/font-awesome-icons.html">
-                                          <span class="sub-item">Font Awesome Icons</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="components/simple-line-icons.html">
-                                          <span class="sub-item">Simple Line Icons</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="components/typography.html">
-                                          <span class="sub-item">Typography</span>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                          <a data-bs-toggle="collapse" href="#products">
                               <i class="fas fa-th-list"></i>
-                              <p>Sidebar Layouts</p>
+                              <p>Products</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="sidebarLayouts">
+                          <div class="collapse" id="products">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="sidebar-style-2.html">
-                                          <span class="sub-item">Sidebar Style 2</span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="icon-menu.html">
-                                          <span class="sub-item">Icon Menu</span>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#forms">
+                          <a data-bs-toggle="collapse" href="#Orders">
                               <i class="fas fa-pen-square"></i>
-                              <p>Forms</p>
+                              <p>Orders</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="forms">
+                          <div class="collapse" id="Orders">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="forms/forms.html">
-                                          <span class="sub-item">Basic Form</span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#tables">
+                          <a data-bs-toggle="collapse" href="#category">
                               <i class="fas fa-table"></i>
-                              <p>Tables</p>
+                              <p>Category</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="tables">
+                          <div class="collapse" id="category">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="tables/tables.html">
-                                          <span class="sub-item">Basic Table</span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="tables/datatables.html">
-                                          <span class="sub-item">Datatables</span>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#maps">
+                          <a data-bs-toggle="collapse" href="#payments">
                               <i class="fas fa-map-marker-alt"></i>
-                              <p>Maps</p>
+                              <p>Payments</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="maps">
+                          <div class="collapse" id="payments">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="maps/googlemaps.html">
-                                          <span class="sub-item">Google Maps</span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="maps/jsvectormap.html">
-                                          <span class="sub-item">Jsvectormap</span>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#charts">
+                          <a data-bs-toggle="collapse" href="#productImage">
                               <i class="far fa-chart-bar"></i>
-                              <p>Charts</p>
+                              <p>Product Image</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="charts">
+                          <div class="collapse" id="productImage">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="charts/charts.html">
-                                          <span class="sub-item">Chart Js</span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="charts/sparkline.html">
-                                          <span class="sub-item">Sparkline</span>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a href="widgets.html">
+                          <a data-bs-toggle="collapse" href="#reviews">
                               <i class="fas fa-desktop"></i>
-                              <p>Widgets</p>
-                              <span class="badge badge-success">4</span>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="../../documentation/index.html">
-                              <i class="fas fa-file"></i>
-                              <p>Documentation</p>
-                              <span class="badge badge-secondary">1</span>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#submenu">
-                              <i class="fas fa-bars"></i>
-                              <p>Menu Levels</p>
+                              <p>Reviews</p>
                               <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="submenu">
+                          <div class="collapse" id="reviews">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a data-bs-toggle="collapse" href="#subnav1">
-                                          <span class="sub-item">Level 1</span>
-                                          <span class="caret"></span>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
                                       </a>
-                                      <div class="collapse" id="subnav1">
-                                          <ul class="nav nav-collapse subnav">
-                                              <li>
-                                                  <a href="#">
-                                                      <span class="sub-item">Level 2</span>
-                                                  </a>
-                                              </li>
-                                              <li>
-                                                  <a href="#">
-                                                      <span class="sub-item">Level 2</span>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
                                   </li>
                                   <li>
-                                      <a data-bs-toggle="collapse" href="#subnav2">
-                                          <span class="sub-item">Level 1</span>
-                                          <span class="caret"></span>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
                                       </a>
-                                      <div class="collapse" id="subnav2">
-                                          <ul class="nav nav-collapse subnav">
-                                              <li>
-                                                  <a href="#">
-                                                      <span class="sub-item">Level 2</span>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
                                   </li>
                                   <li>
-                                      <a href="#">
-                                          <span class="sub-item">Level 1</span>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
                           </div>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{ route('logout') }}">
+                              <i class="fas fa-sign-out-alt"></i>
+                              <p>Logout</p>
+                          </a>
                       </li>
                   </ul>
               </div>
