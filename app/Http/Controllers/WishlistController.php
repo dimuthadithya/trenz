@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WishlistController extends Controller
 {
@@ -15,8 +16,12 @@ class WishlistController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $wishlistItems = Wishlist::where('user_id', $user->id)->with('product')->get();
+        $wishlistItems = Wishlist::where('user_id', $user->id)
+            ->join('products', 'wishlists.product_id', '=', 'products.id')
+            ->select('products.*')
+            ->get();
 
+        // dd($wishlistItems);
         return view('pages.wishlist', compact('wishlistItems'));
     }
 
@@ -74,8 +79,5 @@ class WishlistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Wishlist $wishlist)
-    {
-        //
-    }
+    public function destroy(Wishlist $wishlistId) {}
 }

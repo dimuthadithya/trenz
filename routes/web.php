@@ -34,6 +34,8 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.in
 
 
 
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
