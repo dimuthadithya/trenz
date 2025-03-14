@@ -18,8 +18,11 @@ class AdminController extends Controller
         $adminsCount = User::where('role', 'admin')->count();
         $productsCount = Product::count();
         $ordersCount = Order::count();
+        $newUsers = User::where('role', 'customer')->orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('pages.admin.index', compact('usersCount', 'adminsCount', 'productsCount', 'ordersCount'));
+
+
+        return view('pages.admin.index', compact('usersCount', 'adminsCount', 'productsCount', 'ordersCount', 'newUsers'));
     }
 
     /**
