@@ -55,7 +55,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#users">
-                              <i class="fas fa-layer-group"></i>
+                              <i class="fas fa-users"></i>
                               <p>Users</p>
                               <span class="caret"></span>
                           </a>
@@ -86,7 +86,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#admins">
-                              <i class="fas fa-layer-group"></i>
+                              <i class="fas fa-user-secret"></i>
                               <p>Admins</p>
                               <span class="caret"></span>
                           </a>
@@ -117,7 +117,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#products">
-                              <i class="fas fa-th-list"></i>
+                              <i class="fas fa-shopping-bag"></i>
                               <p>Products</p>
                               <span class="caret"></span>
                           </a>
@@ -148,7 +148,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#Orders">
-                              <i class="fas fa-pen-square"></i>
+                              <i class="fas fa-truck"></i>
                               <p>Orders</p>
                               <span class="caret"></span>
                           </a>
@@ -210,7 +210,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#payments">
-                              <i class="fas fa-map-marker-alt"></i>
+                              <i class="fas fa-credit-card"></i>
                               <p>Payments</p>
                               <span class="caret"></span>
                           </a>
@@ -241,7 +241,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#productImage">
-                              <i class="far fa-chart-bar"></i>
+                              <i class="far fa-image"></i>
                               <p>Product Image</p>
                               <span class="caret"></span>
                           </a>
@@ -272,7 +272,7 @@
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#reviews">
-                              <i class="fas fa-desktop"></i>
+                              <i class="fas fa-star"></i>
                               <p>Reviews</p>
                               <span class="caret"></span>
                           </a>
