@@ -3718,3 +3718,7 @@ height: auto;
 	height: 100%;
 	display: block;
 }
+
+.border-rd{
+	border: 5px solid red;
+}

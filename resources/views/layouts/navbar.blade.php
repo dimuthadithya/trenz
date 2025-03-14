@@ -48,7 +48,7 @@
             </div>
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
-                    <ul>
+                    <ul class="d-flex justify-content-center">
                         <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}">
                             <a href="{{ route('home') }}">Home</a>
                         </li>
@@ -61,21 +61,6 @@
                         <li class="{{ Route::currentRouteName() == 'kid' ? 'active' : '' }}">
                             <a href="{{ route('kid') }}">Kid's</a>
                         </li>
-                        <li class="{{Route::currentRouteName() == 'home' ? 'active' : '' }}}}">
-                            <a href="./shop.html">Shop</a>
-                        </li>
-                        <li>
-                            <a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li>
-                                    <a href="./product-details.html">Product Details</a>
-                                </li>
-                                <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                <li><a href="./checkout.html">Checkout</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="./blog.html">Blog</a></li>
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>
