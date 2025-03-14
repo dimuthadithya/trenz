@@ -104,7 +104,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"><span class="icon_bag_alt"></span>
+                            <a href="{{ route('cart.index') }}"><span class="icon_bag_alt"></span>
                                 <div class="tip">2</div>
                             </a>
                         </li>
