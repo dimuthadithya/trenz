@@ -8,9 +8,11 @@ use Illuminate\View\Component;
 
 class WishlistCard extends Component
 {
-    public function __construct()
+    public $product;
+
+    public function __construct($product)
     {
-        //
+        $this->product = $product;
     }
 
     /**

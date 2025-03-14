@@ -21,7 +21,7 @@ class WishlistController extends Controller
             ->select('products.*')
             ->get();
 
-        // dd($wishlistItems);
+
         return view('pages.wishlist', compact('wishlistItems'));
     }
 

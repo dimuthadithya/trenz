@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/css/slicknav.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
+    @stack('styles')
 </head>
 
 <body>
@@ -89,6 +90,8 @@
     </script>
     @endif
     <!-- login sucess message end -->
+
+    @stack('scripts')
 </body>
 
 </html>
