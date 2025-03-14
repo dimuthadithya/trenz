@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class AdminController extends Controller
         $usersCount = User::where('role', 'customer')->count();
         $adminsCount = User::where('role', 'admin')->count();
         $productsCount = Product::count();
+        $ordersCount = Order::count();
 
-        return view('pages.admin.index', compact('usersCount', 'adminsCount', 'productsCount'));
+        return view('pages.admin.index', compact('usersCount', 'adminsCount', 'productsCount', 'ordersCount'));
     }
 
     /**
