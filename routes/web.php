@@ -30,7 +30,7 @@ Route::get('/kids', [ProductController::class, 'indexKid'])->name('kid');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
-
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
 
 

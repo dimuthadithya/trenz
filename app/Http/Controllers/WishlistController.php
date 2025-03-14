@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,14 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $wishlistItems = Wishlist::where('user_id', $user->id)->with('product')->get();
+
+        return view('pages.wishlist', compact('wishlistItems'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.s
      */
     public function create()
     {

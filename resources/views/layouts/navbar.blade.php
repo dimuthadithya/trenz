@@ -91,8 +91,14 @@
                          <ul class="header__right__widget">
                              <li><span class="icon_search search-switch"></span></li>
                              <li>
-                                 <a href="#"><span class="icon_heart_alt"></span>
-                                     <div class="tip">2</div>
+                                 <a href="{{ route('wishlist.index') }}"><span class="icon_heart_alt"></span>
+                                     <div class="tip">
+                                         @auth
+                                         {{ auth()->user()->wishlist->count() }}
+                                         @else
+                                         0
+                                         @endauth
+                                     </div>
                                  </a>
                              </li>
                              <li>
