@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/logo/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/logo/favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('assets/img/logo/favicon_io/site.webmanifest') }}">
 
     <title>Trenz</title>
 
@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/slicknav.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
     @stack('styles')
+
 </head>
 
 <body>
