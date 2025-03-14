@@ -33,7 +33,9 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
+Route::get('/admin', function () {
+    return view('pages.admin.index');
+})->name('admin.index');
 
 
 

@@ -14,7 +14,7 @@
                             <span>{{ $product['description'] }}</span>
                         </div>
                     </td>
-                    <td>{{ $product['price'] }}</td>
+                    <td>${{ $product['price'] }}</td>
                     <td>
                         <button class="btn btn-danger btn-sm">
                             <i class="fa fa-shopping-cart"></i>

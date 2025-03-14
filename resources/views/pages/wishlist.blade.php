@@ -28,7 +28,6 @@
                                   <tbody>
                                       @foreach ($wishlistItems as $product )
                                       <x-wishlist-card :product="$product"></x-wishlist-card>
-
                                       @endforeach
                                   </tbody>
                               </table>
