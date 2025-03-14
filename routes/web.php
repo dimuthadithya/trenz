@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,15 +34,16 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/admin', function () {
-    return view('pages.admin.index');
-})->name('admin.index');
-
-
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('pages.admin.index');
+})->name('dashboard');
+
+
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
