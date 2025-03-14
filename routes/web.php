@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
@@ -17,6 +18,7 @@ Route::get('/welcome', function () {
 })->name('welcome');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
 Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register');
 
@@ -35,9 +37,6 @@ Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.s
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
-Route::get('/dashboard', function () {
-    return view('pages.admin.index');
-})->name('dashboard');
 
 
 

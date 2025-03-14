@@ -85,6 +85,37 @@
                           </div>
                       </li>
                       <li class="nav-item">
+                          <a data-bs-toggle="collapse" href="#admins">
+                              <i class="fas fa-layer-group"></i>
+                              <p>Admins</p>
+                              <span class="caret"></span>
+                          </a>
+                          <div class="collapse" id="admins">
+                              <ul class="nav nav-collapse">
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">View</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Create</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Edit</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <span class="sub-item">Delete</span>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#products">
                               <i class="fas fa-th-list"></i>
                               <p>Products</p>
