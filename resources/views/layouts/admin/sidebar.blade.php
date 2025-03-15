@@ -62,7 +62,7 @@
                           <div class="collapse" id="users">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('users.index') }}">
                                           <span class="sub-item">View</span>
                                       </a>
                                   </li>
