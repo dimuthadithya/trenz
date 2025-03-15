@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminDashboardController;
+use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
 // Routes for Admin 
 Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users');
 });
 
 

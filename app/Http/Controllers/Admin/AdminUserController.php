@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
@@ -12,7 +14,19 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        //
+
+        // Fetch all users along with their total order amount and total payment amount
+        $users = User::with(['orders', 'payments'])->get();
+
+        // Calculate the total order amount and total payment amount for each user
+        foreach ($users as $user) {
+            $user->total_order_count = $user->orders()->count();  // Sum of order amounts
+            $user->total_payment_amount = $user->payments()->sum('amount'); // Sum of payment amounts
+        }
+
+        // dd($users);
+
+        return view('pages.admin.users.index', compact('users'));
     }
 
     /**
