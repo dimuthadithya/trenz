@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
@@ -39,13 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
-    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 });
 
 // Routes for Admin 
 Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 });
 
 

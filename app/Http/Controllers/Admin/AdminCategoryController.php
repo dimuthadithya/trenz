@@ -1,28 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $usersCount = User::where('role', 'customer')->count();
-        $adminsCount = User::where('role', 'admin')->count();
-        $productsCount = Product::count();
-        $ordersCount = Order::count();
-        $newUsers = User::where('role', 'customer')->orderBy('created_at', 'desc')->take(5)->get();
-
-
-
-        return view('pages.admin.index', compact('usersCount', 'adminsCount', 'productsCount', 'ordersCount', 'newUsers'));
+        //
     }
 
     /**

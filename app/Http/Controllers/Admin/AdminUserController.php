@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class AdminUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::where('role', 'customer')->get();
-        return view('pages.admin.users.index', compact('users'));
+        //
     }
 
     /**
