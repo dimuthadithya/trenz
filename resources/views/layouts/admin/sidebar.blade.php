@@ -43,35 +43,10 @@
                           <h4 class="text-section">Components</h4>
                       </li>
                       <li class="nav-item">
-                          <a data-bs-toggle="collapse" href="#users">
+                          <a href="{{ route('admin.users') }}">
                               <i class="fas fa-users"></i>
                               <p>Users</p>
-                              <span class="caret"></span>
                           </a>
-                          <div class="collapse" id="users">
-                              <ul class="nav nav-collapse">
-                                  <li>
-                                      <a href="{{ route('admin.users') }}">
-                                          <span class="sub-item">View</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Create</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Edit</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Delete</span>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </div>
                       </li>
                       <li class="nav-item">
                           <a data-bs-toggle="collapse" href="#admins">

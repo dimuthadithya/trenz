@@ -20,5 +20,9 @@
                   <span class="badge badge-success rounded-pill d-inline">Active</span>
               </td>
               <td>{{ $user['created_at'] }}</td>
-              <td><button class="btn btn-link btn-sm fw-bold">Suspend</button></td>
+              <td>
+                  <button class="btn btn-link btn-sm fw-bold">Suspend</button>
+                  <button class="btn btn-link btn-sm fw-bold">Delete</button>
+              </td>
+
           </tr>
