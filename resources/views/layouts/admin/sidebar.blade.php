@@ -88,7 +88,7 @@
                           <div class="collapse" id="products">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('admin.products') }}">
                                           <span class="sub-item">View</span>
                                       </a>
                                   </li>

@@ -1,9 +1,9 @@
       @php
-      $wishlistItems = $products->toArray();
+      $products = $products->toArray();
 
       @endphp
 
-      <x-app-layout>
+      <x-admin-app-layout>
           @push('styles')
           <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,7 +29,7 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      @foreach ($wishlistItems as $product )
+                                      @foreach ($products as $product )
                                       <x-admin.product-row :product="$product" :indexVal="$loop->iteration" />
                                       @endforeach
                                   </tbody>
@@ -46,4 +46,4 @@
           <script src="{{ asset('assets/js/wishlist/js/bootstrap.min.js') }}"></script>
           <script src="{{ asset('assets/js/wishlist/js/main.js') }}"></script>
           @endpush
-      </x-app-layout>
+      </x-admin-app-layout>
