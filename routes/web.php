@@ -47,7 +47,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+    Route::get('/admin/view', [AdminDashboardController::class, 'viewAdmins'])->name('admin.view');
+    Route::get('/admin/create', [AdminDashboardController::class, 'create'])->name('admin.create');
     Route::get('/products', [AdminProductController::class, 'index'])->name('products');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
 });
 
 

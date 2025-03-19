@@ -22,7 +22,7 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.products.create');
     }
 
     /**

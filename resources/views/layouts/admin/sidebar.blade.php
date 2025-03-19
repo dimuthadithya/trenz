@@ -51,23 +51,13 @@
                           <div class="collapse" id="admins">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('admin.admin.view') }}">
                                           <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('admin.admin.create') }}">
                                           <span class="sub-item">Create</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Edit</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>
@@ -87,18 +77,8 @@
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('admin.products.create') }}">
                                           <span class="sub-item">Create</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Edit</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <span class="sub-item">Delete</span>
                                       </a>
                                   </li>
                               </ul>

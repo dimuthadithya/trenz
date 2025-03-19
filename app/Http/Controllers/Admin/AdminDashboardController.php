@@ -31,7 +31,12 @@ class AdminDashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.admin.create');
+    }
+    public function viewAdmins()
+    {
+        $admins = User::where('role', 'admin')->get();
+        return view('pages.admin.admin.view', compact('admins'));
     }
 
     /**

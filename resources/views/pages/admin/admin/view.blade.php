@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user )
+                @foreach ($admins as $user )
                 <x-admin.users-row :user="$user"></x-admin.users-row>
                 @endforeach
             </tbody>
