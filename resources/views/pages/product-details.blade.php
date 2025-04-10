@@ -1,3 +1,7 @@
+@php
+use App\Models\ProductImage;
+@endphp
+
 <x-app-layout>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -25,24 +29,22 @@
                             <a class="pt active" href="#product-1">
                                 <img src="{{ asset($product->image) }}" alt="">
                             </a>
-                            <a class="pt" href="#product-2">
-                                <img src="{{ asset($product->image) }}" alt="">
-                            </a>
-                            <a class="pt" href="#product-3">
-                                <img src="{{ asset($product->image) }}" alt="">
+                            @php
+                            $product_images = ProductImage::where('product_id', $product->id)->get();
+                            $image_count = $product_images->count();
 
+                            @endphp
+                            @foreach ($product_images as $product_image)
+                            <a class="pt" href="#product-{{ $loop->iteration }}">
+                                <img src="{{ asset($product_image->image_path) }}" alt="">
                             </a>
-                            <a class="pt" href="#product-4">
-                                <img src="{{ asset($product->image) }}" alt="">
-
-                            </a>
+                            @endforeach
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="{{ asset($product->image) }}" alt="">
-                                <img data-hash="product-2" class="product__big__img" src="{{ asset($product->image) }}" alt="">
-                                <img data-hash="product-3" class="product__big__img" src="{{ asset($product->image) }}" alt="">
-                                <img data-hash="product-4" class="product__big__img" src="{{ asset($product->image) }}" alt="">
+                                @foreach ($product_images as $product_image)
+                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ asset($product_image->image_path) }}" alt="">
+                                @endforeach
                             </div>
                         </div>
                     </div>
