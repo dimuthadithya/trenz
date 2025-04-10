@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,10 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.products.create');
+        $parentCategories = Category::where('parent_category_id', null)->get();
+        $childCategories = Category::where('parent_category_id', '!=', null)->get();
+
+        return view('pages.admin.products.create', compact('parentCategories', 'childCategories'));
     }
 
     /**
@@ -30,7 +34,33 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $parentCategoryId = $request->parent_category_id;
+        $childCategoryId = $request->child_category_id;
+        $categoryId = Category::where('parent_category_id', $parentCategoryId)
+            ->where('id', $childCategoryId)
+            ->value('id');
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->category_id = $categoryId;
+
+
+        if ($request->hasFile('main_image')) {
+            $image = $request->file('main_image');
+            $fileName = $image->store('', 'public');
+            $filePath = 'uploads/' . $fileName;
+
+            $product->image = $filePath;
+        }
+
+        $product->save();
+
+
+        return redirect()->route('admin.products')->with('success', 'Product created successfully');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 <div {{ $attributes->merge(['class' => 'col-lg-3 col-md-4 col-sm-6 product-card-item']) }} onclick="window.location='{{ route('product.show', $product->id) }}'">
     <div class="product__item">
-        <div class="product__item__pic set-bg" data-setbg="{{ $image ?? asset('assets/img/product/product-1.jpg') }}">
+        <div class="product__item__pic set-bg" data-setbg="{{ $product->image ?? asset('assets/img/product/product-1.jpg') }}">
             <div class="label new">{{ $label ?? 'New' }}</div>
             <ul class="product__hover">
                 <li>

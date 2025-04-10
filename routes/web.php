@@ -51,6 +51,7 @@ Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(funct
     Route::get('/admin/create', [AdminDashboardController::class, 'create'])->name('admin.create');
     Route::get('/products', [AdminProductController::class, 'index'])->name('products');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products/create', [AdminProductController::class, 'store'])->name('products.store');
 });
 
 

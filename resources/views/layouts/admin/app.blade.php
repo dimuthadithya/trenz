@@ -11,34 +11,10 @@
     <!-- Fonts and icons -->
     <script src="{{ asset('assets/admin/js/plugin/webfont/webfont.min.js') }}"></script>
 
-    <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/1afz41v01jtblcj41zug9et970ndon8qfccf2ljc58tatcjt/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- Include stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 
-    <script>
-        tinymce.init({
-            selector: '#mytextarea',
-            plugins: [
-                // Core editing features
-                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-                // Your account includes a free trial of TinyMCE premium features
-                // Try the most popular premium features until Apr 1, 2025:
-                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
-            ],
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [{
-                    value: 'First.Name',
-                    title: 'First Name'
-                },
-                {
-                    value: 'Email',
-                    title: 'Email'
-                },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-        });
-    </script>
+
 
     <script>
         WebFont.load({
@@ -60,10 +36,14 @@
         });
     </script>
 
+    @stack("scripts")
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/kaiadmin.min.css')}}" />
+
+
 </head>
 
 <body>
@@ -436,6 +416,7 @@
     <script src="{{ asset('assets/admin/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/core/bootstrap.min.js') }}"></script>
 
+
     <!-- jQuery Scrollbar -->
     <script src="{{ asset('assets/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
@@ -491,6 +472,16 @@
             lineWidth: "2",
             lineColor: "#ffa534",
             fillColor: "rgba(255, 165, 52, .14)",
+        });
+    </script>
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        const quill = new Quill('#editor', {
+            theme: 'snow'
         });
     </script>
 </body>
