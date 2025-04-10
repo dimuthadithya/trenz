@@ -10,12 +10,15 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Product;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
 // route for home page 
 Route::get('/', function () {
-    return view('index');
+    $products = Product::all()->take(8);
+
+    return view('index', compact('products'));
 })->name('home');
 
 // Routes for pages 

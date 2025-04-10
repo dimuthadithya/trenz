@@ -36,9 +36,11 @@ class AdminProductController extends Controller
     {
         $parentCategoryId = $request->parent_category_id;
         $childCategoryId = $request->child_category_id;
+
         $categoryId = Category::where('parent_category_id', $parentCategoryId)
             ->where('id', $childCategoryId)
             ->value('id');
+
 
         $product = new Product();
         $product->name = $request->name;
