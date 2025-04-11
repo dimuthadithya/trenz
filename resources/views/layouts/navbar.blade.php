@@ -1,9 +1,20 @@
+@php
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
+use App\Models\Wishlist;
+
+$cartCount = Cart::where('user_id', Auth::id())->count();
+$wishlistCount = Wishlist::where('user_id', Auth::id())->count();
+@endphp
+
 @if (Route::currentRouteName() == 'home')
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
 @endif
+
+
 
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay"></div>
@@ -13,12 +24,12 @@
         <li><span class="icon_search search-switch"></span></li>
         <li>
             <a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
+                <div class="tip">{{ $wishlistCount }}</div>
             </a>
         </li>
         <li>
             <a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
+                <div class="tip">{{ $cartCount }}</div>
             </a>
         </li>
     </ul>
@@ -81,7 +92,7 @@
                             <a href="{{ route('wishlist.index') }}"><span class="icon_heart_alt"></span>
                                 <div class="tip">
                                     @auth
-                                    {{ auth()->user()->wishlist->count() }}
+                                    {{ $wishlistCount }}
                                     @else
                                     0
                                     @endauth
@@ -90,7 +101,13 @@
                         </li>
                         <li>
                             <a href="{{ route('cart.index') }}"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
+                                <div class="tip">
+                                    @auth
+                                    {{ $cartCount }}
+                                    @else
+                                    0
+                                    @endauth
+                                </div>
                             </a>
                         </li>
                         @auth
