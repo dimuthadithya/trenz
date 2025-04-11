@@ -38,10 +38,13 @@ class AdminProductController extends Controller
         $parentCategoryId = $request->parent_category_id;
         $childCategoryId = $request->child_category_id;
 
+        // Get parent category name safely
+        $parentCategory = Category::findOrFail($parentCategoryId)->category_name;
+
+        // Ensure valid category assignment
         $categoryId = Category::where('parent_category_id', $parentCategoryId)
             ->where('id', $childCategoryId)
             ->value('id');
-
 
         $product = new Product();
         $product->name = $request->name;
@@ -51,36 +54,34 @@ class AdminProductController extends Controller
         $product->stock = $request->stock;
         $product->category_id = $categoryId;
 
-
+        // Upload main image
         if ($request->hasFile('main_image')) {
             $image = $request->file('main_image');
-            $fileName = $image->store('', 'public');
-            $filePath = 'uploads/' . $fileName;
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $uploadPath = "uploads/products/{$parentCategory}";
 
-            $product->image = $filePath;
+            $image->move(public_path($uploadPath), $fileName);
+            $product->image = $uploadPath . '/' . $fileName;
         }
-
 
         $product->save();
 
+        // Upload gallery images
         if ($request->hasFile('other_images')) {
-            $subImages = $request->file('other_images');
+            foreach ($request->file('other_images') as $image) {
+                $fileName = time() . '_' . $image->getClientOriginalName();
+                $uploadPath = "uploads/products/{$parentCategory}";
 
-            foreach ($subImages as $image) {
-                $fileName = $image->store('', 'public');
-                $filePath = 'uploads/' . $fileName;
+                $image->move(public_path($uploadPath), $fileName);
 
                 $productImage = new ProductImage();
                 $productImage->product_id = $product->id;
-                $productImage->image_path = $filePath;
+                $productImage->image_path = $uploadPath . '/' . $fileName;
                 $productImage->image_name = $fileName;
                 $productImage->image_type = 'gallery';
                 $productImage->save();
             }
         }
-
-
-
 
 
         return redirect()->route('admin.products')->with('success', 'Product created successfully');
