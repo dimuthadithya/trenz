@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/create', [CartController::class, 'store'])->name('cart.store');
     Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.remove');
 });
 
 // Routes for Admin 

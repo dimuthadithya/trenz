@@ -32,6 +32,14 @@
             </form>
         </div>
     </td>
-    <td class="cart__total">${{ $product["price"] }}</td>
-    <td class="cart__close"><span class="icon_close"></span></td>
+    <td class="cart__total">${{ $product["price"]*$cartQty }}</td>
+    <td class="cart__close">
+        <form action="{{ route('cart.remove', $product['id']) }}" method="POST" class="">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="remove-from-cart"><span class="icon_close" id="removeFromCart"></span></button>
+        </form>
+    </td>
+
+
 </tr>

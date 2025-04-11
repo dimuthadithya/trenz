@@ -93,8 +93,20 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy(Cart $cart, $id)
     {
-        //
+
+
+        $cartItem = Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $id)
+            ->first();
+
+
+        if ($cartItem) {
+            $cartItem->delete();
+            return redirect()->route('cart.index')->with('success', 'Product removed from cart successfully.');
+        } else {
+            return redirect()->route('cart.index')->with('error', 'Cart item not found.');
+        }
     }
 }
