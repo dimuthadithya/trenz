@@ -50,8 +50,8 @@
                           <div class="cart__total__procced">
                               <h6>Cart total</h6>
                               <ul>
-                                  <li>Subtotal <span>$ 750.0</span></li>
-                                  <li>Total <span>$ 750.0</span></li>
+                                  <li>Subtotal <span id="cartSubTotal"></span></li>
+                                  <li>Total <span id="cartTotal"></span></li>
                               </ul>
                               <a href="#" class="primary-btn">Proceed to checkout</a>
                           </div>
