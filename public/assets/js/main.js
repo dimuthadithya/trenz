@@ -248,13 +248,11 @@
         let cartSubTotal = 0;
         let cartTotal = 0;
         $(".cart__total").each(function () {
-            console.log($(this).text());
             const price = parseFloat($(this).text().replace("$", ""));
             cartSubTotal += price;
             cartTotal += price;
         });
 
-        $(".cart__total").text("$" + cartTotal.toFixed(2)); // update cartTotal
         $("#cartSubTotal").text("$" + cartSubTotal.toFixed(2)); // update cartSubTotal
         $("#cartTotal").text("$" + cartTotal.toFixed(2)); // update cartTotal
     }
