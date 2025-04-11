@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminCategoryController extends Controller
@@ -12,7 +13,10 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $mainCategories = Category::whereNull('parent_category_id')->get();
+        $subCategories = Category::whereNotNull('parent_category_id')->get();
+
+        return view('pages.admin.categories.index', compact('mainCategories', 'subCategories'));
     }
 
     /**
@@ -20,7 +24,9 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $mainCategories = Category::whereNull('parent_category_id')->get();
+        $subCategories = Category::whereNotNull('parent_category_id')->get();
+        return view('pages.admin.categories.create', compact('mainCategories', 'subCategories'));
     }
 
     /**
@@ -28,7 +34,7 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

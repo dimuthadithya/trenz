@@ -16,7 +16,7 @@ class AdminProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('pages.admin.products.index', compact('products'));
+        return view('pages.admin.categories.index', compact('products'));
     }
 
     /**

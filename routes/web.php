@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminCategoryController;
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\AdminUserController;
@@ -59,6 +60,9 @@ Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(funct
     Route::get('/products', [AdminProductController::class, 'index'])->name('products');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
     Route::post('/products/create', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.view');
+    Route::get('/categories/create', [AdminCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/create', [AdminCategoryController::class, 'store'])->name('categories.store');
 });
 
 

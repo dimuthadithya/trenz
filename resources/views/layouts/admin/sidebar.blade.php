@@ -124,12 +124,12 @@
                           <div class="collapse" id="category">
                               <ul class="nav nav-collapse">
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('admin.categories.view') }}">
                                           <span class="sub-item">View</span>
                                       </a>
                                   </li>
                                   <li>
-                                      <a href="">
+                                      <a href="{{ route('admin.categories.create') }}">
                                           <span class="sub-item">Create</span>
                                       </a>
                                   </li>
