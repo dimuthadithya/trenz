@@ -3722,3 +3722,7 @@ height: auto;
 .border-rd{
 	border: 5px solid red;
 }
+
+.cursor-pointer{
+	cursor: pointer;
+}
