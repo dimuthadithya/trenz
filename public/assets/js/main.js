@@ -1,12 +1,3 @@
-/*  ---------------------------------------------------
-Template Name: Ashion
-Description: Ashion ecommerce template
-Author: Colorib
-Author URI: https://colorlib.com/
-Version: 1.0
-Created: Colorib
----------------------------------------------------------  */
-
 "use strict";
 
 (function ($) {
@@ -210,26 +201,40 @@ Created: Colorib
         }
     });
 
-    /*-------------------
-		Quantity change
-	--------------------- */
-    var proQty = $(".pro-qty");
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on("click", ".qtybtn", function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find("input").val();
-        if ($button.hasClass("inc")) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        $button.parent().find("input").val(newVal);
+    /*------------------
+        Change Total Price
+    --------------------*/
+
+    $(".pro-qty input").on("change", function () {
+        const totalEl = $(this).closest("td").next();
+        const priceEl = $(this).closest("td").prev();
+
+        const total =
+            parseFloat($(this).val()) *
+            parseFloat(priceEl.text().replace("$", ""));
+
+        totalEl.text("$" + total.toFixed(2));
+    });
+
+    /*------------------
+        Submit Cart Forms
+    --------------------*/
+    $("#updateCart").on("click", function (e) {
+        e.preventDefault();
+
+        $(".update-cart-form").each(function () {
+            const form = $(this);
+            const action = form.attr("action");
+            const data = form.serialize();
+
+            $.ajax({
+                url: action,
+                method: "POST",
+                data: data,
+                success: function (response) {},
+                error: function (error) {},
+            });
+        });
     });
 
     /*-------------------

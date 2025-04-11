@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -12,7 +14,20 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('pages.cart');
+        // Fetch the cart items from the database
+        $userId = Auth::user()->id;
+        $cartItems = Cart::where('user_id', $userId)->get();
+
+        $products = [];
+
+        foreach ($cartItems as $cartItem) {
+            $product = Product::find($cartItem->product_id);
+            if ($product) {
+                $products[] = $product->toArray();
+            }
+        }
+
+        return view('pages.cart', compact('products'));
     }
 
     /**
@@ -28,7 +43,15 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $userId = Auth::user()->id;
+        $cartItem = new Cart();
+        $cartItem->user_id = $userId;
+        $cartItem->product_id = $request->product_id;
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+
+        return redirect()->route('cart.index')->with('success', 'Product added to cart successfully.');
     }
 
     /**
@@ -52,7 +75,19 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        $cartItem = Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        // dd($cartItem);
+
+        if ($cartItem) {
+            $cartItem->quantity = $request->quantity;
+            $cartItem->save();
+            return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
+        } else {
+            return redirect()->route('cart.index')->with('error', 'Cart not found.');
+        }
     }
 
     /**

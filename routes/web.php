@@ -43,7 +43,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/create', [CartController::class, 'store'])->name('cart.store');
+    Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
 });
 
 // Routes for Admin 

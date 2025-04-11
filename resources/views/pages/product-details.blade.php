@@ -70,7 +70,12 @@ use App\Models\ProductImage;
                                 </div>
                             </div>
                             @auth
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <form action="{{ route("cart.store") }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="border-0 cart-btn"><span class="icon_bag_alt"></span> Add to cart</button>
+                            </form>
                             @else
                             <a href="{{ route("login") }}" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
                             @endauth
