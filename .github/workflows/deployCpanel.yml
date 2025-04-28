@@ -20,6 +20,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }} 
           port: 21098
           source: "."
   
