@@ -18,17 +18,18 @@ jobs:
         run: |
           echo "${{ secrets.ENV_CONTENT }}" > .env
 
-      # Disable fnm and clean up any related symlinks and files
-      - name: Disable fnm and clean up environment
+      # Remove fnm completely from the environment
+      - name: Remove fnm and clear related symlinks
         run: |
+          # Ensure fnm is uninstalled completely
+          rm -rf $HOME/.fnm
+          rm -rf /run/user/$(id -u)/fnm_multishells
+          rm -f $(which fnm)
+          # Unset environment variables
           unset FNM_DIR
           unset FNM_NODE_VERSION
           export PATH=$(echo $PATH | sed -e 's|:$FNM_DIR/bin||')
-          # Remove any symlink or directories related to fnm that could cause issues
-          rm -rf /run/user/$(id -u)/fnm_multishells
-          # Check if the environment variables for fnm are unset correctly
-          echo "FNM_DIR: $FNM_DIR"
-          echo "FNM_NODE_VERSION: $FNM_NODE_VERSION"
+          echo "fnm completely removed"
 
       - name: Upload files via SSH
         uses: appleboy/scp-action@v0.1.7
