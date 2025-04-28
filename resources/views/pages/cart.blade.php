@@ -48,10 +48,10 @@
                       </div>
                       <div class="col-lg-4 offset-lg-2">
                           <div class="cart__total__procced">
-                              <h6>Cart total</h6>
+                              <h6> Cart total</h6>
                               <ul>
                                   <li>Subtotal <span id="cartSubTotal"></span></li>
-                                  <li>Total <span id="cartTotal"></span></li>
+                                  <li>Total<span id="cartTotal"></span></li>
                               </ul>
                               <a href="{{ route('checkout') }}" class="primary-btn">Proceed to checkout</a>
                           </div>
