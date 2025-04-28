@@ -29,4 +29,5 @@ jobs:
           port: 21098
           source: "."
           target: "/home/lsvosolvqm/trenz.dimuthadithya.me/"
+          tar_dereference: true 
   
