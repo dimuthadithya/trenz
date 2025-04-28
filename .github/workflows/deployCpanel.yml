@@ -18,11 +18,14 @@ jobs:
         run: |
           echo "${{ secrets.ENV_CONTENT }}" > .env
 
-      # Step to disable fnm by unsetting related environment variables
-      - name: Disable fnm during deployment
+      # Disable fnm by cleaning up the environment
+      - name: Disable fnm and clean up environment
         run: |
           unset FNM_DIR
+          unset FNM_NODE_VERSION
           export PATH=$(echo $PATH | sed -e 's/:$FNM_DIR\/bin//')
+          # Remove any existing symlink that could conflict
+          rm -rf /run/user/$(id -u)/fnm_multishells
 
       - name: Upload files via SSH
         uses: appleboy/scp-action@v0.1.7
