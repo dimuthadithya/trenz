@@ -53,7 +53,7 @@
                                   <li>Subtotal <span id="cartSubTotal"></span></li>
                                   <li>Total<span id="cartTotal"></span></li>
                               </ul>
-                              <a href="{{ route('checkout') }}" class=" primary-btn">Proceed to checkout</a>
+                              <a href="{{ route('checkout') }}" class="primary-btn">Proceed to checkout</a>
                           </div>
                       </div>
                   </div>
