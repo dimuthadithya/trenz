@@ -1,8 +1,10 @@
-<tr>
+<tr class="done">
     <td class="cart__product__item">
         <img src="{{ asset($product["image"]) }}" alt="" style="object-fit: contain;width: 100px;height: 100px;">
         <div class="cart__product__item__title">
-            <h6>{{ $product["name"] }}</h6>
+            <a href="{{ route('product.show', $product["id"]) }}">
+                <h6>{{ $product["name"] }}</h6>
+            </a>
             <div class="rating">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -40,6 +42,4 @@
             <button type="submit" class="remove-from-cart"><span class="icon_close" id="removeFromCart"></span></button>
         </form>
     </td>
-
-
 </tr>

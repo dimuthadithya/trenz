@@ -113,10 +113,15 @@
                                         <span class="top__text">Product</span>
                                         <span class="top__text__right">Total</span>
                                     </li>
-                                    <li>01. Chain buck bag <span>$ 300.0</span></li>
-                                    <li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                                    <li>03. Black jean <span>$ 170.0</span></li>
-                                    <li>04. Cotton shirt <span>$ 110.0</span></li>
+
+
+                                    @foreach ($products as $product)
+                                    @php
+                                    $count =1;
+                                    @endphp
+                                    <li>{{ $count++ }}. {{ $product['name'] }}<span>$ {{ $product['price'] }}</span></li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                             <div class="checkout__order__total">
@@ -144,7 +149,18 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button type="submit" class="site-btn">Place oder</button>
+                            <button type="submit" id="placeOrderBtn" class="site-btn">Place oder</button>
+
+                            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                            <script>
+                                document.getElementById('placeOrderBtn').addEventListener('click', function() {
+                                    axios.post("{{ route('order.create') }}")
+                                        .then(function(response) {
+                                            window.location.href = "{{ route('home') }}";
+                                        })
+                                        .catch(function(error) {});
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>

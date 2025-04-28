@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
@@ -37,9 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/checkout', function () {
-        return view('pages.checkout');
-    })->name('checkout');
+    Route::get('/checkout',  [OrderController::class, 'index'])->name('checkout');
+    Route::post('/checkout',  [OrderController::class, 'create'])->name('order.create');
 
 
     Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
