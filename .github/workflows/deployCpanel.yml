@@ -18,16 +18,14 @@ jobs:
         run: |
           echo "${{ secrets.ENV_CONTENT }}" > .env
 
-      
       - name: Upload files via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }} 
+          passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }}
           port: 21098
           source: "."
           target: "/home/lsvosolvqm/trenz.dimuthadithya.me/"
-          tar_dereference: true 
-  
+          tar_dereference: true
