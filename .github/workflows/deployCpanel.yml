@@ -23,4 +23,5 @@ jobs:
           passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }} 
           port: 21098
           source: "."
+          target: "/trenz.dimuthadithya.me/"
   
