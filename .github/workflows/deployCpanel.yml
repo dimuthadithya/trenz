@@ -18,13 +18,19 @@ jobs:
         run: |
           echo "${{ secrets.ENV_CONTENT }}" > .env
 
+      # Step to disable fnm by unsetting related environment variables
+      - name: Disable fnm during deployment
+        run: |
+          unset FNM_DIR
+          export PATH=$(echo $PATH | sed -e 's/:$FNM_DIR\/bin//')
+
       - name: Upload files via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }}
+          passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }} 
           port: 21098
           source: "."
           target: "/home/lsvosolvqm/trenz.dimuthadithya.me/"
