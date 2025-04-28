@@ -1,27 +1,26 @@
 name: Deploy to cPanel
 
 on:
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
   push:
     branches:
-      - main           # Automatically trigger on push to main
+      - main
 
 jobs:
   deploy:
-    name: SFTP-Deploy-Action
+    name: FTP-Deploy-Action
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Upload files via SFTP
-        uses: appleboy/scp-action@v0.1.7
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 22  # Path on the server (change if needed)
-          strip_components: 1          # Prevent nesting repo folder
+          dangerous-clean-slate: true
+          timeout: 30000
