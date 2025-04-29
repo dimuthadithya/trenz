@@ -57,7 +57,6 @@ class CategorySeeder extends Seeder
         Category::create(['category_name' => 'Sneakers', 'parent_category_id' => $men->id]);
 
         // Existing subcategories under Kids
-        Category::create(['category_name' => 'Shorts', 'parent_category_id' => $kids->id]);
         Category::create(['category_name' => 'Sweatpants', 'parent_category_id' => $kids->id]);
     }
 }
