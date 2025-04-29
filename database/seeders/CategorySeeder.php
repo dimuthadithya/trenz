@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -18,18 +16,47 @@ class CategorySeeder extends Seeder
         $men = Category::create(['category_name' => 'Men']);
         $kids = Category::create(['category_name' => 'Kids']);
 
-        // Child Categories
-        Category::create(['category_name' => 'Pants', 'parent_category_id' => $women->id]);
-        Category::create(['category_name' => 'Shirts', 'parent_category_id' => $women->id]);
-        Category::create(['category_name' => 'Blouses', 'parent_category_id' => $women->id]);
-        Category::create(['category_name' => 'Dresses', 'parent_category_id' => $women->id]);
-        Category::create(['category_name' => 'Shoes', 'parent_category_id' => $women->id]);
+        // Subcategories under Women
+        $womenSubcategories = [
+            'Jersey',
+            'TShirts',
+            'Crop Top',
+            'Jackets',
+            'Kits',
+            'Romper',
+            'Skirt',
+            'Pant',
+            'Cargo Pant',
+            'Denim',
+            'Hoddie Top',
+            'Dungaree',
+            'Dresses',
+            'Tops',
+            'Frocks',
+            'Jumpsuits',
+            'Skinny',
+            'Shirt',
+            'Office Wear',
+            'Party Wear',
+            'Pinapo',
+            'Blouse',
+            'Shorts'
+        ];
 
+        foreach ($womenSubcategories as $subcategory) {
+            Category::create([
+                'category_name' => $subcategory,
+                'parent_category_id' => $women->id,
+            ]);
+        }
+
+        // Existing subcategories under Men
         Category::create(['category_name' => 'Jeans', 'parent_category_id' => $men->id]);
         Category::create(['category_name' => 'T-Shirts', 'parent_category_id' => $men->id]);
         Category::create(['category_name' => 'Hoodies', 'parent_category_id' => $men->id]);
         Category::create(['category_name' => 'Sneakers', 'parent_category_id' => $men->id]);
 
+        // Existing subcategories under Kids
         Category::create(['category_name' => 'Shorts', 'parent_category_id' => $kids->id]);
         Category::create(['category_name' => 'Sweatpants', 'parent_category_id' => $kids->id]);
     }
