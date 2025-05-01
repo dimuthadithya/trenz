@@ -8,20 +8,9 @@
                      </h2>
                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                          <div class="accordion-body">
+                             @foreach ($categories as $category)
                              <x-checkbox id="jersey" value="jersey" label="Jersey" />
-                             <x-checkbox id="tshirts" value="tshirts" label="TShirts" />
-                             <x-checkbox id="crop-top" value="crop-top" label="Crop Top" />
-                             <x-checkbox id="jackets" value="jackets" label="Jackets" />
-                             <x-checkbox id="kits" value="kits" label="Kits" />
-                             <x-checkbox id="romper" value="romper" label="Romper" />
-                             <x-checkbox id="skirt" value="skirt" label="Skirt" />
-                             <x-checkbox id="pant" value="pant" label="Pant" />
-                             <x-checkbox id="cargo-pant" value="cargo-pant" label="Cargo Pant" />
-                             <x-checkbox id="denim" value="denim" label="Denim" />
-                             <x-checkbox id="hoodie-top" value="hoodie-top" label="Hoodie Top" />
-                             <x-checkbox id="dungaree" value="dungaree" label="Dungaree" />
-                             <x-checkbox id="dresses" value="dresses" label="Dresses" />
-                             <x-checkbox id="tops" value="tops" label="Tops" />
+                             @endforeach
                          </div>
                      </div>
                  </div>
@@ -64,11 +53,11 @@
                  </div>
                  <div class="accordion-item">
                      <h2 class="accordion-header">
-                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
                              Filter by Material
                          </button>
                      </h2>
-                     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                     <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
                          <div class="accordion-body">
                              <x-checkbox id="cotton" value="cotton" label="Cotton" />
                              <x-checkbox id="polyester" value="polyester" label="Polyester" />
