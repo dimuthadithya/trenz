@@ -1,4 +1,4 @@
-         <div class=" flex-grow-1 col-lg-3 col-md-6 col-12">
+         <div class="flex-grow-1 col-lg-2 col-md-6 col-12">
              <div class="accordion" id="accordionPanelsStayOpenExample">
                  <div class="accordion-item">
                      <h2 class="accordion-header">
@@ -9,7 +9,7 @@
                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                          <div class="accordion-body">
                              @foreach ($categories as $category)
-                             <x-checkbox id="jersey" value="jersey" label="Jersey" />
+                             <x-checkbox id="{{ $category }}" value="{{ $category }}" />
                              @endforeach
                          </div>
                      </div>

@@ -13,22 +13,25 @@ class ProductController extends Controller
      */
     public function indexMen()
     {
-        $menCategoryIds = Category::where('parent_category_id', 2)->pluck('id');
+        $menCategoryIds = Category::where('parent_category_id', 17)->pluck('id');
+        $categories = Category::where('parent_category_id', 17)->pluck('category_name');
 
         // Get products that belong to these categories
         $products = Product::whereIn('category_id', $menCategoryIds)->get();
 
-        return view('pages.men', compact('products'));
+        return view('pages.men', compact('products', 'categories'));
     }
 
     public function indexWomen()
     {
-        $menCategoryIds = Category::where('parent_category_id', 1)->pluck('id');
+        $menCategoryIds = Category::where('parent_category_id', 16)->pluck('id');
+        $categories = Category::where('parent_category_id', 16)->pluck('category_name');
+
 
         // Get products that belong to these categories
         $products = Product::whereIn('category_id', $menCategoryIds)->get();
 
-        return view('pages.women', compact('products'));
+        return view('pages.women', compact('products', 'categories'));
     }
 
     public function indexKid()

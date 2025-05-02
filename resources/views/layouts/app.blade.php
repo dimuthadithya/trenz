@@ -90,6 +90,27 @@
         });
     </script>
     @endif
+
+    <script>
+        function updateDom(target, event) {
+            const categoryName = target.id;
+
+            $('#product-list').children().each(function() {
+                if ($(this).hasClass(categoryName)) {
+                    $(this).show();
+                    $('#showing_category_text').html(categoryName);
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+        $('#showing_category_btn').on('click', function() {
+            $('#product-list').children().each(function() {
+                $(this).show();
+            });
+            $('#showing_category_text').html('All');
+        });
+    </script>
     <!-- login sucess message end -->
 
     @stack('scripts')
