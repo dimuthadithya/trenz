@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ProductsTableSeeder extends Seeder
+class productsWomenSeedr extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,7 +23,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 5695.00,
                 'stock' => 15,
                 'image' => "uploads/products/Women/zip_hoodie.jpg",
-                'category_id' => 19,
+                'category_id' => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -35,7 +34,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 5895.00,
                 'stock' => 12,
                 'image' => "uploads/products/Women/essence_jacket.jpg",
-                'category_id' => 19,
+                'category_id' => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -46,9 +45,9 @@ class ProductsTableSeeder extends Seeder
                 'slug' => Str::slug("Women's Ewe Beauty T-Shirt"),
                 'description' => "Soft, stylish, and subtly sheep-tastic! Perfect for everyday wear.",
                 'price' => 1550.00,
-                'stock' => 25,
+                'stock' => 5,
                 'image' => "uploads/products/Women/ewe_beauty.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -59,7 +58,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1795.00,
                 'stock' => 20,
                 'image' => "uploads/products/Women/cardigan_set.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -70,7 +69,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1595.00,
                 'stock' => 18,
                 'image' => "uploads/products/Women/black_line.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -81,7 +80,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1395.00,
                 'stock' => 22,
                 'image' => "uploads/products/Women/black_cropped.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -92,7 +91,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1595.00,
                 'stock' => 17,
                 'image' => "uploads/products/Women/mock_neck.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -103,7 +102,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 2995.00,
                 'stock' => 14,
                 'image' => "uploads/products/Women/vneck_button.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -114,7 +113,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1495.00,
                 'stock' => 26,
                 'image' => "uploads/products/Women/solid_round.jpg",
-                'category_id' => 20,
+                'category_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -127,7 +126,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1195.00,
                 'stock' => 20,
                 'image' => "uploads/products/Women/frill_top.jpg",
-                'category_id' => 21,
+                'category_id' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -138,7 +137,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1495.00,
                 'stock' => 19,
                 'image' => "uploads/products/Women/white_long.jpg",
-                'category_id' => 21,
+                'category_id' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -149,7 +148,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1995.00,
                 'stock' => 12,
                 'image' => "uploads/products/Women/sexy_crop.jpg",
-                'category_id' => 21,
+                'category_id' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -160,7 +159,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1250.00,
                 'stock' => 15,
                 'image' => "uploads/products/Women/purple_top.jpg",
-                'category_id' => 21,
+                'category_id' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -171,7 +170,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 1250.00,
                 'stock' => 18,
                 'image' => "uploads/products/Women/bow_strappy.jpg",
-                'category_id' => 21,
+                'category_id' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

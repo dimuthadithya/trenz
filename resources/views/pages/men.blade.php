@@ -1,16 +1,3 @@
-<!-- <x-app-layout>
-    <section class="flex-wrap product spad d-flex">
-        @include('layouts.filters')
-        <div class="container col-lg-9 col-md-6 col-12">
-            <div class="row">
-                @foreach($products as $product)
-                <x-product-card :product="$product" />
-                @endforeach
-            </div>
-        </div>
-    </section>
-</x-app-layout> -->
-
 @php
 use App\Models\Category;
 @endphp

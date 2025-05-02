@@ -12,9 +12,9 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $women = Category::create(['category_name' => 'Women']);
-        $men = Category::create(['category_name' => 'Men']);
-        $kids = Category::create(['category_name' => 'Kids']);
+        Category::create(['category_name' => 'Women']);
+        Category::create(['category_name' => 'Men']);
+        Category::create(['category_name' => 'Kids']);
 
         // Subcategories under Women
         $womenSubcategories = [
@@ -43,6 +43,8 @@ class CategorySeeder extends Seeder
             'Shorts'
         ];
 
+        $women = Category::where('category_name', 'Women')->first();
+
         foreach ($womenSubcategories as $subcategory) {
             Category::create([
                 'category_name' => $subcategory,
@@ -50,13 +52,24 @@ class CategorySeeder extends Seeder
             ]);
         }
 
-        // Existing subcategories under Men
-        Category::create(['category_name' => 'Jeans', 'parent_category_id' => $men->id]);
-        Category::create(['category_name' => 'T-Shirts', 'parent_category_id' => $men->id]);
-        Category::create(['category_name' => 'Hoodies', 'parent_category_id' => $men->id]);
-        Category::create(['category_name' => 'Sneakers', 'parent_category_id' => $men->id]);
+        // Subcategories under Men
+        $menSubcategories = [
+            'Casual Shirts',
+            'Shirts',
+            'TShirts',
+            'Shorts',
+            'Bottom',
+            'Office Shirt',
+            'Gents Kits'
+        ];
 
-        // Existing subcategories under Kids
-        Category::create(['category_name' => 'Sweatpants', 'parent_category_id' => $kids->id]);
+        $men = Category::where('category_name', 'Men')->first();
+
+        foreach ($menSubcategories as $subcategory) {
+            Category::create([
+                'category_name' => $subcategory,
+                'parent_category_id' => $men->id,
+            ]);
+        }
     }
 }
