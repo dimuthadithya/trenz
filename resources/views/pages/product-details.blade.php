@@ -60,7 +60,7 @@ use App\Models\ProductImage;
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
                         </div>
-                        <div class="product__details__price">${{ $product->price }} <span>${{ $product->price+10 }}</span></div>
+                        <div class="product__details__price">LKR {{ $product->price }} <span>LKR {{ $product->price+10 }}.00</span></div>
                         <p>{{ $product->description }}</p>
                         <div class="product__details__button">
                             <div class="quantity">

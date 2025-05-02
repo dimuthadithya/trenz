@@ -36,7 +36,7 @@
                     <i class="fa fa-star{{ $i < $rating ? '' : '-o' }}"></i>
                     @endfor
             </div>
-            <div class="product__price">${{ $product->price ?? '0.0' }}</div>
+            <div class="product__price">LKR {{ $product->price ?? '0.0' }}</div>
         </div>
         </a>
     </div>

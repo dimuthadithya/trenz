@@ -9,40 +9,48 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of Men's products.
      */
     public function indexMen()
     {
-        $menCategoryIds = Category::where('parent_category_id', 2)->pluck('id');
+        $menParent = Category::where('category_name', 'Men')->first();
+        $categories = Category::where('parent_category_id', $menParent->id)->pluck('category_name');
 
-        // Get products that belong to these categories
-        $products = Product::whereIn('category_id', $menCategoryIds)->get();
+        $subCategoryIds = Category::where('parent_category_id', $menParent->id)->pluck('id')->toArray();
+        $products = Product::whereIn('category_id', $subCategoryIds)->get();
 
-        return view('pages.men', compact('products'));
+        return view('pages.men', compact('products', 'categories'));
     }
 
+    /**
+     * Display a listing of Women's products.
+     */
     public function indexWomen()
     {
-        $menCategoryIds = Category::where('parent_category_id', 1)->pluck('id');
+        $womenParent = Category::where('category_name', 'Women')->first();
+        $categories = Category::where('parent_category_id', $womenParent->id)->pluck('category_name');
 
-        // Get products that belong to these categories
-        $products = Product::whereIn('category_id', $menCategoryIds)->get();
+        $subCategoryIds = Category::where('parent_category_id', $womenParent->id)->pluck('id')->toArray();
+        $products = Product::whereIn('category_id', $subCategoryIds)->get();
 
-        return view('pages.women', compact('products'));
+        return view('pages.women', compact('products', 'categories'));
     }
 
+    /**
+     * Display a listing of Kids' products.
+     */
     public function indexKid()
     {
-        $menCategoryIds = Category::where('parent_category_id', 3)->pluck('id');
+        $kidParent = Category::where('category_name', 'Kids')->first();
+        $subCategoryIds = Category::where('parent_category_id', $kidParent->id)->pluck('id')->toArray();
 
-        // Get products that belong to these categories
-        $products = Product::whereIn('category_id', $menCategoryIds)->get();
+        $products = Product::whereIn('category_id', $subCategoryIds)->get();
 
         return view('pages.kids', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      */
     public function create()
     {
@@ -50,7 +58,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      */
     public function store(Request $request)
     {
@@ -58,19 +66,16 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      */
     public function show(Product $id)
     {
         $product = Product::findOrFail($id->id);
-
-
-        // Pass the product to the view
         return view('pages.product-details', compact('product'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      */
     public function edit(Product $product)
     {
@@ -78,7 +83,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified product in storage.
      */
     public function update(Request $request, Product $product)
     {
@@ -86,7 +91,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from storage.
      */
     public function destroy(Product $product)
     {
