@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 // route for home page 
 Route::get('/', function () {
-    $products = Product::all()->take(8);
+    $products = Product::all();
 
     return view('index', compact('products'));
 })->name('home');
