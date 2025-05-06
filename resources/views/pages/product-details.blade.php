@@ -9,8 +9,10 @@ use App\Models\ProductImage;
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="#">Women’s</a>
+                        <a href="{{ route('home') }}l"><i class="fa fa-home"></i> Home</a>
+                        <a href="{{ $product->category_id > 26 ? route('men') : route('women') }}">
+                            {{ $product->category_id > 26 ? 'Men' : 'Women' }}
+                        </a>
                         <span>{{ $product->name }}</span>
                     </div>
                 </div>
