@@ -26,17 +26,23 @@
                 </li>
             </ul>
         </div>
-        <div class="product__item__text">
-            <h6><a href="#">{{ $product->name ?? 'Buttons tweed blazer' }}{{ $product->id }}</a></h6>
-            <div class="rating">
+        <div class="pb-3 border product__item__text d-flex flex-column ctz-height">
+            <div class="flex-grow-1">
+                <h5><a href="#">{{ $product->name ?? 'Buttons tweed blazer' }}</a></h5>
+            </div>
+            <div class="mb-2 rating">
                 @php
-                $rating = $rating ?? 0;
+                $rating = $product->rating;
                 @endphp
                 @for ($i = 0; $i < 5; $i++)
-                    <i class="fa fa-star{{ $i < $rating ? '' : '-o' }}"></i>
+                    @if ($i < $rating)
+                    <i class="fa-solid fa-star"></i>
+                    @else
+                    <i class="fa-regular fa-star"></i>
+                    @endif
                     @endfor
             </div>
-            <div class="product__price">LKR {{ $product->price ?? '0.0' }}</div>
+            <div class=" product__price">LKR {{ $product->price ?? '0.0' }}</div>
         </div>
         </a>
     </div>

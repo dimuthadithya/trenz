@@ -1293,9 +1293,10 @@ overflow: hidden;
 	padding-top: 22px;
 }
 
-.product__item__text h6 a {
-	font-size: 14px;
+.product__item__text a {
+	font-family: "Montserrat", sans-serif;
 	color: #111111;
+	font-size: medium;
 }
 
 .product__item__text .rating {
@@ -1323,6 +1324,11 @@ overflow: hidden;
 	color: #b1b0b0;
 	text-decoration: line-through;
 	margin-left: 4px;
+}
+
+.ctz-height{
+	height: 150px ;
+	overflow-y: scroll;
 }
 
 /*---------------------
