@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $products = Product::all();
 
-    return view('index', compact('products'));
+    $menCategoryId = Category::where('category_name', 'Men')->pluck('id')->toArray();
+    $menSubCategoryIds = Category::where('parent_category_id', $menCategoryId)->pluck('id')->toArray();
+
+    $kidsCategoryId = Category::where('category_name', 'Kids')->pluck('id')->toArray();
+    $kidsSubCategoryIds = Category::where('parent_category_id', $kidsCategoryId)->pluck('id')->toArray();
+
+    $menProductsCount = $products->whereIn('category_id', $menSubCategoryIds)->count();
+    $kidsProductsCount = $products->whereIn('category_id', $kidsSubCategoryIds)->count();
+
+
+
+    return view('index', compact('menProductsCount', 'kidsProductsCount', 'products'));;
 })->name('home');
 
 // Routes for pages 
