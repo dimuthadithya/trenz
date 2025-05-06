@@ -1,9 +1,15 @@
-<!-- resources/views/components/product-item.blade.php -->
+@php
+use App\Models\Category;
+
+$product_id = $product->id;
+
+$categoryName = Category::where('id', $product->category_id)->value('category_name');
+@endphp
 
 <div {{ $attributes->merge(['class' => 'col-lg-3 col-md-4 col-sm-6 product-card-item']) }} onclick="window.location='{{ route('product.show', $product->id) }}'">
     <div class="cursor-pointer product__item">
         <div class="product__item__pic set-bg" data-setbg="{{ $product->image ?? asset('assets/img/product/product-1.jpg') }}">
-            <div class="label new">{{ $label ?? 'New' }}</div>
+            <div class="label new">{{$categoryName }}</div>
             <ul class="product__hover">
                 <li>
                     <a href="{{ $product->image ?? asset('assets/img/product/product-1.jpg') }}" class="image-popup"><span class="arrow_expand"></span></a>

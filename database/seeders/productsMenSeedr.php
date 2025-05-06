@@ -16,7 +16,7 @@ class productsMenSeedr extends Seeder
         $products = [
             // Casual Shirts (category_id = 27)
             [
-                'name' => "Men's Double Pocket Long Sleeve Shirt",
+                'name' => "Men's Double Pocket Long Sleeve",
                 'slug' => Str::slug("Men's Double Pocket Long Sleeve Shirt"),
                 'description' => "This men's long-sleeve shirt features two convenient pockets...",
                 'price' => 3660.00,
@@ -28,7 +28,7 @@ class productsMenSeedr extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => "White Print Cotton Shirt",
+                'name' => "White Print Cotton",
                 'slug' => Str::slug("White Print Cotton Shirt"),
                 'description' => "A classic staple, breathable and lightweight fabric...",
                 'price' => 3760.00,
@@ -40,7 +40,7 @@ class productsMenSeedr extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => "In-Formal Full Sleeve Casual Shirt",
+                'name' => "In-Formal Full Sleeve Casual",
                 'slug' => Str::slug("In-Formal Full Sleeve Casual Shirt"),
                 'description' => "Effortlessly stylish and comfortable...",
                 'price' => 4995.00,
@@ -52,7 +52,7 @@ class productsMenSeedr extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => "Beige Checkered Collar Shirt",
+                'name' => "Beige Checkered Collar",
                 'slug' => Str::slug("Beige Checkered Collar Shirt"),
                 'description' => "Classic and versatile with subtle check pattern...",
                 'price' => 3890.00,
@@ -66,7 +66,7 @@ class productsMenSeedr extends Seeder
 
             // Shirts (category_id = 28)
             [
-                'name' => "Men Formal Full Sleeve Plain Shirt",
+                'name' => "Men Formal Full Sleeve Plain",
                 'slug' => Str::slug("Men Formal Full Sleeve Plain Shirt"),
                 'description' => "A classic wardrobe essential with a tailored fit...",
                 'price' => 3695.00,
@@ -78,7 +78,7 @@ class productsMenSeedr extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => "Men Slim Fit Formal Shirt",
+                'name' => "Men Slim Fit Formal",
                 'slug' => Str::slug("Men Slim Fit Formal Shirt"),
                 'description' => "Tailored for a sharp, modern look...",
                 'price' => 4095.00,
@@ -92,7 +92,7 @@ class productsMenSeedr extends Seeder
 
             // TShirts (category_id = 29)
             [
-                'name' => "DKDC Pink Short Sleeve Tshirt",
+                'name' => "DKDC Pink Short Sleeve",
                 'slug' => Str::slug("DKDC Pink Short Sleeve Tshirt"),
                 'description' => "Stay effortlessly chic in this pink short sleeve t-shirt...",
                 'price' => 2295.00,
