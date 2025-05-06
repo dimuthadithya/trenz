@@ -30,8 +30,8 @@ use App\Models\Category;
                 data-setbg="{{ asset('assets/img/categories/category-2.jpg') }}">
                 <div class="categories__text">
                   <h4>Men’s fashion</h4>
-                  <p>358 items</p>
-                  <a href="#">Shop now</a>
+                  <p>{{ $menProductsCount }} items</p>
+                  <a href="{{ route("men") }}">Shop now</a>
                 </div>
               </div>
             </div>
@@ -41,8 +41,8 @@ use App\Models\Category;
                 data-setbg="{{ asset('assets/img/categories/category-3.jpg') }}">
                 <div class="categories__text">
                   <h4>Kid’s fashion</h4>
-                  <p>273 items</p>
-                  <a href="#">Shop now</a>
+                  <p>{{ $kidsProductsCount }} items</p>
+                  <a href="{{ route("kid") }}">Shop now</a>
                 </div>
               </div>
             </div>
