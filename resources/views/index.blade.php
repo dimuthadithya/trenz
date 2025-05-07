@@ -30,7 +30,7 @@ use App\Models\Category;
                 data-setbg="{{ asset('assets/img/categories/category-2.jpg') }}">
                 <div class="categories__text">
                   <h4>Men’s fashion</h4>
-                  <p>{{ $menProductsCount }} items</p>
+                  <p><span class="counter" data-count="{{ $menProductsCount }}">0</span> items</p>
                   <a href="{{ route("men") }}">Shop now</a>
                 </div>
               </div>
@@ -41,7 +41,7 @@ use App\Models\Category;
                 data-setbg="{{ asset('assets/img/categories/category-3.jpg') }}">
                 <div class="categories__text">
                   <h4>Kid’s fashion</h4>
-                  <p>{{ $kidsProductsCount }} items</p>
+                  <p><span class="counter" data-count="{{ $kidsProductsCount }}">0</span> items</p>
                   <a href="{{ route("kid") }}">Shop now</a>
                 </div>
               </div>
@@ -52,7 +52,7 @@ use App\Models\Category;
                 data-setbg="{{ asset('assets/img/categories/category-4.jpg') }}">
                 <div class="categories__text">
                   <h4>Cosmetics</h4>
-                  <p>159 items</p>
+                  <p><span class="counter" data-count="159">0</span> items</p>
                   <a href="#">Shop now</a>
                 </div>
               </div>
@@ -63,7 +63,7 @@ use App\Models\Category;
                 data-setbg="{{ asset('assets/img/categories/category-5.jpg') }}">
                 <div class="categories__text">
                   <h4>Accessories</h4>
-                  <p>792 items</p>
+                  <p><span class="counter" data-count="102">0</span> items</p>
                   <a href="#">Shop now</a>
                 </div>
               </div>
@@ -395,5 +395,35 @@ use App\Models\Category;
       </div>
     </div>
   </section>
+
+  @push('scripts')
+  <script type="module">
+    import {
+      CountUp
+    } from 'https://cdn.jsdelivr.net/npm/countup.js@2.6.2/dist/countUp.min.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll(".counter");
+
+      counters.forEach(counter => {
+        const endVal = parseInt(counter.dataset.count, 10);
+
+        const duration = 20;
+
+        const countUp = new CountUp(counter, endVal, {
+          duration: duration
+        });
+
+        if (!countUp.error) {
+          countUp.start();
+        } else {
+          console.error(countUp.error);
+        }
+      });
+    });
+  </script>
+
+
+  @endpush
   <!-- Services Section End -->
 </x-app-layout>
