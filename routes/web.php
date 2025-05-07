@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 // route for home page 
 Route::get('/', function () {
-    $products = Product::all();
+    $products = Product::all()->take(20);
 
     $menCategoryId = Category::where('category_name', 'Men')->pluck('id')->toArray();
     $menSubCategoryIds = Category::where('parent_category_id', $menCategoryId)->pluck('id')->toArray();

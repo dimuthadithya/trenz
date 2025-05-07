@@ -59,6 +59,10 @@
     <!-- notyf -->
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
+    <!-- CountUp -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.6.2/countUp.umd.min.js"></script>
+
+
     <!-- Js Plugins -->
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -69,7 +73,7 @@
     <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/notyf.js') }}"></script>
 
     <!-- login sucess message -->

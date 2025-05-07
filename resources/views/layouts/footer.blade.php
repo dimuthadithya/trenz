@@ -6,7 +6,7 @@
                         <div class="instagram__item set-bg" data-setbg="{{ asset('assets/img/instagram/insta-1.jpg') }}">
                             <div class="instagram__text">
                                 <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
+                                <a href="#">@ trenz_shop</a>
                             </div>
                         </div>
                     </div>
@@ -14,7 +14,7 @@
                         <div class="instagram__item set-bg" data-setbg="{{ asset('assets/img/instagram/insta-2.jpg') }}">
                             <div class="instagram__text">
                                 <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
+                                <a href="#">@ trenz_shop</a>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <div class="instagram__item set-bg" data-setbg="{{ asset('assets/img/instagram/insta-3.jpg') }}">
                             <div class="instagram__text">
                                 <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
+                                <a href="#">@ trenz_shop</a>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="instagram__item set-bg" data-setbg="{{ asset('assets/img/instagram/insta-4.jpg') }}">
                             <div class="instagram__text">
                                 <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
+                                <a href="#">@ trenz_shop</a>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="instagram__item set-bg" data-setbg="{{ asset('assets/img/instagram/insta-5.jpg') }}">
                             <div class="instagram__text">
                                 <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
+                                <a href="#">@ trenz_shop</a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                         <div class="instagram__item set-bg" data-setbg="{{ asset('assets/img/instagram/insta-6.jpg') }}">
                             <div class="instagram__text">
                                 <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
+                                <a href="#">@ trenz_shop</a>
                             </div>
                         </div>
                     </div>
@@ -65,8 +65,7 @@
                                 <a href="./index.html"><img src="img/logo.png" alt="" /></a>
                             </div>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt cilisis.
+                                At TRENZ, we blend timeless style with modern trends, offering high-quality apparel for confident, everyday style.
                             </p>
                             <div class="footer__payment">
                                 <a href="#"><img src="img/payment/payment-1.png" alt="" /></a>
