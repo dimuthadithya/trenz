@@ -53,7 +53,7 @@ use App\Models\ProductImage;
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>{{ $product->name }}<span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
+                        <h3>{{ $product->name }}<span>Brand: SKU{{$product->id}}{{ $product->category_id }}{{ $product->stock }}</span></h3>
                         <div class="mb-2 rating">
                             @php
                             $rating = $product->rating;
@@ -182,7 +182,7 @@ use App\Models\ProductImage;
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="text-center col-lg-12">
                     <div class="related__title">
                         <h5>RELATED PRODUCTS</h5>
