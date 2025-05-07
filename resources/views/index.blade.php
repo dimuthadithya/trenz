@@ -95,7 +95,7 @@ use App\Models\Category;
           </ul>
         </div>
       </div>
-      <div class="row property__gallery">
+      <div class="row property__gallery justify-content-center">
         @foreach($products as $product)
         @php
         $category_id = $product->category_id;
