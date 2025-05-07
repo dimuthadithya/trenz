@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
 
         $request->authenticate();
-        $request->session()->regenerate();
+        session()->regenerate();
 
         Session::flash('login_success', 'You have successfully logged in!');
 
