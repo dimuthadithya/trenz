@@ -1,6 +1,6 @@
 # Trenz
 
-## Overview
+## Overview 
 
 Trenz is a modern web application designed to simplify and enhance user management and role-based access control. Built with Laravel, Trenz provides a robust and scalable foundation for managing users, roles, and secure authentication. Its responsive design ensures a seamless experience across all devices, making it ideal for both administrators and end-users.
 
