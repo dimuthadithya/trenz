@@ -14,7 +14,7 @@ Trenz is a modern web application designed to simplify and enhance user manageme
 -   **Secure Authentication**: Includes robust login and registration mechanisms with role-based access.
 -   **Scalable Architecture**: Built with Laravel, ensuring flexibility and scalability for future enhancements.
 
-## Installation
+## Installation 
 
 Follow these steps to set up the project locally:
 
