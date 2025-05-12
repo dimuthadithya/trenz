@@ -1331,8 +1331,8 @@ overflow: hidden;
 }
 
 .ctz-height{
-	height: 150px ;
-	overflow-y: scroll;
+	height: 100px ;
+	/* overflow-y: scroll; */
 }
 
 /*---------------------
@@ -2163,6 +2163,7 @@ overflow: hidden;
 	color: #ca1515;
 	font-weight: 600;
 	width: 190px;
+	
 }
 
 .shop__cart__table tbody tr .cart__quantity {
