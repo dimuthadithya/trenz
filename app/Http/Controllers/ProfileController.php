@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\OrderItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,11 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        return view('profile.index');
+        $currentUser = Auth::user();
+        $orderId = $currentUser->orders()->pluck('id');
+        $orderItems = OrderItem::whereIn('order_id', $orderId)->get();
+
+        return view('profile.index', compact('orderItems'));
     }
 
 

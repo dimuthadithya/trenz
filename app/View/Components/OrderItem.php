@@ -8,13 +8,21 @@ use Illuminate\View\Component;
 
 class OrderItem extends Component
 {
+
+    public $product;
+    public $orderItem;
+    public $orderDetails;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($product, $orderItem, $orderDetails)
     {
-        //
+        $this->product = $product;
+        $this->orderItem = $orderItem;
+        $this->orderDetails = $orderDetails;
     }
+
 
     /**
      * Get the view / contents that represent the component.

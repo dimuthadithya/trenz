@@ -172,7 +172,6 @@
             font-weight: 600;
             color: #424242;
             text-align: right;
-            width: 80px;
         }
 
         .order-qty {
@@ -202,7 +201,7 @@
             <!-- Left sidebar -->
             <div class="col-md-3">
                 <div class="account-sidebar">
-                    <div class="pb-2">Hello, dimuth adithya</div>
+                    <div class="pb-2">Hello, {{ auth()->user()->name }}</div>
 
                     <h5 class="mt-3">Manage My Account</h5>
                     <ul class="sidebar-menu ms-3">
@@ -259,7 +258,16 @@
                     </div>
 
                     <!-- Order items -->
-                    <x-order-item />
+                    @foreach ($orderItems as $orderItem)
+                    @php
+                    $productId = $orderItem->product_id;
+                    $product = \App\Models\Product::find($productId);
+                    $orderDetails = \App\Models\Order::find($orderItem->order_id);
+
+
+                    @endphp
+                    <x-order-item :product="$product" :orderItem="$orderItem" :orderDetails="$orderDetails" />
+                    @endforeach
                 </div>
             </div>
         </div>

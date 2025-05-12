@@ -5,16 +5,21 @@
             <a href="{{ route('product.show', $product["id"]) }}">
                 <h6>{{ $product["name"] }}</h6>
             </a>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+            <div class="mb-2 rating">
+                @php
+                $rating = $product["rating"];
+                @endphp
+                @for ($i = 0; $i < 5; $i++)
+                    @if ($i < $rating)
+                    <i class="fa-solid fa-star"></i>
+                    @else
+                    <i class="fa-regular fa-star"></i>
+                    @endif
+                    @endfor
             </div>
         </div>
     </td>
-    <td class="cart__price">${{ $product["price"] }}</td>
+    <td class="cart__price">LKR <span>{{ $product["price"] }}</span></td>
     <td class="cart__quantity">
         <div class="pro-qty">
             <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form">
@@ -34,7 +39,7 @@
             </form>
         </div>
     </td>
-    <td class="cart__total">${{ $product["price"]*$cartQty }}</td>
+    <td class="cart__total">LKR {{ $product["price"]*$cartQty }}.00</td>
     <td class="cart__close">
         <form action="{{ route('cart.remove', $product['id']) }}" method="POST" class="">
             @csrf
