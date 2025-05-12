@@ -1297,7 +1297,7 @@ overflow: hidden;
 }
 
 .product__item__text a {
-	font-family: "Montserrat", sans-serif;
+	font-family: "Lato", sans-serif !important;
 	color: #111111;
 	font-size: medium;
 }
@@ -1320,6 +1320,7 @@ overflow: hidden;
 .product__item__text .product__price {
 	color: #111111;
 	font-weight: 600;
+	font-family: "Open Sans", sans-serif !important;
 }
 
 .product__item__text .product__price span {
