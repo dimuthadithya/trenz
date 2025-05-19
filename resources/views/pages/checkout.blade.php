@@ -23,7 +23,8 @@
                         here to enter your code.</h6>
                 </div>
             </div>
-            <form action="#" class="checkout__form">
+            <form action="{{ route('order.create') }}" class="checkout__form" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-lg-8">
                         <h5>Billing detail</h5>
@@ -31,77 +32,70 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>First Name <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="fname">
+                                    @error('fname')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Last Name <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="lname">
+                                    @error('lname')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
                                     <p>Country <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="country">
+                                    @error('country')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Address <span>*</span></p>
-                                    <input type="text" placeholder="Street Address">
-                                    <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
+                                    <input type="text" name="address" placeholder="Address">
+                                    @error('address')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Town/City <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Country/State <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="city">
+                                    @error('city')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="postcode">
+                                    @error('postcode')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Phone <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="phone">
+                                    @error('phone')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Email <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="email">
+                                    @error('email')
+                                    <p class="mt-0 text-danger small">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__checkbox">
-                                    <label for="acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing
-                                        customer login at the <br />top of the page</p>
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Account Password <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__checkbox">
-                                    <label for="note">
-                                        Note about your order, e.g, special noe for delivery
-                                        <input type="checkbox" id="note">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Oder notes <span>*</span></p>
-                                    <input type="text"
-                                        placeholder="Note about your order, e.g, special noe for delivery">
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -115,52 +109,40 @@
                                     </li>
 
 
-                                    @foreach ($products as $product)
-                                    @php
-                                    $count =1;
-                                    @endphp
-                                    <li>{{ $count++ }}. {{ $product['name'] }}<span>$ {{ $product['price'] }}</span></li>
+                                    @foreach ($products as $product )
+                                    <li class="py-2 border-2 d-flex justify-content-between border-bottom">
+                                        <span class="w-50 fw-medium">{{$loop->iteration }}. {{ $product['name'] }}</span>
+                                        <span class="">LKR {{ $product['price'] }}</span>
+                                    </li>
                                     @endforeach
 
                                 </ul>
                             </div>
                             <div class="checkout__order__total">
                                 <ul>
-                                    <li>Subtotal <span>$ 750.0</span></li>
-                                    <li>Total <span>$ 750.0</span></li>
+                                    <li>Total
+                                        <span>LKR {{ $cartItemsTotal }}.00</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="checkout__order__widget">
                                 <label for="o-acc">
-                                    Create an acount?
-                                    <input type="checkbox" id="o-acc">
+                                    Cash On Delivery
+                                    <input type="radio" name="payment_method" id="o-acc">
                                     <span class="checkmark"></span>
                                 </label>
-                                <p>Create am acount by entering the information below. If you are a returing customer
-                                    login at the top of the page.</p>
                                 <label for="check-payment">
                                     Cheque payment
-                                    <input type="checkbox" id="check-payment">
+                                    <input type="radio" name="payment_method" id="check-payment">
                                     <span class="checkmark"></span>
                                 </label>
                                 <label for="paypal">
                                     PayPal
-                                    <input type="checkbox" id="paypal">
+                                    <input type="radio" name="payment_method" id="paypal">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button type="submit" id="placeOrderBtn" class="site-btn">Place oder</button>
-
-                            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                            <script>
-                                document.getElementById('placeOrderBtn').addEventListener('click', function() {
-                                    axios.post("{{ route('order.create') }}")
-                                        .then(function(response) {
-                                            window.location.href = "{{ route('home') }}";
-                                        })
-                                        .catch(function(error) {});
-                                });
-                            </script>
+                            <input type="submit" class="site-btn" value="Place an order">
                         </div>
                     </div>
                 </div>

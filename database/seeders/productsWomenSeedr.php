@@ -17,7 +17,7 @@ class productsWomenSeedr extends Seeder
         $products = [
             // Jersey
             [
-                'name' => "Women Zip Up Sweater Hoodie Long Sleeve Cropped Lined Slim Fit ",
+                'name' => "Women Zip Up Sweater Hoodie Long Sleeve",
                 'slug' => Str::slug("Women Zip Up Sweater Hoodie Long Sleeve Cropped Lined Slim Fit Jacket"),
                 'description' => "Stay stylish and cozy with this women's zip-up sweater hoodie...",
                 'price' => 5695.00,

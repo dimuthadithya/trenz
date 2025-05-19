@@ -112,7 +112,7 @@ $wishlistCount = Wishlist::where('user_id', Auth::id())->count();
                         </li>
                         @auth
                         <li>
-                            <a href="{{ route('profile.edit') }}"><span class="fa-regular fa-user"></span>
+                            <a href="{{ route('profile.index') }}"><span class="fa-regular fa-user"></span>
                             </a>
                         </li>
                         @endauth

@@ -1198,6 +1198,9 @@ ol {
 	width: 100%;
 	bottom: 30px;
 	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .product__hover li {
@@ -1294,7 +1297,7 @@ overflow: hidden;
 }
 
 .product__item__text a {
-	font-family: "Montserrat", sans-serif;
+	font-family: "Lato", sans-serif !important;
 	color: #111111;
 	font-size: medium;
 }
@@ -1317,6 +1320,7 @@ overflow: hidden;
 .product__item__text .product__price {
 	color: #111111;
 	font-weight: 600;
+	font-family: "Open Sans", sans-serif !important;
 }
 
 .product__item__text .product__price span {
@@ -1327,8 +1331,8 @@ overflow: hidden;
 }
 
 .ctz-height{
-	height: 150px ;
-	overflow-y: scroll;
+	height: 100px ;
+	/* overflow-y: scroll; */
 }
 
 /*---------------------
@@ -2159,6 +2163,7 @@ overflow: hidden;
 	color: #ca1515;
 	font-weight: 600;
 	width: 190px;
+	
 }
 
 .shop__cart__table tbody tr .cart__quantity {
