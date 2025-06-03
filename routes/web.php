@@ -1,17 +1,11 @@
 <?php
 
-use App\Http\Controllers\admin\AdminCategoryController;
-use App\Http\Controllers\admin\AdminDashboardController;
-use App\Http\Controllers\admin\AdminProductController;
-use App\Http\Controllers\admin\AdminUserController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
-use App\Http\Middleware\AdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Container\Attributes\Auth;
@@ -62,20 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/create', [CartController::class, 'store'])->name('cart.store');
     Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.remove');
-});
-
-// Routes for Admin 
-Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/users', [AdminUserController::class, 'index'])->name('users');
-    Route::get('/admin/view', [AdminDashboardController::class, 'viewAdmins'])->name('admin.view');
-    Route::get('/admin/create', [AdminDashboardController::class, 'create'])->name('admin.create');
-    Route::get('/products', [AdminProductController::class, 'index'])->name('products');
-    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
-    Route::post('/products/create', [AdminProductController::class, 'store'])->name('products.store');
-    Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.view');
-    Route::get('/categories/create', [AdminCategoryController::class, 'create'])->name('categories.create');
-    Route::post('/categories/create', [AdminCategoryController::class, 'store'])->name('categories.store');
 });
 
 
