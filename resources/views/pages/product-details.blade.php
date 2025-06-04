@@ -35,14 +35,15 @@ use App\Models\ProductImage;
                             $product_images = ProductImage::where('product_id', $product->id)->get();
                             @endphp
                             @foreach ($product_images as $product_image)
+
                             <a class="pt" href="#product-{{ $loop->iteration }}">
-                                <img src="{{ $product_image->image_path }}" alt="">
+                                <img src="../{{ $product_image->image_path }}" alt="">
                             </a>
                             @endforeach
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-main" class="product__big__img" src="{{ $product->image }}" alt="">
+                                <img data-hash="product-main" class="product__big__img" src="../{{ $product->image }}" alt="">
                                 @foreach ($product_images as $product_image)
                                 <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ $product_image->image_path }}" alt="">
                                 @endforeach
