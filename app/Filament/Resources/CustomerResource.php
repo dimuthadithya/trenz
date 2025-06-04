@@ -61,6 +61,16 @@ class CustomerResource extends Resource
                             ->password()
                             ->dehydrated(fn($state) => filled($state))
                             ->required(fn(string $context): bool => $context === 'create'),
+
+                        Forms\Components\Select::make('role')
+                            ->options([
+                                'customer' => 'Customer',
+                                'admin' => 'Admin',
+                            ])
+                            ->default('customer')
+                            ->disabled()
+                            ->dehydrated()
+                            ->required(),
                     ])
             ]);
     }
@@ -89,6 +99,12 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable()
                     ->sortable(),
+
+                Tables\Columns\BadgeColumn::make('role')
+                    ->colors([
+                        'success' => 'customer',
+                        'danger' => 'admin',
+                    ]),
 
                 Tables\Columns\IconColumn::make('email_verified_at')
                     ->label('Verified')
