@@ -150,7 +150,7 @@
             <!-- Main content area -->
             <div class="col-md-9">
                 <div class="address-container">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="mb-4 d-flex justify-content-between align-items-center">
                         <h4 class="m-0">My Addresses</h4>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
                             <i class="fas fa-plus"></i> Add New Address
@@ -160,7 +160,7 @@
                     <!-- Address Cards -->
                     <div class="row">
                         @forelse($addresses ?? [] as $address)
-                        <div class="col-md-6 mb-3">
+                        <div class="mb-3 col-md-6">
                             <div class="address-card">
                                 <div class="address-type">
                                     {{ $address->type }}
@@ -185,11 +185,11 @@
                             </div>
                         </div>
                         @empty
-                        <div class="col-md-6 mb-3">
+                        <div class="mb-3 col-md-6">
                             <div class="add-address-card" data-bs-toggle="modal" data-bs-target="#addAddressModal">
-                                <i class="fas fa-plus-circle fa-2x mb-2"></i>
+                                <i class="mb-2 fas fa-plus-circle fa-2x"></i>
                                 <h5>Add New Address</h5>
-                                <p class="text-muted mb-0">Add your first delivery address</p>
+                                <p class="mb-0 text-muted">Add your first delivery address</p>
                             </div>
                         </div>
                         @endforelse
@@ -227,21 +227,21 @@
                             <input type="text" class="form-control" id="address2" name="address_line2">
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="mb-3 col-md-6">
                                 <label for="city" class="form-label">City</label>
                                 <input type="text" class="form-control" id="city" name="city" required>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="mb-3 col-md-6">
                                 <label for="state" class="form-label">State/Province</label>
                                 <input type="text" class="form-control" id="state" name="state" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="mb-3 col-md-6">
                                 <label for="postalCode" class="form-label">Postal Code</label>
                                 <input type="text" class="form-control" id="postalCode" name="postal_code" required>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="mb-3 col-md-6">
                                 <label for="country" class="form-label">Country</label>
                                 <input type="text" class="form-control" id="country" name="country" required>
                             </div>
