@@ -131,6 +131,13 @@ class OrderResource extends Resource
             ]);
     }
 
+    public static function getWidgets(): array
+    {
+        return [
+            OrderResource\Widgets\RecentOrders::class
+        ];
+    }
+
     public static function getRelations(): array
     {
         return [
