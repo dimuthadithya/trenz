@@ -260,7 +260,7 @@
             <h3 class="text-lg font-medium text-gray-900">No Orders Found</h3>
             <p class="mt-1 text-gray-500">You haven't placed any orders yet.</p>
             <div class="mt-4">
-                <a href="{{ route('shop') }}" class="btn">Start Shopping</a>
+                <a href="{{ route('home') }}" class="btn">Start Shopping</a>
             </div>
         </div>
     </div>

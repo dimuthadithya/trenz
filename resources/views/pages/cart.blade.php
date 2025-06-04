@@ -68,7 +68,7 @@
                 </div>
                 <h2 class="mb-3 h4">Your cart is empty</h2>
                 <p class="mb-4 text-muted">Looks like you haven't added anything to your cart yet.</p>
-                <a href="{{ route('shop') }}" class="btn btn-primary">
+                <a href="{{ route('home') }}" class="btn btn-primary">
                     Start Shopping
                 </a>
             </div>

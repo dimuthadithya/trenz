@@ -54,7 +54,6 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('l
 Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register');
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::get('/men', [ProductController::class, 'indexMen'])->name('men');
-Route::get('/shop', [ProductController::class, 'index'])->name('shop');
 Route::get('/women', [ProductController::class, 'indexWomen'])->name('women');
 Route::get('/kids', [ProductController::class, 'indexKid'])->name('kid');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
