@@ -65,6 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/address', [ProfileController::class, 'address'])->name('profile.address');
     Route::post('/profile/address', [ProfileController::class, 'storeAddress'])->name('profile.address.store');
+    Route::patch('/profile/address/{id}', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
+    Route::delete('/profile/address/{id}', [ProfileController::class, 'deleteAddress'])->name('profile.address.delete');
+    Route::post('/profile/address/{id}/default', [ProfileController::class, 'setDefaultAddress'])->name('profile.address.default');
     Route::get('/profile/payments', [ProfileController::class, 'payments'])->name('profile.payments');
     Route::post('/profile/payments', [ProfileController::class, 'storePayment'])->name('profile.payments.store');
     Route::delete('/profile/payments/{id}', [ProfileController::class, 'deletePayment'])->name('profile.payments.delete');

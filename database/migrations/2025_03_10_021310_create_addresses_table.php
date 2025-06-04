@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('fname');
+            $table->string('lname');
+            $table->string('address');
             $table->string('city');
-            $table->string('zip_code');
             $table->string('country');
+            $table->string('zip_code');
+            $table->string('phone_number');
+            $table->string('email');
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
     }

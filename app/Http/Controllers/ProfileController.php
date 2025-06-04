@@ -81,20 +81,27 @@ class ProfileController extends Controller
     public function storeAddress(Request $request)
     {
         $request->validate([
-            'full_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'address_line1' => 'required|string|max:255',
-            'address_line2' => 'nullable|string|max:255',
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
-            'state' => 'required|string|max:100',
-            'postal_code' => 'required|string|max:20',
             'country' => 'required|string|max:100',
-            'type' => 'required|in:home,work,other',
+            'zip_code' => 'required|string|max:20',
+            'phone_number' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
             'is_default' => 'boolean'
         ]);
 
-        $address = new Address($request->all());
+        $address = new Address();
         $address->user_id = Auth::id();
+        $address->fname = $request->fname;
+        $address->lname = $request->lname;
+        $address->address = $request->address;
+        $address->city = $request->city;
+        $address->country = $request->country;
+        $address->zip_code = $request->zip_code;
+        $address->phone_number = $request->phone_number;
+        $address->email = $request->email;
 
         // If this is the first address or is_default is checked, make it default
         if ($request->is_default || Auth::user()->addresses()->count() === 0) {
@@ -105,6 +112,48 @@ class ProfileController extends Controller
         $address->save();
 
         return redirect()->route('profile.address')->with('success', 'Address added successfully');
+    }
+
+    public function updateAddress(Request $request, $id)
+    {
+        $request->validate([
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:100',
+            'country' => 'required|string|max:100',
+            'zip_code' => 'required|string|max:20',
+            'phone_number' => 'required|string|max:20',
+            'email' => 'required|email|max:255'
+        ]);
+
+        $address = Auth::user()->addresses()->findOrFail($id);
+        $address->update($request->all());
+
+        return redirect()->route('profile.address')->with('success', 'Address updated successfully');
+    }
+
+    public function deleteAddress($id)
+    {
+        $address = Auth::user()->addresses()->findOrFail($id);
+
+        if ($address->is_default) {
+            return redirect()->route('profile.address')
+                ->with('error', 'Cannot delete default address. Please set another address as default first.');
+        }
+
+        $address->delete();
+        return redirect()->route('profile.address')->with('success', 'Address deleted successfully');
+    }
+
+    public function setDefaultAddress($id)
+    {
+        $address = Auth::user()->addresses()->findOrFail($id);
+
+        Auth::user()->addresses()->update(['is_default' => false]);
+        $address->update(['is_default' => true]);
+
+        return redirect()->route('profile.address')->with('success', 'Default address updated successfully');
     }
 
     /**
