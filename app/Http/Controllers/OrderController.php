@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Payment;
 
 class OrderController extends Controller
 {
@@ -59,6 +60,7 @@ class OrderController extends Controller
             'postcode' => 'required|string|max:10',
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
+            'payment_method' => 'required|in:card,paypal,cod',
         ]);
 
         $userId = Auth::user()->id;
@@ -97,7 +99,7 @@ class OrderController extends Controller
         $order->order_number = 'ORD' . time() . $userId;
         $order->total_price = 0;
         $order->status = 'processing';
-        $order->payment_status = 'paid';
+        $order->payment_status = 'pending';
         $order->save();
 
         $totalPrice = 0;
@@ -113,6 +115,27 @@ class OrderController extends Controller
         }
 
         $order->total_price = $totalPrice;
+        $order->save();
+
+        // Create payment record
+        $payment = new Payment();
+        $payment->user_id = $userId;
+        $payment->order_id = $order->id;
+        $payment->payment_method = $request->payment_method;
+        $payment->amount = $totalPrice;
+        $payment->status = 'pending';
+        $payment->save();
+
+        // Update order payment status based on payment method
+        if ($request->payment_method === 'cod') {
+            $order->payment_status = 'pending';
+        } else {
+            // For card and PayPal, we'd integrate with a payment gateway here
+            // For now, let's set it as paid for demo purposes
+            $order->payment_status = 'paid';
+            $payment->status = 'completed';
+            $payment->save();
+        }
         $order->save();
 
         // Clear the cart

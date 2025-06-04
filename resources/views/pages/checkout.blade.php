@@ -129,22 +129,25 @@ use App\Models\Cart;
                                 </ul>
                             </div>
                             <div class="checkout__order__widget">
-                                <label for="o-acc">
+                                <label for="cod">
                                     Cash On Delivery
-                                    <input type="radio" name="payment_method" id="o-acc">
+                                    <input type="radio" name="payment_method" id="cod" value="cod" required checked>
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="check-payment">
-                                    Cheque payment
-                                    <input type="radio" name="payment_method" id="check-payment">
+                                <label for="card">
+                                    Card Payment
+                                    <input type="radio" name="payment_method" id="card" value="card" required>
                                     <span class="checkmark"></span>
                                 </label>
                                 <label for="paypal">
                                     PayPal
-                                    <input type="radio" name="payment_method" id="paypal">
+                                    <input type="radio" name="payment_method" id="paypal" value="paypal" required>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
+                            @error('payment_method')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             <input type="submit" class="site-btn" value="Place an order">
                         </div>
                     </div>
