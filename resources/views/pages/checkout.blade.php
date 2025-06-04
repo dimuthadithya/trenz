@@ -21,12 +21,6 @@ use App\Models\Cart;
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
-                        here to enter your code.</h6>
-                </div>
-            </div>
             <form action="{{ route('order.create') }}" class="checkout__form" method="POST">
                 @csrf
                 <div class="row">
