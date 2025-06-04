@@ -23,7 +23,9 @@ class CartController extends Controller
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
             if ($product) {
-                $products[] = $product->toArray();
+                $productArray = $product->toArray();
+                $productArray['cart_quantity'] = $cartItem->quantity;
+                $products[] = $productArray;
             }
         }
 
@@ -93,14 +95,11 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart, $id)
+    public function destroy($id)
     {
-
-
         $cartItem = Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $id)
             ->first();
-
 
         if ($cartItem) {
             $cartItem->delete();

@@ -85,10 +85,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
+    // Cart routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/create', [CartController::class, 'store'])->name('cart.store');
-    Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.remove');
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 
 

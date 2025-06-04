@@ -1,52 +1,49 @@
-<tr class="done">
-    <td class="cart__product__item">
-        <img src="{{ asset($product["image"]) }}" alt="" style="object-fit: contain;width: 100px;height: 100px;">
-        <div class="cart__product__item__title">
-            <a href="{{ route('product.show', $product["id"]) }}">
-                <h6>{{ $product["name"] }}</h6>
-            </a>
-            <div class="mb-2 rating">
-                @php
-                $rating = $product["rating"];
-                @endphp
-                @for ($i = 0; $i < 5; $i++)
-                    @if ($i < $rating)
-                    <i class="fa-solid fa-star"></i>
-                    @else
-                    <i class="fa-regular fa-star"></i>
-                    @endif
-                    @endfor
+<tr>
+    <td class="align-middle">
+        <div class="d-flex align-items-center">
+            <img src="{{ asset($product["image"]) }}" alt="" class="me-3" style="object-fit: contain;width: 80px;height: 80px;">
+            <div>
+                <h6 class="mb-1">
+                    <a href="{{ route('product.show', $product["id"]) }}" class="text-decoration-none text-dark">
+                        {{ $product["name"] }}
+                    </a>
+                </h6>
+                <div class="mb-2">
+                    @php
+                    $rating = $product["rating"];
+                    @endphp
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < $rating)
+                        <i class="fa-solid fa-star text-warning"></i>
+                        @else
+                        <i class="fa-regular fa-star text-warning"></i>
+                        @endif
+                        @endfor
+                </div>
             </div>
         </div>
     </td>
-    <td class="cart__price">LKR {{ number_format($product["price"], 2) }}</td>
-    <td class="cart__quantity">
-        <div class="pro-qty">
-            <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form">
+    <td class="align-middle">LKR {{ number_format($product["price"], 2) }}</td>
+    <td class="align-middle">
+        <div class="pro-qty input-group" style="width: 130px">
+            <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form d-flex">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="product_id" value="{{ $product['id'] }}">
-                @php
-                use App\Models\Cart;
-
-                $cartQty = Cart::where('user_id', auth()->user()->id)
-                ->where('product_id', $product['id'])
-                ->first()->quantity;
-
-                $itemTotal = $product["price"] * $cartQty;
-                @endphp
-                <span class="dec qtybtn">-</span>
-                <input type="text" name="quantity" value="{{ $cartQty }}" min="1" readonly>
-                <span class="inc qtybtn">+</span>
+                <button type="button" class="btn btn-outline-secondary qtybtn dec">-</button>
+                <input type="text" name="quantity" value="{{ $product['cart_quantity'] }}" min="1" class="form-control text-center" readonly>
+                <button type="button" class="btn btn-outline-secondary qtybtn inc">+</button>
             </form>
         </div>
     </td>
-    <td class="cart__total">LKR {{ number_format($itemTotal, 2) }}</td>
-    <td class="cart__close">
-        <form action="{{ route('cart.remove', $product['id']) }}" method="POST" class="">
+    <td class="align-middle">LKR {{ number_format($product["price"] * $product['cart_quantity'], 2) }}</td>
+    <td class="align-middle">
+        <form action="{{ route('cart.destroy', $product['id']) }}" method="POST" class="d-inline">
             @csrf
             @method('DELETE')
-            <button type="submit" class="remove-from-cart"><span class="icon_close" id="removeFromCart"></span></button>
+            <button type="submit" class="btn btn-link text-danger p-0" onclick="return confirm('Are you sure you want to remove this item?')">
+                <i class="fas fa-trash"></i>
+            </button>
         </form>
     </td>
 </tr>
