@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\LatestOrders::class,
                 Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
