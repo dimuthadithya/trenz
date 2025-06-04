@@ -29,7 +29,7 @@ use App\Models\ProductImage;
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-main">
-                                <img src="{{ $product->image }}" alt="">
+                                <img src="Storage::url{{ $product->image }}" alt="">
                             </a>
                             @php
                             $product_images = ProductImage::where('product_id', $product->id)->get();
@@ -37,7 +37,7 @@ use App\Models\ProductImage;
                             @foreach ($product_images as $product_image)
 
                             <a class="pt" href="#product-{{ $loop->iteration }}">
-                                <img src="../{{ $product_image->image_path }}" alt="">
+                                <img src="{{ $product_image->image_path }}" alt="">
                             </a>
                             @endforeach
                         </div>
@@ -45,7 +45,7 @@ use App\Models\ProductImage;
                             <div class="product__details__pic__slider owl-carousel">
                                 <img data-hash="product-main" class="product__big__img" src="../{{ $product->image }}" alt="">
                                 @foreach ($product_images as $product_image)
-                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ $product_image->image_path }}" alt="">
+                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="./{{ $product_image->image_path }}" alt="">
                                 @endforeach
                             </div>
                         </div>
