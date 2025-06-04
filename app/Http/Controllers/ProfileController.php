@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\OrderItem;
 use App\Models\Address;
+use App\Models\Order;
+use App\Models\Wishlist;
+use App\Models\Review;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +22,30 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        $currentUser = Auth::user();
-        $orderId = $currentUser->orders()->pluck('id');
-        $orderItems = OrderItem::whereIn('order_id', $orderId)->get();
+        $user = Auth::user();
 
-        return view('profile.index', compact('orderItems'));
+        // Get total orders count
+        $totalOrders = Order::where('user_id', $user->id)->count();
+
+        // Get wishlist count
+        $wishlistCount = Wishlist::where('user_id', $user->id)->count();
+
+        // Get reviews count
+        $reviewsCount = Review::where('user_id', $user->id)->count();
+
+        // Get recent orders with their items
+        $recentOrders = Order::with(['orderItems.product', 'address'])
+            ->where('user_id', $user->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('profile.index', compact(
+            'totalOrders',
+            'wishlistCount',
+            'reviewsCount',
+            'recentOrders'
+        ));
     }
 
 
