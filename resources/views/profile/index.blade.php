@@ -205,21 +205,43 @@
 
                     <h5 class="mt-3">Manage My Account</h5>
                     <ul class="sidebar-menu ms-3">
-                        <li><a href="">My Profile</a></li>
-                        <li><a href="">Address Book</a></li>
-                        <li><a href="">My Payment Options</a></li>
+                        <li class="{{ Route::currentRouteName() == 'profile.edit' ? 'active' : '' }}">
+                            <a href="{{ route('profile.edit') }}">My Profile</a>
+                        </li>
+                        <li class="{{ Route::currentRouteName() == 'profile.address' ? 'active' : '' }}">
+                            <a href="{{ route('profile.address') }}">Address Book</a>
+                        </li>
+                        <li class="{{ Route::currentRouteName() == 'profile.payments' ? 'active' : '' }}">
+                            <a href="{{ route('profile.payments') }}">My Payment Options</a>
+                        </li>
                     </ul>
 
                     <h5 class="mt-3">My Orders</h5>
                     <ul class="sidebar-menu ms-3">
-                        <li class="active"><a href="">My Orders</a></li>
-                        <li><a href="">My Returns</a></li>
-                        <li><a href="">My Cancellations</a></li>
+                        <li class="{{ Route::currentRouteName() == 'profile.orders' ? 'active' : '' }}">
+                            <a href="{{ route('profile.orders') }}">My Orders</a>
+                        </li>
+                        <li class="{{ Route::currentRouteName() == 'profile.returns' ? 'active' : '' }}">
+                            <a href="{{ route('profile.returns') }}">My Returns</a>
+                        </li>
+                        <li class="{{ Route::currentRouteName() == 'profile.cancellations' ? 'active' : '' }}">
+                            <a href="{{ route('profile.cancellations') }}">My Cancellations</a>
+                        </li>
                     </ul>
 
                     <h5 class="mt-3">My Reviews</h5>
+                    <ul class="sidebar-menu ms-3">
+                        <li class="{{ Route::currentRouteName() == 'profile.reviews' ? 'active' : '' }}">
+                            <a href="{{ route('profile.reviews') }}">Reviews</a>
+                        </li>
+                    </ul>
 
                     <h5 class="mt-3">My Wishlist & Followed Stores</h5>
+                    <ul class="sidebar-menu ms-3">
+                        <li class="{{ Route::currentRouteName() == 'profile.wishlist' ? 'active' : '' }}">
+                            <a href="{{ route('profile.wishlist') }}">My Wishlist</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -229,21 +251,21 @@
                     <h4 class="mb-3">My Orders</h4>
 
                     <!-- Order tabs -->
-                    <ul class="nav orders-tabs ">
+                    <ul class="nav orders-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">All</a>
+                            <a class="nav-link active" href="{{ route('profile.orders', ['status' => 'all']) }}">All</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">To Pay</a>
+                            <a class="nav-link" href="{{ route('profile.orders', ['status' => 'to_pay']) }}">To Pay</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">To Ship</a>
+                            <a class="nav-link" href="{{ route('profile.orders', ['status' => 'to_ship']) }}">To Ship</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">To Receive</a>
+                            <a class="nav-link" href="{{ route('profile.orders', ['status' => 'to_receive']) }}">To Receive</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">To Review(s)</a>
+                            <a class="nav-link" href="{{ route('profile.orders', ['status' => 'to_review']) }}">To Review(s)</a>
                         </li>
                     </ul>
 

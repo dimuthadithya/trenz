@@ -40,8 +40,18 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 // Routes for Reg User 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Profile routes
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/address', [ProfileController::class, 'address'])->name('profile.address');
+    Route::post('/profile/address', [ProfileController::class, 'storeAddress'])->name('profile.address.store');
+    Route::get('/profile/payments', [ProfileController::class, 'payments'])->name('profile.payments');
+    Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
+    Route::post('/profile/orders/{order}/cancel', [ProfileController::class, 'cancelOrder'])->name('profile.orders.cancel');
+    Route::get('/profile/returns', [ProfileController::class, 'returns'])->name('profile.returns');
+    Route::get('/profile/cancellations', [ProfileController::class, 'cancellations'])->name('profile.cancellations');
+    Route::get('/profile/reviews', [ProfileController::class, 'reviews'])->name('profile.reviews');
+    Route::get('/profile/wishlist', [ProfileController::class, 'wishlist'])->name('profile.wishlist');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
