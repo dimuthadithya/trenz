@@ -57,7 +57,7 @@
 <body>
     @include('layouts.navbar')
 
-    {{ $slot }}
+    @yield('content')
 
     @include('layouts.footer')
 

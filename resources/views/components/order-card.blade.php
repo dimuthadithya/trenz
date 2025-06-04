@@ -11,6 +11,9 @@
             </span>
         </div>
 
+        @if (isset($slot) && !empty($slot->toHtml()))
+        {{ $slot }}
+        @else
         <!-- Order Items -->
         <div class="mb-4">
             @foreach ($order->orderItems as $item)
@@ -20,7 +23,8 @@
                         alt="{{ $item->product->name }}"
                         class="img-fluid rounded border"
                         style="width: 60px; height: 60px; object-fit: cover;"
-                        loading="lazy">
+                        loading="lazy"
+                        onerror="this.src='{{ asset('images/placeholder.png') }}'">
                 </div>
                 <div class="flex-grow-1">
                     <h6 class="fw-medium text-truncate mb-1">{{ $item->product->name }}</h6>
@@ -52,5 +56,6 @@
                 @endif
             </div>
         </div>
+        @endif
     </div>
 </div>
