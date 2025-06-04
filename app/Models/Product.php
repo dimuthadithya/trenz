@@ -22,7 +22,7 @@ class Product extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ? "/storage/products/{$value}" : null,
+            get: fn($value) => $value ? $value : null,
         );
     }
 

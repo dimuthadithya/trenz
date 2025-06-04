@@ -40,7 +40,7 @@ class ProductResource extends Resource
                             ->prefix('Rs'),
                         Forms\Components\FileUpload::make('image')
                             ->image()
-                            ->directory('uploads/products')
+                            ->directory('products')
                             ->imageEditor()
                             ->circleCropper()
                             ->preserveFilenames()

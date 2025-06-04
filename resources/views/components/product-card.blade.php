@@ -8,11 +8,11 @@ $categoryName = Category::where('id', $product->category_id)->value('category_na
 
 <div {{ $attributes->merge(['class' => 'col-lg-3 col-md-4 col-sm-6 product-card-item']) }}>
     <div class="cursor-pointer product__item">
-        <div class="product__item__pic set-bg" data-setbg="../{{ $product->image  }}">
+        <div class="product__item__pic set-bg" data-setbg="{{ asset('storage/products/' . basename($product->image)) }}">
             <div class="label new">{{$categoryName }}</div>
             <ul class="product__hover">
                 <li>
-                    <a href="{{ asset($product->image) }}" class="image-popup"><span class="arrow_expand"></span></a>
+                    <a href="{{ asset('storage/products/' . basename($product->image)) }}" class="image-popup"><span class="arrow_expand"></span></a>
                 </li>
                 <li>
                     @auth
