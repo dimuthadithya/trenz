@@ -21,7 +21,7 @@ class ProductImagesSeeder extends Seeder
 
                 $images[] = [
                     'product_id' => $productId,
-                    'image_path' => "uploads/products/{$folder}/{$imageFileName}",
+                    'image_path' => "uploads/uploads/products/{$imageFileName}",
                     'image_name' => $imageFileName,
                     'image_type' => 'gallery',
                     'created_at' => now(),
