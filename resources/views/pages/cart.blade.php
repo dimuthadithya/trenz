@@ -79,34 +79,53 @@
 
     @push('scripts')
     <script>
+        function updateCartTotals() {
+            let subtotal = 0;
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('LKR ', '').replace(',', ''));
+                const quantity = parseInt(row.querySelector('input[name="quantity"]').value);
+                const total = price * quantity;
+                subtotal += total;
+
+                // Update row total
+                row.querySelector('td:nth-child(4)').textContent = 'LKR ' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+
+            // Update cart totals
+            document.getElementById('cartSubTotal').textContent = 'LKR ' + subtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('cartTotal').textContent = 'LKR ' + subtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            const qtyContainers = document.querySelectorAll('.pro-qty');
+            // Initial calculation of totals
+            updateCartTotals();
 
-            qtyContainers.forEach(container => {
-                const input = container.querySelector('input[name="quantity"]');
-                const form = container.querySelector('form');
-
+            // Handle quantity changes
+            document.querySelectorAll('.pro-qty').forEach(container => {
                 container.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('qtybtn')) {
-                        const oldValue = parseInt(input.value);
-                        let newValue;
+                    if (!e.target.classList.contains('qtybtn') && !e.target.parentElement.classList.contains('qtybtn')) return;
 
-                        if (e.target.classList.contains('inc')) {
-                            newValue = oldValue + 1;
-                        } else {
-                            newValue = oldValue > 1 ? oldValue - 1 : 1;
-                        }
+                    const button = e.target.classList.contains('qtybtn') ? e.target : e.target.parentElement;
+                    const form = button.closest('form');
+                    const input = form.querySelector('input[name="quantity"]');
+                    const oldValue = parseInt(input.value);
+                    let newValue;
 
-                        input.value = newValue;
-                        form.submit(); // Automatically submit form when quantity changes
+                    if (button.classList.contains('inc')) {
+                        newValue = oldValue + 1;
+                    } else {
+                        newValue = oldValue > 1 ? oldValue - 1 : 1;
                     }
+
+                    input.value = newValue;
+                    updateCartTotals();
+                    form.submit();
                 });
             });
 
-            // Add click handler for update cart button
+            // Handle update cart button
             document.getElementById('updateCart')?.addEventListener('click', function() {
-                const forms = document.querySelectorAll('.update-cart-form');
-                forms.forEach(form => form.submit());
+                document.querySelectorAll('.update-cart-form').forEach(form => form.submit());
             });
         });
     </script>

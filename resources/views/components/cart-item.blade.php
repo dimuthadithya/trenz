@@ -25,23 +25,23 @@
     </td>
     <td class="align-middle">LKR {{ number_format($product["price"], 2) }}</td>
     <td class="align-middle">
-        <div class="pro-qty input-group" style="width: 130px">
-            <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form d-flex">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="product_id" value="{{ $product['id'] }}">
-                <button type="button" class="btn btn-outline-secondary qtybtn dec">-</button>
-                <input type="text" name="quantity" value="{{ $product['cart_quantity'] }}" min="1" class="form-control text-center" readonly>
-                <button type="button" class="btn btn-outline-secondary qtybtn inc">+</button>
-            </form>
-        </div>
+        <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+            <div class="input-group" style="width: 120px">
+                <button type="button" class="btn btn-outline-secondary qtybtn dec"><i class="fas fa-minus"></i></button>
+                <input type="text" name="quantity" value="{{ $product['cart_quantity'] }}" class="px-2 text-center form-control" readonly>
+                <button type="button" class="btn btn-outline-secondary qtybtn inc"><i class="fas fa-plus"></i></button>
+            </div>
+        </form>
     </td>
     <td class="align-middle">LKR {{ number_format($product["price"] * $product['cart_quantity'], 2) }}</td>
     <td class="align-middle">
         <form action="{{ route('cart.destroy', $product['id']) }}" method="POST" class="d-inline">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-link text-danger p-0" onclick="return confirm('Are you sure you want to remove this item?')">
+            <button type="submit" class="p-0 btn btn-link text-danger" onclick="return confirm('Are you sure you want to remove this item?')">
                 <i class="fas fa-trash"></i>
             </button>
         </form>
