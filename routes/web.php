@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/payments/{id}', [ProfileController::class, 'deletePayment'])->name('profile.payments.delete');
     Route::post('/profile/payments/{id}/default', [ProfileController::class, 'setDefaultPayment'])->name('profile.payments.default');
     Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
     Route::post('/profile/orders/{order}/cancel', [ProfileController::class, 'cancelOrder'])->name('profile.orders.cancel');
 
     Route::get('/profile/cancellations', [ProfileController::class, 'cancellations'])->name('profile.cancellations');

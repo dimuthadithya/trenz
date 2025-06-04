@@ -135,7 +135,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        // Ensure the user can only view their own orders
+        if ($order->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+
+        $order->load(['orderItems.product', 'address']);
+        return view('pages.order-details', compact('order'));
     }
 
     /**

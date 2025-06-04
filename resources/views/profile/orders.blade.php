@@ -65,55 +65,6 @@
         color: var(--gray-400);
     }
 
-    .order-card {
-        border: 1px solid var(--gray-200);
-        border-radius: 8px;
-        margin-bottom: 16px;
-        background: white;
-        transition: box-shadow 0.2s ease;
-    }
-
-    .order-card:hover {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .order-header {
-        padding: 16px 20px;
-        border-bottom: 1px solid var(--gray-200);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: var(--gray-50);
-    }
-
-    .order-status {
-        padding: 6px 16px;
-        border-radius: 16px;
-        font-size: 13px;
-        font-weight: 500;
-        text-transform: capitalize;
-    }
-
-    .status-processing {
-        background-color: #E3F2FD;
-        color: #1976D2;
-    }
-
-    .status-shipped {
-        background-color: #F3E5F5;
-        color: #7B1FA2;
-    }
-
-    .status-delivered {
-        background-color: #E8F5E9;
-        color: #388E3C;
-    }
-
-    .status-cancelled {
-        background-color: #FFEBEE;
-        color: #D32F2F;
-    }
-
     button[type="submit"] {
         background-color: var(--primary-color);
         color: white;
@@ -128,16 +79,6 @@
     button[type="submit"]:hover {
         background-color: var(--primary-hover);
     }
-
-    button[type="submit"].cancel-btn {
-        background-color: white;
-        color: #C62828;
-        border: 1px solid #C62828;
-    }
-
-    button[type="submit"].cancel-btn:hover {
-        background-color: #FFEBEE;
-    }
 </style>
 @endpush
 
@@ -145,7 +86,7 @@
 <div class="p-6">
     <!-- Orders Page Content -->
     <div class="orders-header">
-        <h1 class="text-2xl font-medium">My Orders</h1>
+        <h1 class="font-medium h2">My Orders</h1>
     </div>
 
     <!-- Order Status Tabs -->
@@ -177,7 +118,7 @@
     </div>
 
     <!-- Search Form -->
-    <form action="{{ route('profile.orders') }}" method="GET">
+    <form action="{{ route('profile.orders') }}" method="GET" class="mb-5">
         <div class="flex gap-2">
             <input type="hidden" name="status" value="{{ request('status', 'all') }}">
             <div class="flex-1 search-box">
@@ -194,80 +135,20 @@
 
     <!-- Orders List -->
     @forelse($orders as $order)
-    <div class="order-card">
-        <div class="order-header">
-            <div>
-                <h4 class="text-sm font-medium text-gray-900">Order #{{ $order->id }}</h4>
-                <p class="text-sm text-gray-500">Placed on {{ $order->created_at->format('M d, Y') }}</p>
-            </div>
-            <span class="order-status status-{{ $order->status }}">{{ $order->status }}</span>
-        </div>
-
-        <div class="p-4">
-            <!-- Order Items -->
-            @foreach($order->orderItems as $item)
-            <div class="flex items-center py-3 {{ !$loop->last ? 'border-b border-gray-100' : '' }}">
-                <div class="flex-shrink-0 w-16 h-16">
-                    @if($item->product)
-                    <img src="{{ asset($item->product->image) }}"
-                        alt="{{ $item->product->name }}"
-                        class="object-cover w-full h-full rounded">
-                    @else
-                    <div class="flex items-center justify-center w-full h-full bg-gray-100 rounded">
-                        <span class="text-gray-400">No image</span>
-                    </div>
-                    @endif
-                </div>
-                <div class="flex-grow ml-4">
-                    <div class="flex justify-between">
-                        <div>
-                            <h4 class="text-sm font-medium">
-                                {{ $item->product ? $item->product->name : 'Product Unavailable' }}
-                            </h4>
-                            <p class="text-sm text-gray-500">Qty: {{ $item->quantity }}</p>
-                        </div>
-                        <p class="font-medium">
-                            LKR {{ number_format($item->price, 2) }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-
-            <!-- Order Summary -->
-            <div class="flex items-center justify-between pt-4 mt-4 border-t">
-                <div>
-                    <p class="text-sm text-gray-500">Total Items: {{ $order->orderItems->sum('quantity') }}</p>
-                    <p class="mt-1 text-base font-medium">
-                        Total: LKR {{ number_format($order->total_price, 2) }}
-                    </p>
-                </div>
-                @if($order->status === 'processing')
-                <form action="{{ route('profile.orders.cancel', $order->id) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="cancel-btn">
-                        Cancel Order
-                    </button>
-                </form>
-                @endif
-            </div>
-        </div>
-    </div>
+    <x-order-card :order="$order" />
     @empty
-    <div class="empty-state">
-        <div class="text-center">
-            <img src="{{ asset('img/no-orders.svg') }}" alt="No orders" class="mx-auto mb-4" style="height: 200px">
-            <h3 class="text-lg font-medium text-gray-900">No Orders Found</h3>
-            <p class="mt-1 text-gray-500">You haven't placed any orders yet.</p>
-            <div class="mt-4">
-                <a href="{{ route('home') }}" class="btn">Start Shopping</a>
-            </div>
+    <div class="py-5 text-center">
+        <div class="mb-4">
+            <img src="{{ asset('img/no-orders.svg') }}" alt="No orders" class="mx-auto" style="height: 200px">
         </div>
+        <h3 class="mb-2 h5">No Orders Found</h3>
+        <p class="mb-4 text-muted">You haven't placed any orders yet.</p>
+        <a href="{{ route('home') }}" class="btn btn-primary">Start Shopping</a>
     </div>
     @endforelse
 
     <!-- Pagination -->
-    <div class="mt-6">
+    <div class="mt-4">
         {{ $orders->appends(request()->query())->links() }}
     </div>
 </div>
