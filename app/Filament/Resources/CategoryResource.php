@@ -17,13 +17,34 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationLabel = 'Categories';
+    protected static ?string $modelLabel = 'Category';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('category_name')
+                            ->required()
+                            ->maxLength(255)
+                            ->label('Category Name'),
+                        
+                        Forms\Components\Select::make('parent_category_id')
+                            ->label('Parent Category')
+                            ->relationship('parent', 'category_name')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Select a parent category')
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('category_name')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Category Name')
+                            ]),
+                    ])
             ]);
     }
 
@@ -31,10 +52,32 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('category_name')
+                    ->searchable()
+                    ->sortable()
+                    ->label('Category Name'),
+                
+                Tables\Columns\TextColumn::make('parent.category_name')
+                    ->searchable()
+                    ->sortable()
+                    ->label('Parent Category'),
+                
+                Tables\Columns\TextColumn::make('children_count')
+                    ->counts('children')
+                    ->label('Subcategories')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('parent_category_id')
+                    ->label('Parent Category')
+                    ->relationship('parent', 'category_name')
+                    ->searchable()
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
