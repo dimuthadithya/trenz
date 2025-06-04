@@ -13,12 +13,12 @@ use Illuminate\Support\Carbon;
 class StatsOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
-    
+
     protected function getStats(): array
     {
         // Get stats for last 7 days
         $lastWeek = Carbon::now()->subDays(7);
-        
+
         $totalRevenue = Payment::where('status', 'completed')->sum('amount');
         $weeklyRevenue = Payment::where('status', 'completed')
             ->where('created_at', '>=', $lastWeek)
@@ -26,7 +26,7 @@ class StatsOverview extends BaseWidget
 
         $totalOrders = Order::count();
         $weeklyOrders = Order::where('created_at', '>=', $lastWeek)->count();
-        
+
         $totalCustomers = User::where('role', 'customer')->count();
         $newCustomers = User::where('role', 'customer')
             ->where('created_at', '>=', $lastWeek)
