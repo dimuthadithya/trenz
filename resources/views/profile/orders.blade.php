@@ -1,4 +1,4 @@
-@extends('profile.index')
+@extends('layouts.profile')
 
 @push('styles')
 <style>
