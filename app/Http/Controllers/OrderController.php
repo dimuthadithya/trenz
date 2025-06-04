@@ -113,9 +113,13 @@ class OrderController extends Controller
         $order->total_price = $totalPrice;
         $order->save();
 
+        // Clear the cart
         Cart::where('user_id', $userId)->delete();
 
-        return redirect()->route('home')->with('success', 'Order created successfully.');
+        // Load the order with its items and product details
+        $order = Order::with(['orderItems.product'])->find($order->id);
+
+        return view('pages.order-complete', compact('order'));
     }
 
     /**
