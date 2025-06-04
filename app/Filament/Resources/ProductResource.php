@@ -40,19 +40,16 @@ class ProductResource extends Resource
                             ->directory('products')
                             ->preserveFilenames()
                             ->visibility('public')
-                            ->downloadable()
                             ->imageEditor()
                             ->circleCropper()
                             ->required(fn(string $operation): bool => $operation === 'create')
-                            ->default(fn($record) => $record?->getRawOriginal('image'))
                             ->dehydrateStateUsing(function ($state) {
                                 if (empty($state)) return null;
                                 if (is_array($state)) {
-                                    // If array is associative, return first value; if indexed, return first element
                                     $first = reset($state);
                                     return $first;
                                 }
-                                return $state;
+                                return str_replace('storage/', '', $state);
                             }),
 
                         Forms\Components\FileUpload::make('gallery')
@@ -61,33 +58,45 @@ class ProductResource extends Resource
                             ->directory('products/gallery')
                             ->preserveFilenames()
                             ->visibility('public')
-                            ->downloadable()
                             ->reorderable()
                             ->appendFiles()
                             ->imageEditor()
                             ->maxFiles(5)
-                            ->default(fn($record) => $record?->galleryImages->pluck('getRawOriginal', 'image_path')->values()->all() ?? [])
-                            ->saveUploadedFileUsing(function ($file) {
-                                $filename = $file->getClientOriginalName();
-                                $path = $file->storeAs('products/gallery', $filename, 'public');
-                                return $path;
+                            ->default(function ($record) {
+                                if (!$record) return [];
+                                return $record->galleryImages()
+                                    ->where('image_type', 'gallery')
+                                    ->pluck('image_path')
+                                    ->map(fn($path) => str_replace('storage/', '', $path))
+                                    ->toArray();
                             })
+                            ->dehydrateStateUsing(fn($state) => null)
                             ->afterStateUpdated(function ($state, Forms\Set $set, $get) {
                                 if ($state && is_array($state)) {
                                     $record = Product::find($get('id'));
                                     if ($record) {
-                                        // Delete old images not in new state
+                                        // Get all the new image paths
+                                        $newPaths = array_map(function ($image) {
+                                            return 'products/gallery/' . basename($image);
+                                        }, $state);
+
+                                        // Delete removed images
                                         $record->galleryImages()
-                                            ->whereNotIn('image_path', $state)
+                                            ->where('image_type', 'gallery')
+                                            ->whereNotIn('image_path', $newPaths)
                                             ->delete();
 
-                                        // Add/update new images
+                                        // Add or update gallery images
                                         foreach ($state as $image) {
+                                            $path = 'products/gallery/' . basename($image);
                                             $record->galleryImages()->updateOrCreate(
-                                                ['image_path' => $image],
                                                 [
-                                                    'image_name' => basename($image),
-                                                    'image_type' => 'gallery'
+                                                    'product_id' => $record->id,
+                                                    'image_type' => 'gallery',
+                                                    'image_path' => $path,
+                                                ],
+                                                [
+                                                    'image_name' => basename($image)
                                                 ]
                                             );
                                         }

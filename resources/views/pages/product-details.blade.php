@@ -28,24 +28,23 @@ use App\Models\ProductImage;
                 <div class="col-lg-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
-                            <a class="pt active" href="#product-1">
-                                <img src="{{ Str::startsWith($product->image, ['http', 'https', '/storage', 'storage']) ? $product->image : asset($product->image) }}" alt="">
+                            <a class="pt active" href="#product-main">
+                                <img src="{{ $product->image }}" alt="">
                             </a>
                             @php
                             $product_images = ProductImage::where('product_id', $product->id)->get();
-                            $image_count = $product_images->count();
-
                             @endphp
                             @foreach ($product_images as $product_image)
                             <a class="pt" href="#product-{{ $loop->iteration }}">
-                                <img src="{{ asset($product_image->image_path) }}" alt="">
+                                <img src="{{ $product_image->image_path }}" alt="">
                             </a>
                             @endforeach
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
+                                <img data-hash="product-main" class="product__big__img" src="{{ $product->image }}" alt="">
                                 @foreach ($product_images as $product_image)
-                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ asset($product_image->image_path) }}" alt="">
+                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ $product_image->image_path }}" alt="">
                                 @endforeach
                             </div>
                         </div>
