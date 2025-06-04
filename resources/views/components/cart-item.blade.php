@@ -35,7 +35,9 @@
 
                 $itemTotal = $product["price"] * $cartQty;
                 @endphp
-                <input type="number" name="quantity" value="{{ $cartQty }}" min="1">
+                <span class="dec qtybtn">-</span>
+                <input type="text" name="quantity" value="{{ $cartQty }}" min="1" readonly>
+                <span class="inc qtybtn">+</span>
             </form>
         </div>
     </td>
