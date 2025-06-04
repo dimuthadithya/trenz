@@ -28,7 +28,6 @@
         <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form">
             @csrf
             @method('PUT')
-            <input type="hidden" name="product_id" value="{{ $product['id'] }}">
             <div class="input-group" style="width: 120px">
                 <button type="button" class="btn btn-outline-secondary qtybtn dec"><i class="fas fa-minus"></i></button>
                 <input type="text" name="quantity" value="{{ $product['cart_quantity'] }}" class="px-2 text-center form-control" readonly>

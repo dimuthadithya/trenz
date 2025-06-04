@@ -19,6 +19,7 @@ class CartController extends Controller
         $cartItems = Cart::where('user_id', $userId)->get();
 
         $products = [];
+        $cartTotal = 0;
 
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
@@ -26,10 +27,13 @@ class CartController extends Controller
                 $productArray = $product->toArray();
                 $productArray['cart_quantity'] = $cartItem->quantity;
                 $products[] = $productArray;
+
+                // Calculate item total and add to cart total
+                $cartTotal += $product->price * $cartItem->quantity;
             }
         }
 
-        return view('pages.cart', compact('products'));
+        return view('pages.cart', compact('products', 'cartTotal'));
     }
 
     /**
@@ -75,19 +79,36 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, $productId)
     {
-        $cartItem = Cart::where('user_id', Auth::user()->id)
-            ->where('product_id', $request->product_id)
+        $userId = Auth::user()->id;
+        \Log::info('Cart Update Request', [
+            'user_id' => $userId,
+            'product_id' => $productId,
+            'quantity' => $request->quantity
+        ]);
+
+        $cartItem = Cart::where('user_id', $userId)
+            ->where('product_id', $productId)
             ->first();
 
-        // dd($cartItem);
+        \Log::info('Cart Item Found', ['cart_item' => $cartItem]);
 
         if ($cartItem) {
             $cartItem->quantity = $request->quantity;
             $cartItem->save();
+
+            \Log::info('Cart Item Updated', [
+                'cart_item' => $cartItem->fresh(),
+                'new_quantity' => $request->quantity
+            ]);
+
             return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
         } else {
+            \Log::error('Cart Item Not Found', [
+                'user_id' => $userId,
+                'product_id' => $productId
+            ]);
             return redirect()->route('cart.index')->with('error', 'Cart not found.');
         }
     }

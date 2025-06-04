@@ -45,11 +45,11 @@
                             <div class="mb-3">
                                 <div class="mb-2 d-flex justify-content-between">
                                     <span class="text-muted">Subtotal</span>
-                                    <span class="fw-bold" id="cartSubTotal"></span>
+                                    <span class="fw-bold" id="cartSubTotal">LKR {{ number_format($cartTotal, 2) }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">Total</span>
-                                    <span class="fw-bold" id="cartTotal"></span>
+                                    <span class="fw-bold" id="cartTotal">LKR {{ number_format($cartTotal, 2) }}</span>
                                 </div>
                             </div>
                             <a href="{{ route('checkout') }}" class="btn btn-primary w-100">
@@ -79,53 +79,23 @@
 
     @push('scripts')
     <script>
-        function updateCartTotals() {
-            let subtotal = 0;
-            document.querySelectorAll('tbody tr').forEach(row => {
-                const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('LKR ', '').replace(',', ''));
-                const quantity = parseInt(row.querySelector('input[name="quantity"]').value);
-                const total = price * quantity;
-                subtotal += total;
-
-                // Update row total
-                row.querySelector('td:nth-child(4)').textContent = 'LKR ' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            });
-
-            // Update cart totals
-            document.getElementById('cartSubTotal').textContent = 'LKR ' + subtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            document.getElementById('cartTotal').textContent = 'LKR ' + subtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
-            // Initial calculation of totals
-            updateCartTotals();
-
-            // Handle quantity changes
-            document.querySelectorAll('.pro-qty').forEach(container => {
-                container.addEventListener('click', function(e) {
-                    if (!e.target.classList.contains('qtybtn') && !e.target.parentElement.classList.contains('qtybtn')) return;
-
-                    const button = e.target.classList.contains('qtybtn') ? e.target : e.target.parentElement;
-                    const form = button.closest('form');
+            // Handle quantity increment/decrement buttons
+            document.querySelectorAll('.qtybtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const form = this.closest('form');
                     const input = form.querySelector('input[name="quantity"]');
-                    const oldValue = parseInt(input.value);
-                    let newValue;
+                    const currentValue = parseInt(input.value) || 1;
 
-                    if (button.classList.contains('inc')) {
-                        newValue = oldValue + 1;
+                    if (this.classList.contains('inc')) {
+                        input.value = currentValue + 1;
                     } else {
-                        newValue = oldValue > 1 ? oldValue - 1 : 1;
+                        input.value = currentValue > 1 ? currentValue - 1 : 1;
                     }
 
-                    input.value = newValue;
-                    updateCartTotals();
+                    // Submit the form to update the cart
                     form.submit();
                 });
-            });
-
-            // Handle update cart button
-            document.getElementById('updateCart')?.addEventListener('click', function() {
-                document.querySelectorAll('.update-cart-form').forEach(form => form.submit());
             });
         });
     </script>
