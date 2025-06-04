@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Product extends Model
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -18,6 +18,13 @@ class Product extends Model
         'category_id',
         'image'
     ];
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value ? "/storage/products/{$value}" : null,
+        );
+    }
 
     public function category()
     {

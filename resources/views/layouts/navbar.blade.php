@@ -7,12 +7,6 @@ $cartCount = Cart::where('user_id', Auth::id())->count();
 $wishlistCount = Wishlist::where('user_id', Auth::id())->count();
 @endphp
 
-@if (Route::currentRouteName() == 'home')
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-@endif
 
 
 

@@ -40,7 +40,12 @@ class ProductResource extends Resource
                             ->prefix('Rs'),
                         Forms\Components\FileUpload::make('image')
                             ->image()
-                            ->directory('uploads/products'),
+                            ->directory('uploads/products')
+                            ->imageEditor()
+                            ->circleCropper()
+                            ->preserveFilenames()
+                            ->visibility('public')
+                            ->downloadable(),
                         Forms\Components\RichEditor::make('description')
                             ->required()
                             ->columnSpanFull(),
