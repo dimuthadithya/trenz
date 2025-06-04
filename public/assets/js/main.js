@@ -248,16 +248,21 @@
         let cartSubTotal = 0;
         let cartTotal = 0;
         $(".cart__total").each(function () {
-            const price = parseFloat($(this).text().replace("LKR", "").replace(/,/g, ""));
+            const price = parseFloat(
+                $(this).text().replace("LKR", "").replace(/,/g, "")
+            );
             cartSubTotal += price;
             cartTotal += price;
         });
 
         const formatPrice = (price) => {
-            return "LKR " + price.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+            return (
+                "LKR " +
+                price.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                })
+            );
         };
 
         $("#cartSubTotal").text(formatPrice(cartSubTotal));
