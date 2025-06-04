@@ -57,7 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/reviews', [ProfileController::class, 'reviews'])->name('profile.reviews');
     Route::get('/profile/wishlist', [ProfileController::class, 'wishlist'])->name('profile.wishlist');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/checkout',  [OrderController::class, 'index'])->name('checkout');
     Route::post('/checkout',  [OrderController::class, 'create'])->name('order.create');
