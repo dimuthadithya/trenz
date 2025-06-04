@@ -22,12 +22,17 @@ class Product extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ? $value : null,
+            get: fn($value) => $value ? asset('storage/' . $value) : null,
         );
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function galleryImages()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 }

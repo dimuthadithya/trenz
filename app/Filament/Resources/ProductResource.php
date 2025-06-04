@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
-use Filament\Forms\Form; // Removed because Form does not exist in this namespace
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductResource extends Resource
 {
@@ -21,7 +18,7 @@ class ProductResource extends Resource
     protected static ?string $navigationLabel = 'Products';
     protected static ?string $modelLabel = 'Product';
 
-    public static function form(Forms\Form $form): Forms\Form
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -41,11 +38,61 @@ class ProductResource extends Resource
                         Forms\Components\FileUpload::make('image')
                             ->image()
                             ->directory('products')
-                            ->imageEditor()
-                            ->circleCropper()
                             ->preserveFilenames()
                             ->visibility('public')
-                            ->downloadable(),
+                            ->downloadable()
+                            ->imageEditor()
+                            ->circleCropper()
+                            ->required(fn(string $operation): bool => $operation === 'create')
+                            ->dehydrateStateUsing(function ($state) {
+                                if (empty($state)) return null;
+                                if (is_array($state)) {
+                                    // If array is associative, return first value; if indexed, return first element
+                                    $first = reset($state);
+                                    return $first;
+                                }
+                                return $state;
+                            }),
+
+                        Forms\Components\FileUpload::make('gallery')
+                            ->multiple()
+                            ->image()
+                            ->directory('products/gallery')
+                            ->preserveFilenames()
+                            ->visibility('public')
+                            ->downloadable()
+                            ->reorderable()
+                            ->appendFiles()
+                            ->imageEditor()
+                            ->maxFiles(5)
+                            ->saveUploadedFileUsing(function ($file) {
+                                $filename = $file->getClientOriginalName();
+                                $path = $file->storeAs('products/gallery', $filename, 'public');
+                                return $path;
+                            })
+                            ->afterStateUpdated(function ($state, Forms\Set $set, $get) {
+                                if ($state && is_array($state)) {
+                                    $record = Product::find($get('id'));
+                                    if ($record) {
+                                        // Delete old images not in new state
+                                        $record->galleryImages()
+                                            ->whereNotIn('image_path', $state)
+                                            ->delete();
+
+                                        // Add/update new images
+                                        foreach ($state as $image) {
+                                            $record->galleryImages()->updateOrCreate(
+                                                ['image_path' => $image],
+                                                [
+                                                    'image_name' => basename($image),
+                                                    'image_type' => 'gallery'
+                                                ]
+                                            );
+                                        }
+                                    }
+                                }
+                            }),
+
                         Forms\Components\RichEditor::make('description')
                             ->required()
                             ->columnSpanFull(),
@@ -62,8 +109,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->circular()
-                    ->size(50)
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->size(50),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -73,10 +119,6 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('category.category_name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')
@@ -96,9 +138,7 @@ class ProductResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
