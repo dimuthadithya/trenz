@@ -1,5 +1,3 @@
-@extends('layouts.profile')
-
 @section('profile-content')
 <div class="address-container">
     <h2 class="mb-4">My Addresses</h2>
