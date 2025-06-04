@@ -37,13 +37,12 @@ class LatestOrders extends BaseWidget
                     ->sortable()
                     ->label('Total'),
 
-                Tables\Columns\BadgeColumn::make('status')
-                    ->colors([
-                        'warning' => 'processing',
-                        'info' => 'shipped',
-                        'success' => 'delivered',
-                        'danger' => 'cancelled',
-                    ]),
+                Tables\Columns\BadgeColumn::make('status')->colors([
+                    'warning' => 'pending',
+                    'info' => 'shipped',
+                    'success' => 'delivered',
+                    'danger' => 'canceled',
+                ]),
 
                 Tables\Columns\TextColumn::make('payment_status')
                     ->badge()

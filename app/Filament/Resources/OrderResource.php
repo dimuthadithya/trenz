@@ -49,10 +49,11 @@ class OrderResource extends Resource
                 Forms\Components\Select::make('status')
                     ->required()
                     ->options([
+                        'pending' => 'Pending',
                         'processing' => 'Processing',
                         'shipped' => 'Shipped',
                         'delivered' => 'Delivered',
-                        'cancelled' => 'Cancelled',
+                        'canceled' => 'Canceled',
                     ])
                     ->default('processing')
                     ->selectablePlaceholder(false),
@@ -89,7 +90,7 @@ class OrderResource extends Resource
                         'processing' => 'warning',
                         'shipped' => 'info',
                         'delivered' => 'success',
-                        'cancelled' => 'danger',
+                        'canceled' => 'danger',
                     }),
                 Tables\Columns\TextColumn::make('payment_status')
                     ->badge()
@@ -107,10 +108,11 @@ class OrderResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options([
+                        'pending' => 'Pending',
                         'processing' => 'Processing',
                         'shipped' => 'Shipped',
                         'delivered' => 'Delivered',
-                        'cancelled' => 'Cancelled',
+                        'canceled' => 'Canceled',
                     ]),
                 Tables\Filters\SelectFilter::make('payment_status')
                     ->options([

@@ -134,10 +134,9 @@ $user = Auth::user();
                                         <th>Status:</th>
                                         <td>
                                             @switch($order->status)
-                                            @case('processing') Processing @break
-                                            @case('shipped') Shipped @break
+                                            @case('processing') Processing @break @case('shipped') Shipped @break
                                             @case('delivered') Delivered @break
-                                            @case('cancelled') Cancelled @break
+                                            @case('canceled') Canceled @break
                                             @endswitch
                                         </td>
                                     </tr>

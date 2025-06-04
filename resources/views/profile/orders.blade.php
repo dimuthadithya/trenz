@@ -164,10 +164,11 @@ $user = Auth::user();
                             <div class="col-md-4">
                                 <select name="status" class="form-select">
                                     <option value="all" @if(request('status')=='all' ) selected @endif>All Orders</option>
+                                    <option value="pending" @if(request('status')=='pending' ) selected @endif>Pending</option>
                                     <option value="processing" @if(request('status')=='processing' ) selected @endif>Processing</option>
                                     <option value="shipped" @if(request('status')=='shipped' ) selected @endif>Shipped</option>
                                     <option value="delivered" @if(request('status')=='delivered' ) selected @endif>Delivered</option>
-                                    <option value="cancelled" @if(request('status')=='cancelled' ) selected @endif>Cancelled</option>
+                                    <option value="canceled" @if(request('status')=='canceled' ) selected @endif>Canceled</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -205,9 +206,8 @@ $user = Auth::user();
                                             @break
                                             @case('delivered')
                                             <span class="badge bg-success">Delivered</span>
-                                            @break
-                                            @case('cancelled')
-                                            <span class="badge bg-danger">Cancelled</span>
+                                            @break @case('canceled')
+                                            <span class="badge bg-danger">Canceled</span>
                                             @break
                                             @endswitch
                                         </div>
