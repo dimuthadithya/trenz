@@ -29,7 +29,7 @@ use App\Models\ProductImage;
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-1">
-                                <img src="{{ asset($product->image) }}" alt="">
+                                <img src="{{ Str::startsWith($product->image, ['http', 'https', '/storage', 'storage']) ? $product->image : asset($product->image) }}" alt="">
                             </a>
                             @php
                             $product_images = ProductImage::where('product_id', $product->id)->get();

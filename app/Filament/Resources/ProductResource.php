@@ -44,6 +44,7 @@ class ProductResource extends Resource
                             ->imageEditor()
                             ->circleCropper()
                             ->required(fn(string $operation): bool => $operation === 'create')
+                            ->default(fn($record) => $record?->getRawOriginal('image'))
                             ->dehydrateStateUsing(function ($state) {
                                 if (empty($state)) return null;
                                 if (is_array($state)) {
@@ -65,6 +66,7 @@ class ProductResource extends Resource
                             ->appendFiles()
                             ->imageEditor()
                             ->maxFiles(5)
+                            ->default(fn($record) => $record?->galleryImages->pluck('getRawOriginal', 'image_path')->values()->all() ?? [])
                             ->saveUploadedFileUsing(function ($file) {
                                 $filename = $file->getClientOriginalName();
                                 $path = $file->storeAs('products/gallery', $filename, 'public');
