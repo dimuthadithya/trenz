@@ -48,8 +48,7 @@
                                 alt="{{ $item->product->name }}"
                                 class="border rounded img-fluid"
                                 style="width: 60px; height: 60px; object-fit: cover;"
-                                loading="lazy"
-                                onerror="this.src='{{ asset('images/placeholder.png') }}'">
+                                loading="lazy">
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-1 fw-medium text-truncate">{{ $item->product->name }}</h6>

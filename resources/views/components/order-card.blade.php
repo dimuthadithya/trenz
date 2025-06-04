@@ -1,10 +1,10 @@
-<div class="card mb-4">
+<div class="mb-4 card">
     <div class="card-body">
         <!-- Order Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="mb-4 d-flex justify-content-between align-items-center">
             <div>
                 <h5 class="mb-1">Order #{{ $order->order_number }}</h5>
-                <p class="text-muted small mb-0">{{ $order->created_at->format('F j, Y') }}</p>
+                <p class="mb-0 text-muted small">{{ $order->created_at->format('F j, Y') }}</p>
             </div>
             <span class="order-status status-{{ strtolower($order->status) }}">
                 {{ ucfirst($order->status) }}
@@ -17,18 +17,17 @@
         <!-- Order Items -->
         <div class="mb-4">
             @foreach ($order->orderItems as $item)
-            <div class="d-flex align-items-start mb-3">
+            <div class="mb-3 d-flex align-items-start">
                 <div class="flex-shrink-0 me-3" style="width: 60px; height: 60px;">
                     <img src="{{ asset($item->product->image) }}"
                         alt="{{ $item->product->name }}"
-                        class="img-fluid rounded border"
+                        class="border rounded img-fluid"
                         style="width: 60px; height: 60px; object-fit: cover;"
-                        loading="lazy"
-                        onerror="this.src='{{ asset('images/placeholder.png') }}'">
+                        loading="lazy">
                 </div>
                 <div class="flex-grow-1">
-                    <h6 class="fw-medium text-truncate mb-1">{{ $item->product->name }}</h6>
-                    <p class="text-muted small mb-1">Qty: {{ $item->quantity }}</p>
+                    <h6 class="mb-1 fw-medium text-truncate">{{ $item->product->name }}</h6>
+                    <p class="mb-1 text-muted small">Qty: {{ $item->quantity }}</p>
                     <p class="fw-medium">Rs. {{ number_format($item->price * $item->quantity, 2) }}</p>
                 </div>
             </div>
@@ -36,14 +35,14 @@
         </div>
 
         <!-- Order Summary -->
-        <div class="border-top pt-3">
+        <div class="pt-3 border-top">
             <div class="d-flex justify-content-between align-items-center">
                 <span class="text-muted small">Order Total</span>
                 <span class="fw-medium">Rs. {{ number_format($order->total_price, 2) }}</span>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="mt-3 d-flex justify-content-between align-items-center">
                 <a href="{{ route('order.show', $order->id) }}"
-                    class="btn btn-link btn-sm text-decoration-none p-0">
+                    class="p-0 btn btn-link btn-sm text-decoration-none">
                     View Details
                 </a>
                 @if($order->status === 'processing')
