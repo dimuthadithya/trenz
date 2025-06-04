@@ -36,7 +36,7 @@ use App\Models\Cart;
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>First Name <span>*</span></p>
-                                    <input type="text" name="fname">
+                                    <input type="text" name="fname" value="{{ $defaultAddress->fname ?? old('fname') }}">
                                     @error('fname')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
@@ -45,7 +45,7 @@ use App\Models\Cart;
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Last Name <span>*</span></p>
-                                    <input type="text" name="lname">
+                                    <input type="text" name="lname" value="{{ $defaultAddress->lname ?? old('lname') }}">
                                     @error('lname')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
@@ -54,28 +54,28 @@ use App\Models\Cart;
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
                                     <p>Country <span>*</span></p>
-                                    <input type="text" name="country">
+                                    <input type="text" name="country" value="{{ $defaultAddress->country ?? old('country') }}">
                                     @error('country')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Address <span>*</span></p>
-                                    <input type="text" name="address" placeholder="Address">
+                                    <input type="text" name="address" placeholder="Address" value="{{ $defaultAddress->address ?? old('address') }}">
                                     @error('address')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Town/City <span>*</span></p>
-                                    <input type="text" name="city">
+                                    <input type="text" name="city" value="{{ $defaultAddress->city ?? old('city') }}">
                                     @error('city')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text" name="postcode">
+                                    <input type="text" name="postcode" value="{{ $defaultAddress->zip_code ?? old('postcode') }}">
                                     @error('postcode')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
@@ -84,7 +84,7 @@ use App\Models\Cart;
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Phone <span>*</span></p>
-                                    <input type="text" name="phone">
+                                    <input type="text" name="phone" value="{{ $defaultAddress->phone_number ?? old('phone') }}">
                                     @error('phone')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror
@@ -93,7 +93,7 @@ use App\Models\Cart;
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Email <span>*</span></p>
-                                    <input type="text" name="email">
+                                    <input type="text" name="email" value="{{ $defaultAddress->email ?? old('email') }}">
                                     @error('email')
                                     <p class="mt-0 text-danger small">{{ $message }}</p>
                                     @enderror

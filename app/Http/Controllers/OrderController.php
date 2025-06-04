@@ -17,19 +17,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-
-        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
+        $user = Auth::user();
+        $cartItems = Cart::where('user_id', $user->id)->get();
         $products = [];
 
-        $cartItemsTotal =  0;
+        $cartItemsTotal = 0;
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
             if ($product) {
                 $cartItemsTotal += $product->price * $cartItem->quantity;
             }
         }
-
-
 
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
@@ -38,8 +36,12 @@ class OrderController extends Controller
             }
         }
 
+        // Get the user's default address
+        $defaultAddress = Address::where('user_id', $user->id)
+            ->where('is_default', true)
+            ->first();
 
-        return view('pages.checkout', compact('products', 'cartItemsTotal'));
+        return view('pages.checkout', compact('products', 'cartItemsTotal', 'defaultAddress'));
     }
 
     /**
