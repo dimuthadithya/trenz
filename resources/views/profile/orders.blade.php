@@ -158,39 +158,100 @@ $user = Auth::user();
             <div class="col-lg-9">
                 <div class="orders-card">
                     <div class="orders-title">My Orders</div>
-                    <!-- Example order list, replace with dynamic orders -->
-                    <div class="order-list">
-                        <div class="mb-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <div class="mb-1 card-title">Order #ORD123456</div>
-                                        <div class="card-text">Placed on: 2025-06-01</div>
-                                        <div class="card-text text-muted small">Total: Rs. 3,660.00</div>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-eye"></i> View</a>
-                                        <a href="#" class="btn btn-outline-danger btn-sm"><i class="fas fa-times"></i> Cancel</a>
-                                    </div>
+                    <!-- Search and filter bar -->
+                    <div class="mb-4">
+                        <form action="{{ route('profile.orders') }}" method="GET" class="row g-3">
+                            <div class="col-md-4">
+                                <select name="status" class="form-select">
+                                    <option value="all" @if(request('status')=='all' ) selected @endif>All Orders</option>
+                                    <option value="processing" @if(request('status')=='processing' ) selected @endif>Processing</option>
+                                    <option value="shipped" @if(request('status')=='shipped' ) selected @endif>Shipped</option>
+                                    <option value="delivered" @if(request('status')=='delivered' ) selected @endif>Delivered</option>
+                                    <option value="cancelled" @if(request('status')=='cancelled' ) selected @endif>Cancelled</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control" placeholder="Search orders..." value="{{ request('search') }}">
+                                    <button class="btn btn-outline-primary" type="submit">Search</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <div class="mb-1 card-title">Order #ORD987654</div>
-                                        <div class="card-text">Placed on: 2025-05-20</div>
-                                        <div class="card-text text-muted small">Total: Rs. 6,200.00</div>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-eye"></i> View</a>
-                                        <a href="#" class="btn btn-outline-danger btn-sm"><i class="fas fa-times"></i> Cancel</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
+
+                    <!-- Orders list -->
+                    @if($orders->isEmpty())
+                    <div class="py-5 text-center">
+                        <i class="mb-3 fas fa-shopping-bag fa-3x text-muted"></i>
+                        <h5>No orders found</h5>
+                        <p class="text-muted">Start shopping to see your orders here.</p>
+                        <a href="{{ route('home') }}" class="btn btn-primary">Browse Products</a>
+                    </div>
+                    @else
+                    <div class="order-list">
+                        @foreach($orders as $order)
+                        <div class="mb-3 card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="mb-1 card-title">
+                                            Order #{{ $order->order_number }}
+                                            @switch($order->status)
+                                            @case('processing')
+                                            <span class="badge bg-info">Processing</span>
+                                            @break
+                                            @case('shipped')
+                                            <span class="badge bg-primary">Shipped</span>
+                                            @break
+                                            @case('delivered')
+                                            <span class="badge bg-success">Delivered</span>
+                                            @break
+                                            @case('cancelled')
+                                            <span class="badge bg-danger">Cancelled</span>
+                                            @break
+                                            @endswitch
+                                        </div>
+                                        <div class="card-text">Placed on: {{ $order->created_at->format('M d, Y') }}</div>
+                                        <div class="card-text text-muted small">Total: Rs. {{ number_format($order->total_price, 2) }}</div>
+
+                                        <!-- Order Items Preview -->
+                                        <div class="mt-2">
+                                            @foreach($order->orderItems->take(2) as $item)
+                                            <div class="small text-muted">
+                                                {{ $item->product->name }} × {{ $item->quantity }}
+                                            </div>
+                                            @endforeach
+                                            @if($order->orderItems->count() > 2)
+                                            <div class="small text-muted">
+                                                and {{ $order->orderItems->count() - 2 }} more item(s)
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('order.show', $order->id) }}" class="btn btn-outline-primary btn-sm me-2">
+                                            <i class="fas fa-eye"></i> View Details
+                                        </a>
+                                        @if($order->status === 'processing')
+                                        <form action="{{ route('profile.orders.cancel', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-times"></i> Cancel Order
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="mt-4 d-flex justify-content-center">
+                        {{ $orders->withQueryString()->links() }}
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
