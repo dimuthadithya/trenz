@@ -31,10 +31,14 @@ class CategoryResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->label('Category Name'),
-                        
+
                         Forms\Components\Select::make('parent_category_id')
                             ->label('Parent Category')
-                            ->relationship('parent', 'category_name')
+                            ->relationship(
+                                'parent',
+                                'category_name',
+                                fn($query) => $query->whereNull('parent_category_id')
+                            )
                             ->searchable()
                             ->preload()
                             ->placeholder('Select a parent category')
@@ -56,12 +60,12 @@ class CategoryResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Category Name'),
-                
+
                 Tables\Columns\TextColumn::make('parent.category_name')
                     ->searchable()
                     ->sortable()
                     ->label('Parent Category'),
-                
+
                 Tables\Columns\TextColumn::make('children_count')
                     ->counts('children')
                     ->label('Subcategories')
@@ -75,7 +79,11 @@ class CategoryResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('parent_category_id')
                     ->label('Parent Category')
-                    ->relationship('parent', 'category_name')
+                    ->relationship(
+                        'parent',
+                        'category_name',
+                        fn($query) => $query->whereNull('parent_category_id')
+                    )
                     ->searchable()
                     ->preload(),
             ])
