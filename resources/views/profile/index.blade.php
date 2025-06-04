@@ -194,11 +194,7 @@
                                 <i class="fas fa-shopping-bag"></i>My Orders
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('profile.returns') }}" class="{{ Route::currentRouteName() == 'profile.returns' ? 'active' : '' }}">
-                                <i class="fas fa-undo"></i>Returns
-                            </a>
-                        </li>
+
                         <li>
                             <a href="{{ route('profile.cancellations') }}" class="{{ Route::currentRouteName() == 'profile.cancellations' ? 'active' : '' }}">
                                 <i class="fas fa-times-circle"></i>Cancellations

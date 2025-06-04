@@ -106,9 +106,73 @@ class ProfileController extends Controller
         return redirect()->route('profile.address')->with('success', 'Address added successfully');
     }
 
-    public function payments()
+    /**
+     * Display the user's payment methods.
+     */
+    public function payments(Request $request): View
     {
-        return view('profile.payments');
+        $user = $request->user();
+        $paymentMethods = $user->paymentMethods()->get();
+
+        return view('profile.payments', [
+            'paymentMethods' => $paymentMethods
+        ]);
+    }
+
+    /**
+     * Store a new payment method.
+     */
+    public function storePayment(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'card_number' => 'required|string',
+            'expiry_month' => 'required|numeric|min:1|max:12',
+            'expiry_year' => 'required|numeric|min:2023',
+            'cvv' => 'required|numeric',
+            'is_default' => 'boolean'
+        ]);
+
+        $user = $request->user();
+
+        // In a real app, you would use a payment gateway like Stripe here
+        $paymentMethod = $user->paymentMethods()->create([
+            'type' => $this->detectCardType($validated['card_number']),
+            'last_four' => substr($validated['card_number'], -4),
+            'expiry_month' => $validated['expiry_month'],
+            'expiry_year' => $validated['expiry_year'],
+            'is_default' => $validated['is_default'] ?? false
+        ]);
+
+        if ($validated['is_default']) {
+            $user->paymentMethods()->where('id', '!=', $paymentMethod->id)->update(['is_default' => false]);
+        }
+
+        return Redirect::route('profile.payments')->with('status', 'payment-method-added');
+    }
+
+    /**
+     * Delete a payment method.
+     */
+    public function deletePayment(Request $request, $id): RedirectResponse
+    {
+        $paymentMethod = $request->user()->paymentMethods()->findOrFail($id);
+        $paymentMethod->delete();
+
+        return Redirect::route('profile.payments')->with('status', 'payment-method-deleted');
+    }
+
+    /**
+     * Set a payment method as default.
+     */
+    public function setDefaultPayment(Request $request, $id): RedirectResponse
+    {
+        $user = $request->user();
+        $paymentMethod = $user->paymentMethods()->findOrFail($id);
+
+        $user->paymentMethods()->update(['is_default' => false]);
+        $paymentMethod->update(['is_default' => true]);
+
+        return Redirect::route('profile.payments')->with('status', 'payment-method-updated');
     }
 
     public function orders(Request $request)
@@ -135,10 +199,7 @@ class ProfileController extends Controller
         return view('profile.orders', compact('orders'));
     }
 
-    public function returns()
-    {
-        return view('profile.returns');
-    }
+
 
     public function cancellations()
     {
@@ -171,5 +232,18 @@ class ProfileController extends Controller
         $order->save();
 
         return back()->with('success', 'Order has been cancelled successfully.');
+    }
+
+    // Helper function to detect card type
+    private function detectCardType($number)
+    {
+        $number = preg_replace('/[^\d]/', '', $number);
+
+        if (preg_match('/^4/', $number)) return 'visa';
+        if (preg_match('/^5[1-5]/', $number)) return 'mastercard';
+        if (preg_match('/^3[47]/', $number)) return 'amex';
+        if (preg_match('/^6(?:011|5)/', $number)) return 'discover';
+
+        return 'other';
     }
 }

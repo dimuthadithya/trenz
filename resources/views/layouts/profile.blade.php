@@ -347,11 +347,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('profile.returns') }}" class="{{ Route::currentRouteName() == 'profile.returns' ? 'active' : '' }}">
-                                <i class="fas fa-undo"></i>Returns
-                            </a>
-                        </li>
-                        <li>
                             <a href="{{ route('profile.cancellations') }}" class="{{ Route::currentRouteName() == 'profile.cancellations' ? 'active' : '' }}">
                                 <i class="fas fa-times-circle"></i>Cancellations
                             </a>
@@ -380,9 +375,9 @@
             <!-- Main Content Area -->
             <div class="profile-content">
                 @hasSection('content-header')
-                    <div class="content-header">
-                        @yield('content-header')
-                    </div>
+                <div class="content-header">
+                    @yield('content-header')
+                </div>
                 @endif
 
                 @yield('content')

@@ -65,6 +65,16 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
+    /**
+     * Get the user's payment methods.
+     */
+    public function paymentMethods()
+    {
+        return $this->hasMany(PaymentMethod::class);
+    }
+
+
+
     public function getOrdersCountAttribute()
     {
         return $this->orders()->count();
