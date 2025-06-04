@@ -13,20 +13,40 @@ use Illuminate\Support\Facades\Route;
 
 // route for home page 
 Route::get('/', function () {
-    $products = Product::all()->take(20);
+    // Get all products for the product section
+    $products = Product::latest()->take(20)->get();
 
-    $menCategoryId = Category::where('category_name', 'Men')->pluck('id')->toArray();
+    // Get category IDs and counts
+    $menCategoryId = Category::where('category_name', 'Men')->pluck('id')->first();
+    $kidsCategoryId = Category::where('category_name', 'Kids')->pluck('id')->first();
+
     $menSubCategoryIds = Category::where('parent_category_id', $menCategoryId)->pluck('id')->toArray();
-
-    $kidsCategoryId = Category::where('category_name', 'Kids')->pluck('id')->toArray();
     $kidsSubCategoryIds = Category::where('parent_category_id', $kidsCategoryId)->pluck('id')->toArray();
 
-    $menProductsCount = $products->whereIn('category_id', $menSubCategoryIds)->count();
-    $kidsProductsCount = $products->whereIn('category_id', $kidsSubCategoryIds)->count();
+    // Get Hot Trend products - newest products
+    $hotTrendProducts = Product::latest()->take(3)->get();
 
+    // Get Best Seller products - can be based on order count in a real app
+    $bestSellerProducts = Product::withCount('orderItems')
+        ->orderBy('order_items_count', 'desc')
+        ->take(3)
+        ->get();
 
+    // Get Featured products - can be based on rating in a real app
+    $featuredProducts = Product::inRandomOrder()->take(3)->get();
 
-    return view('index', compact('menProductsCount', 'kidsProductsCount', 'products'));;
+    // Get category counts
+    $menProductsCount = Product::whereIn('category_id', $menSubCategoryIds)->count();
+    $kidsProductsCount = Product::whereIn('category_id', $kidsSubCategoryIds)->count();
+
+    return view('index', compact(
+        'products',
+        'menProductsCount',
+        'kidsProductsCount',
+        'hotTrendProducts',
+        'bestSellerProducts',
+        'featuredProducts'
+    ));;
 })->name('home');
 
 // Routes for pages 
