@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CustomerResource\Pages;
+use App\Filament\Resources\AdminResource\Pages;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,18 +11,17 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-class CustomerResource extends Resource
+class AdminResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationLabel = 'Users';
-    protected static ?string $modelLabel = 'User';
-    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static ?string $navigationLabel = 'Administrators';
+    protected static ?string $modelLabel = 'Administrator';
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery();
+        return parent::getEloquentQuery()->where('role', 'admin');
     }
 
     public static function form(Form $form): Form
@@ -55,9 +54,6 @@ class CustomerResource extends Resource
                             ->required()
                             ->maxLength(255),
 
-                        Forms\Components\DateTimePicker::make('email_verified_at')
-                            ->label('Email Verified At'),
-
                         Forms\Components\TextInput::make('password')
                             ->password()
                             ->dehydrated(fn($state) => filled($state))
@@ -65,10 +61,11 @@ class CustomerResource extends Resource
 
                         Forms\Components\Select::make('role')
                             ->options([
-                                'customer' => 'Customer',
                                 'admin' => 'Administrator',
                             ])
-                            ->default('customer')
+                            ->default('admin')
+                            ->disabled()
+                            ->dehydrated()
                             ->required(),
                     ])
             ]);
@@ -100,11 +97,7 @@ class CustomerResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\BadgeColumn::make('role')
-                    ->colors([
-                        'success' => fn($state): bool => $state === 'customer',
-                        'danger' => fn($state): bool => $state === 'admin',
-                    ])
-                    ->formatStateUsing(fn($state): string => ucfirst($state)),
+                    ->color('danger'),
 
                 Tables\Columns\IconColumn::make('email_verified_at')
                     ->label('Verified')
@@ -117,11 +110,7 @@ class CustomerResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('role')
-                    ->options([
-                        'customer' => 'Customers',
-                        'admin' => 'Administrators',
-                    ])
+                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -145,9 +134,9 @@ class CustomerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCustomers::route('/'),
-            'create' => Pages\CreateCustomer::route('/create'),
-            'edit' => Pages\EditCustomer::route('/{record}/edit'),
+            'index' => Pages\ListAdmins::route('/'),
+            'create' => Pages\CreateAdmin::route('/create'),
+            'edit' => Pages\EditAdmin::route('/{record}/edit'),
         ];
     }
 }
