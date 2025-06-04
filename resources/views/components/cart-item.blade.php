@@ -19,7 +19,7 @@
             </div>
         </div>
     </td>
-    <td class="cart__price">LKR <span>{{ $product["price"] }}</span></td>
+    <td class="cart__price">LKR {{ number_format($product["price"], 2) }}</td>
     <td class="cart__quantity">
         <div class="pro-qty">
             <form action="{{ route('cart.update', $product['id']) }}" method="POST" class="update-cart-form">
@@ -33,13 +33,13 @@
                 ->where('product_id', $product['id'])
                 ->first()->quantity;
 
-
+                $itemTotal = $product["price"] * $cartQty;
                 @endphp
                 <input type="number" name="quantity" value="{{ $cartQty }}" min="1">
             </form>
         </div>
     </td>
-    <td class="cart__total">LKR {{ $product["price"]*$cartQty }}.00</td>
+    <td class="cart__total">LKR {{ number_format($itemTotal, 2) }}</td>
     <td class="cart__close">
         <form action="{{ route('cart.remove', $product['id']) }}" method="POST" class="">
             @csrf

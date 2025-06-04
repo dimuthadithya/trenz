@@ -248,13 +248,20 @@
         let cartSubTotal = 0;
         let cartTotal = 0;
         $(".cart__total").each(function () {
-            const price = parseFloat($(this).text().replace("LKR", ""));
+            const price = parseFloat($(this).text().replace("LKR", "").replace(/,/g, ""));
             cartSubTotal += price;
             cartTotal += price;
         });
 
-        $("#cartSubTotal").text("LKR" + cartSubTotal.toFixed(2)); // update cartSubTotal
-        $("#cartTotal").text("LKR" + cartTotal.toFixed(2)); // update cartTotal
+        const formatPrice = (price) => {
+            return "LKR " + price.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        };
+
+        $("#cartSubTotal").text(formatPrice(cartSubTotal));
+        $("#cartTotal").text(formatPrice(cartTotal));
     }
 
     /*-------------------

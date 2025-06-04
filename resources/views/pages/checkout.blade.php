@@ -1,3 +1,7 @@
+@php
+use App\Models\Cart;
+@endphp
+
 <x-app-layout>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -108,11 +112,16 @@
                                         <span class="top__text__right">Total</span>
                                     </li>
 
-
                                     @foreach ($products as $product )
+                                    @php
+                                    $cartQty = Cart::where('user_id', auth()->user()->id)
+                                    ->where('product_id', $product['id'])
+                                    ->first()->quantity;
+                                    $itemTotal = $product['price'] * $cartQty;
+                                    @endphp
                                     <li class="py-2 border-2 d-flex justify-content-between border-bottom">
-                                        <span class="w-50 fw-medium">{{$loop->iteration }}. {{ $product['name'] }}</span>
-                                        <span class="">LKR {{ $product['price'] }}</span>
+                                        <span class="w-50 fw-medium">{{$loop->iteration }}. {{ $product['name'] }} (× {{ $cartQty }})</span>
+                                        <span class="">LKR {{ number_format($itemTotal, 2) }}</span>
                                     </li>
                                     @endforeach
 
@@ -121,7 +130,7 @@
                             <div class="checkout__order__total">
                                 <ul>
                                     <li>Total
-                                        <span>LKR {{ $cartItemsTotal }}.00</span>
+                                        <span>LKR {{ number_format($cartItemsTotal, 2) }}</span>
                                     </li>
                                 </ul>
                             </div>
