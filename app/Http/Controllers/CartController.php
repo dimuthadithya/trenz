@@ -78,37 +78,18 @@ class CartController extends Controller
 
     /**
      * Update the specified resource in storage.
-     */
-    public function update(Request $request, $productId)
+     */    public function update(Request $request, $productId)
     {
         $userId = Auth::user()->id;
-        \Log::info('Cart Update Request', [
-            'user_id' => $userId,
-            'product_id' => $productId,
-            'quantity' => $request->quantity
-        ]);
-
         $cartItem = Cart::where('user_id', $userId)
             ->where('product_id', $productId)
             ->first();
 
-        \Log::info('Cart Item Found', ['cart_item' => $cartItem]);
-
         if ($cartItem) {
             $cartItem->quantity = $request->quantity;
             $cartItem->save();
-
-            \Log::info('Cart Item Updated', [
-                'cart_item' => $cartItem->fresh(),
-                'new_quantity' => $request->quantity
-            ]);
-
             return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
         } else {
-            \Log::error('Cart Item Not Found', [
-                'user_id' => $userId,
-                'product_id' => $productId
-            ]);
             return redirect()->route('cart.index')->with('error', 'Cart not found.');
         }
     }
