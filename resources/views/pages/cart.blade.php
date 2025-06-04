@@ -27,7 +27,7 @@
             <div class="mb-4 row">
                 <div class="col-md-6">
                     <div class="gap-3 d-flex">
-                        <a href="{{ route('shop') }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('home') }}" class="btn btn-outline-secondary">
                             Continue Shopping
                         </a>
                         <button id="updateCart" class="btn btn-primary">
