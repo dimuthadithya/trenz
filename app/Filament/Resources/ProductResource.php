@@ -67,17 +67,17 @@ class ProductResource extends Resource
                                 return $record->galleryImages()
                                     ->where('image_type', 'gallery')
                                     ->pluck('image_path')
-                                    ->map(fn($path) => str_replace('storage/', '', $path))
+                                    ->map(fn($path) => basename($path))
                                     ->toArray();
                             })
-                            ->dehydrateStateUsing(fn($state) => null)
+                            ->dehydrateStateUsing(fn($state) => $state) // Changed to return state instead of null
                             ->afterStateUpdated(function ($state, Forms\Set $set, $get) {
                                 if ($state && is_array($state)) {
                                     $record = Product::find($get('id'));
                                     if ($record) {
                                         // Get all the new image paths
                                         $newPaths = array_map(function ($image) {
-                                            return 'products/gallery/' . basename($image);
+                                            return basename($image);
                                         }, $state);
 
                                         // Delete removed images
@@ -88,17 +88,14 @@ class ProductResource extends Resource
 
                                         // Add or update gallery images
                                         foreach ($state as $image) {
-                                            $path = 'products/gallery/' . basename($image);
-                                            $record->galleryImages()->updateOrCreate(
-                                                [
+                                            if (!empty($image)) {
+                                                $record->galleryImages()->create([
                                                     'product_id' => $record->id,
                                                     'image_type' => 'gallery',
-                                                    'image_path' => $path,
-                                                ],
-                                                [
+                                                    'image_path' => $image,
                                                     'image_name' => basename($image)
-                                                ]
-                                            );
+                                                ]);
+                                            }
                                         }
                                     }
                                 }
