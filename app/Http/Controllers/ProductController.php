@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
+     * Display a listing of all products.
+     */
+    public function index()
+    {
+        $products = Product::paginate(20);
+        $categories = Category::whereNull('parent_category_id')->get();
+
+        return view('pages.shop', compact('products', 'categories'));
+    }
+
+    /**
      * Display a listing of Men's products.
      */
     public function indexMen()

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Payment;
 
 class OrderController extends Controller
 {
@@ -17,19 +18,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-
-        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
+        $user = Auth::user();
+        $cartItems = Cart::where('user_id', $user->id)->get();
         $products = [];
 
-        $cartItemsTotal =  0;
+        $cartItemsTotal = 0;
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
             if ($product) {
                 $cartItemsTotal += $product->price * $cartItem->quantity;
             }
         }
-
-
 
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
@@ -38,8 +37,12 @@ class OrderController extends Controller
             }
         }
 
+        // Get the user's default address
+        $defaultAddress = Address::where('user_id', $user->id)
+            ->where('is_default', true)
+            ->first();
 
-        return view('pages.checkout', compact('products', 'cartItemsTotal'));
+        return view('pages.checkout', compact('products', 'cartItemsTotal', 'defaultAddress'));
     }
 
     /**
@@ -57,6 +60,7 @@ class OrderController extends Controller
             'postcode' => 'required|string|max:10',
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
+            'payment_method' => 'required|in:card,paypal,cod',
         ]);
 
         $userId = Auth::user()->id;
@@ -95,7 +99,7 @@ class OrderController extends Controller
         $order->order_number = 'ORD' . time() . $userId;
         $order->total_price = 0;
         $order->status = 'processing';
-        $order->payment_status = 'paid';
+        $order->payment_status = 'pending';
         $order->save();
 
         $totalPrice = 0;
@@ -113,9 +117,34 @@ class OrderController extends Controller
         $order->total_price = $totalPrice;
         $order->save();
 
+        // Create payment record
+        $payment = new Payment();
+        $payment->user_id = $userId;
+        $payment->order_id = $order->id;
+        $payment->payment_method = $request->payment_method;
+        $payment->amount = $totalPrice;
+        $payment->status = 'pending';
+        $payment->save();
+
+        // Update order payment status based on payment method
+        if ($request->payment_method === 'cod') {
+            $order->payment_status = 'pending';
+        } else {
+            // For card and PayPal, we'd integrate with a payment gateway here
+            // For now, let's set it as paid for demo purposes
+            $order->payment_status = 'paid';
+            $payment->status = 'completed';
+            $payment->save();
+        }
+        $order->save();
+
+        // Clear the cart
         Cart::where('user_id', $userId)->delete();
 
-        return redirect()->route('home')->with('success', 'Order created successfully.');
+        // Load the order with its items and product details
+        $order = Order::with(['orderItems.product'])->find($order->id);
+
+        return view('pages.order-complete', compact('order'));
     }
 
     /**
@@ -131,7 +160,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        // Ensure the user can only view their own orders
+        if ($order->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+
+        $order->load(['orderItems.product', 'address']);
+        return view('pages.order-details', compact('order'));
     }
 
     /**

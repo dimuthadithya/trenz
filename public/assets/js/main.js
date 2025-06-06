@@ -201,22 +201,7 @@
         }
     });
 
-    /*------------------
-        Change Total Price
-    --------------------*/
-
-    $(".pro-qty input").on("change", function () {
-        const totalEl = $(this).closest("td").next();
-        const priceEl = $(this).closest("td").prev().find("span");
-
-        const total =
-            parseFloat($(this).val()) *
-            parseFloat(priceEl.text().replace("LKR", ""));
-
-        totalEl.text("LKR " + total.toFixed(2));
-
-        updateCartTotal();
-    });
+    // Cart totals are now handled by PHP
 
     /*------------------
         Submit Cart Forms
@@ -244,18 +229,7 @@
     --------------------*/
     updateCartTotal();
 
-    function updateCartTotal() {
-        let cartSubTotal = 0;
-        let cartTotal = 0;
-        $(".cart__total").each(function () {
-            const price = parseFloat($(this).text().replace("LKR", ""));
-            cartSubTotal += price;
-            cartTotal += price;
-        });
-
-        $("#cartSubTotal").text("LKR" + cartSubTotal.toFixed(2)); // update cartSubTotal
-        $("#cartTotal").text("LKR" + cartTotal.toFixed(2)); // update cartTotal
-    }
+    // Cart totals are now handled by PHP
 
     /*-------------------
 		Radio Btn

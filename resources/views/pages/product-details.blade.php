@@ -28,24 +28,24 @@ use App\Models\ProductImage;
                 <div class="col-lg-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
-                            <a class="pt active" href="#product-1">
-                                <img src="{{ asset($product->image) }}" alt="">
+                            <a class="pt active" href="#product-main">
+                                <img src="Storage::url{{ $product->image }}" alt="">
                             </a>
                             @php
                             $product_images = ProductImage::where('product_id', $product->id)->get();
-                            $image_count = $product_images->count();
-
                             @endphp
                             @foreach ($product_images as $product_image)
+
                             <a class="pt" href="#product-{{ $loop->iteration }}">
-                                <img src="{{ asset($product_image->image_path) }}" alt="">
+                                <img src="{{ $product_image->image_path }}" alt="">
                             </a>
                             @endforeach
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
+                                <img data-hash="product-main" class="product__big__img" src="../{{ $product->image }}" alt="">
                                 @foreach ($product_images as $product_image)
-                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ asset($product_image->image_path) }}" alt="">
+                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="./{{ $product_image->image_path }}" alt="">
                                 @endforeach
                             </div>
                         </div>
@@ -69,17 +69,16 @@ use App\Models\ProductImage;
                         <div class="product__details__price">LKR {{ $product->price }} <span>LKR {{ $product->price+10 }}.00</span></div>
                         <p>{{ $product->description }}</p>
                         <div class="product__details__button">
-                            <div class="quantity">
-                                <span>Quantity:</span>
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
-                                </div>
-                            </div>
                             @auth
-                            <form action="{{ route("cart.store") }}" method="post">
+                            <form action="{{ route("cart.store") }}" method="post" id="addToCartForm">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="quantity" value="1">
+                                <div class="quantity">
+                                    <span>Quantity:</span>
+                                    <div class="pro-qty">
+                                        <input type="text" name="quantity" value="1" id="quantityInput">
+                                    </div>
+                                </div>
                                 <button type="submit" class="border-0 cart-btn"><span class="icon_bag_alt"></span> Add to cart</button>
                             </form>
                             @else
@@ -102,23 +101,7 @@ use App\Models\ProductImage;
                                         </label>
                                     </div>
                                 </li>
-                                <li>
-                                    <span>Available color:</span>
-                                    <div class="color__checkbox">
-                                        <label for="red">
-                                            <input type="radio" name="color__radio" id="red" checked>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="black">
-                                            <input type="radio" name="color__radio" id="black">
-                                            <span class="checkmark black-bg"></span>
-                                        </label>
-                                        <label for="grey">
-                                            <input type="radio" name="color__radio" id="grey">
-                                            <span class="checkmark grey-bg"></span>
-                                        </label>
-                                    </div>
-                                </li>
+
                                 <li>
                                     <span>Available size:</span>
                                     <div class="size__btn">
@@ -150,34 +133,9 @@ use App\Models\ProductImage;
                 </div>
                 <div class="col-lg-12">
                     <div class="product__details__tab">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <h6>Description</h6>
-                                <p>
-                                    {{ $product->description }}
-                                </p>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <h6>Reviews ( 2 )</h6>
-                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                    consequat massa quis enim.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                    quis, sem.</p>
-                            </div>
+                        <div class="description-content">
+                            <h6>Description</h6>
+                            <p>{{ $product->description }}</p>
                         </div>
                     </div>
                 </div>
@@ -202,4 +160,30 @@ use App\Models\ProductImage;
         </div>
     </section>
     <!-- Product Details Section End -->
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to the quantity input and form
+            const quantityInput = document.getElementById('quantityInput');
+            const form = document.getElementById('addToCartForm');
+
+            // Listen for changes to the quantity through the pro-qty buttons
+            document.querySelector('.pro-qty').addEventListener('click', function(e) {
+                if (e.target.classList.contains('qtybtn')) {
+                    // Wait for the input value to be updated
+                    setTimeout(() => {
+                        // Update the form's quantity value
+                        quantityInput.value = parseInt(quantityInput.value) || 1;
+                    }, 100);
+                }
+            });
+
+            // Also listen for direct input changes
+            quantityInput.addEventListener('change', function() {
+                // Ensure the value is at least 1
+                this.value = Math.max(1, parseInt(this.value) || 1);
+            });
+        });
+    </script>
+    @endpush
 </x-app-layout>

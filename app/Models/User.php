@@ -60,10 +60,25 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
     }
+
+    /**
+     * Get the user's payment methods.
+     */
+    public function paymentMethods()
+    {
+        return $this->hasMany(PaymentMethod::class);
+    }
+
+
 
     public function getOrdersCountAttribute()
     {

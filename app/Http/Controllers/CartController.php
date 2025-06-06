@@ -19,15 +19,21 @@ class CartController extends Controller
         $cartItems = Cart::where('user_id', $userId)->get();
 
         $products = [];
+        $cartTotal = 0;
 
         foreach ($cartItems as $cartItem) {
             $product = Product::find($cartItem->product_id);
             if ($product) {
-                $products[] = $product->toArray();
+                $productArray = $product->toArray();
+                $productArray['cart_quantity'] = $cartItem->quantity;
+                $products[] = $productArray;
+
+                // Calculate item total and add to cart total
+                $cartTotal += $product->price * $cartItem->quantity;
             }
         }
 
-        return view('pages.cart', compact('products'));
+        return view('pages.cart', compact('products', 'cartTotal'));
     }
 
     /**
@@ -72,14 +78,12 @@ class CartController extends Controller
 
     /**
      * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
+     */    public function update(Request $request, $productId)
     {
-        $cartItem = Cart::where('user_id', Auth::user()->id)
-            ->where('product_id', $request->product_id)
+        $userId = Auth::user()->id;
+        $cartItem = Cart::where('user_id', $userId)
+            ->where('product_id', $productId)
             ->first();
-
-        // dd($cartItem);
 
         if ($cartItem) {
             $cartItem->quantity = $request->quantity;
@@ -93,14 +97,11 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart, $id)
+    public function destroy($id)
     {
-
-
         $cartItem = Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $id)
             ->first();
-
 
         if ($cartItem) {
             $cartItem->delete();

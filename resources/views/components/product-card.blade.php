@@ -2,17 +2,16 @@
 use App\Models\Category;
 
 $product_id = $product->id;
-
 $categoryName = Category::where('id', $product->category_id)->value('category_name');
 @endphp
 
 <div {{ $attributes->merge(['class' => 'col-lg-3 col-md-4 col-sm-6 product-card-item']) }}>
     <div class="cursor-pointer product__item">
-        <div class="product__item__pic set-bg" data-setbg="../{{ $product->image  }}">
+        <div class="product__item__pic set-bg" data-setbg="../{{ $product->image }}">
             <div class="label new">{{$categoryName }}</div>
             <ul class="product__hover">
                 <li>
-                    <a href="{{ asset($product->image) }}" class="image-popup"><span class="arrow_expand"></span></a>
+                    <a href="../{{ $product->image }}" class="image-popup"><span class="arrow_expand"></span></a>
                 </li>
                 <li>
                     @auth
@@ -38,6 +37,5 @@ $categoryName = Category::where('id', $product->category_id)->value('category_na
             </div>
             <div class="h-1 mt-2 product__price">LKR {{ $product->price ?? '0.0' }}</div>
         </div>
-        </a>
     </div>
 </div>

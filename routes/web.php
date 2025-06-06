@@ -1,17 +1,11 @@
 <?php
 
-use App\Http\Controllers\admin\AdminCategoryController;
-use App\Http\Controllers\admin\AdminDashboardController;
-use App\Http\Controllers\admin\AdminProductController;
-use App\Http\Controllers\admin\AdminUserController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
-use App\Http\Middleware\AdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Container\Attributes\Auth;
@@ -19,20 +13,40 @@ use Illuminate\Support\Facades\Route;
 
 // route for home page 
 Route::get('/', function () {
-    $products = Product::all()->take(20);
+    // Get all products for the product section
+    $products = Product::latest()->take(20)->get();
 
-    $menCategoryId = Category::where('category_name', 'Men')->pluck('id')->toArray();
+    // Get category IDs and counts
+    $menCategoryId = Category::where('category_name', 'Men')->pluck('id')->first();
+    $kidsCategoryId = Category::where('category_name', 'Kids')->pluck('id')->first();
+
     $menSubCategoryIds = Category::where('parent_category_id', $menCategoryId)->pluck('id')->toArray();
-
-    $kidsCategoryId = Category::where('category_name', 'Kids')->pluck('id')->toArray();
     $kidsSubCategoryIds = Category::where('parent_category_id', $kidsCategoryId)->pluck('id')->toArray();
 
-    $menProductsCount = $products->whereIn('category_id', $menSubCategoryIds)->count();
-    $kidsProductsCount = $products->whereIn('category_id', $kidsSubCategoryIds)->count();
+    // Get Hot Trend products - newest products
+    $hotTrendProducts = Product::latest()->take(3)->get();
 
+    // Get Best Seller products - can be based on order count in a real app
+    $bestSellerProducts = Product::withCount('orderItems')
+        ->orderBy('order_items_count', 'desc')
+        ->take(3)
+        ->get();
 
+    // Get Featured products - can be based on rating in a real app
+    $featuredProducts = Product::inRandomOrder()->take(3)->get();
 
-    return view('index', compact('menProductsCount', 'kidsProductsCount', 'products'));;
+    // Get category counts
+    $menProductsCount = Product::whereIn('category_id', $menSubCategoryIds)->count();
+    $kidsProductsCount = Product::whereIn('category_id', $kidsSubCategoryIds)->count();
+
+    return view('index', compact(
+        'products',
+        'menProductsCount',
+        'kidsProductsCount',
+        'hotTrendProducts',
+        'bestSellerProducts',
+        'featuredProducts'
+    ));;
 })->name('home');
 
 // Routes for pages 
@@ -46,10 +60,26 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 // Routes for Reg User 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Profile routes
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/address', [ProfileController::class, 'address'])->name('profile.address');
+    Route::post('/profile/address', [ProfileController::class, 'storeAddress'])->name('profile.address.store');
+    Route::patch('/profile/address/{id}', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
+    Route::delete('/profile/address/{id}', [ProfileController::class, 'deleteAddress'])->name('profile.address.delete');
+    Route::post('/profile/address/{id}/default', [ProfileController::class, 'setDefaultAddress'])->name('profile.address.default');
+    Route::get('/profile/payments', [ProfileController::class, 'payments'])->name('profile.payments');
+    Route::post('/profile/payments', [ProfileController::class, 'storePayment'])->name('profile.payments.store');
+    Route::delete('/profile/payments/{id}', [ProfileController::class, 'deletePayment'])->name('profile.payments.delete');
+    Route::post('/profile/payments/{id}/default', [ProfileController::class, 'setDefaultPayment'])->name('profile.payments.default');
+    Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
+    Route::post('/profile/orders/{order}/cancel', [ProfileController::class, 'cancelOrder'])->name('profile.orders.cancel');
+
+    Route::get('/profile/cancellations', [ProfileController::class, 'cancellations'])->name('profile.cancellations');
+    Route::get('/profile/reviews', [ProfileController::class, 'reviews'])->name('profile.reviews');
+    Route::get('/profile/wishlist', [ProfileController::class, 'wishlist'])->name('profile.wishlist');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/checkout',  [OrderController::class, 'index'])->name('checkout');
     Route::post('/checkout',  [OrderController::class, 'create'])->name('order.create');
@@ -58,24 +88,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
+    // Cart routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/create', [CartController::class, 'store'])->name('cart.store');
-    Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.remove');
-});
-
-// Routes for Admin 
-Route::middleware(['auth', AdminMiddleware::class])->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/users', [AdminUserController::class, 'index'])->name('users');
-    Route::get('/admin/view', [AdminDashboardController::class, 'viewAdmins'])->name('admin.view');
-    Route::get('/admin/create', [AdminDashboardController::class, 'create'])->name('admin.create');
-    Route::get('/products', [AdminProductController::class, 'index'])->name('products');
-    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
-    Route::post('/products/create', [AdminProductController::class, 'store'])->name('products.store');
-    Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.view');
-    Route::get('/categories/create', [AdminCategoryController::class, 'create'])->name('categories.create');
-    Route::post('/categories/create', [AdminCategoryController::class, 'store'])->name('categories.store');
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 
 

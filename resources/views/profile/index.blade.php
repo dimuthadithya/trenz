@@ -1,275 +1,289 @@
-<x-app-layout>
-    @push('styles')
+@php
+$user = Auth::user();
+@endphp
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - {{ config('app.name', 'Laravel') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/elegant-icons.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/slicknav.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
     <style>
-        :root {
-            --daraz-orange: #FF6A00;
-            --light-gray: #f5f5f5;
-            --dark-gray: #757575;
-        }
-
         body {
-            background-color: #F0F0F0;
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f9fa;
         }
 
-        .daraz-header {
-            background-color: var(--daraz-orange);
-            color: white;
-            padding: 10px 0;
+        .profile-hero {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem 2rem 2rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .daraz-logo {
-            height: 40px;
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1rem;
         }
 
-        .search-container {
-            width: 100%;
-            max-width: 700px;
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
         }
 
-        .search-box {
-            border-radius: 2px;
-            border: none;
-        }
-
-        .search-btn {
-            background-color: white;
-            border: none;
-            color: #FF6A00;
-        }
-
-        .top-nav {
-            font-size: 0.8rem;
-        }
-
-        .navbar-toggler {
-            border: none;
-        }
-
-        .account-container {
-            background-color: white;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-            margin-bottom: 20px;
-        }
-
-        .account-sidebar {
-            background-color: white;
-            padding: 15px;
-            margin-right: 10px;
-        }
-
-        .account-sidebar h5 {
-            color: #424242;
+        .profile-email {
+            color: #888;
             font-size: 1rem;
-            margin-bottom: 15px;
-            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .sidebar-menu {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .sidebar-menu li {
-            padding: 3px 0;
-            color: #757575;
+        .profile-badge {
             font-size: 0.9rem;
         }
 
-        .sidebar-menu .active {
-            color: var(--daraz-orange);
-            font-weight: 500;
-        }
-
-        .orders-container {
-            background-color: white;
-            padding: 15px;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-        }
-
-        .orders-tabs {
-            border-bottom: 1px solid #e0e0e0;
-            margin-bottom: 20px;
-        }
-
-        .orders-tabs .nav-link {
-            color: #757575;
+        .stat-card {
             border: none;
-            border-bottom: 3px solid transparent;
-            padding: 10px 15px;
-            font-size: 0.9rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s;
         }
 
-        .orders-tabs .nav-link.active {
-            color: var(--daraz-orange);
-            background-color: transparent;
-            border-bottom: 3px solid var(--daraz-orange);
-            font-weight: 500;
+        .stat-card:hover {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
         }
 
-        .search-order {
-            margin-bottom: 20px;
+        .stat-icon {
+            font-size: 2.2rem;
+            padding: 0.7rem;
+            border-radius: 0.7rem;
+            margin-bottom: 0.5rem;
         }
 
-        .order-item {
-            border: 1px solid #e0e0e0;
-            border-radius: 3px;
-            margin-bottom: 20px;
+        .stat-orders {
+            background: #e7f1ff;
+            color: #0d6efd;
         }
 
-        .order-header {
-            background-color: #f9f9f9;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .stat-wishlist {
+            background: #ffe7ec;
+            color: #dc3545;
         }
 
-        .order-vendor {
-            font-weight: 600;
-            color: #424242;
+        .stat-reviews {
+            background: #fff8e1;
+            color: #ffc107;
         }
 
-        .order-status {
-            color: #757575;
-            font-size: 0.9rem;
+        .recent-orders-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
         }
 
-        .order-content {
-            padding: 15px;
-            display: flex;
-            align-items: center;
+        .recent-orders-title {
+            font-weight: 700;
         }
 
-        .order-img {
-            width: 80px;
+        .profile-sidebar {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-sidebar .user-info {
             text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .order-img img {
-            max-width: 60px;
+        .profile-sidebar .user-avatar {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 0.5rem;
         }
 
-        .order-details {
-            flex-grow: 1;
-            padding: 0 15px;
+        .profile-sidebar .user-name {
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        .order-title {
-            margin-bottom: 5px;
+        .profile-sidebar .user-email {
             font-size: 0.95rem;
-            color: #424242;
+            color: #888;
         }
 
-        .order-info {
-            font-size: 0.85rem;
-            color: #757575;
+        .profile-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .order-price {
-            font-weight: 600;
-            color: #424242;
-            text-align: right;
+        .profile-nav li {
+            margin-bottom: 0.5rem;
         }
 
-        .order-qty {
-            color: #757575;
-            font-size: 0.85rem;
+        .profile-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 1rem;
+            border-radius: 0.5rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .profile-nav a.active,
+        .profile-nav a:hover {
+            background: #f0f4ff;
+            color: #0d6efd;
+        }
+
+        .profile-nav a i {
+            width: 20px;
             text-align: center;
-            width: 80px;
         }
 
-        .delivered-label {
-            background-color: #F5F5F5;
-            color: #757575;
-            padding: 3px 10px;
-            border-radius: 2px;
-            font-size: 0.8rem;
-        }
-
-        .nav::before,
-        .nav::after {
-            background: transparent;
+        @media (max-width: 991px) {
+            .profile-sidebar {
+                margin-bottom: 1.5rem;
+            }
         }
     </style>
-    @endpush
-    <!-- Main content container -->
-    <div class="container mt-4 mb-5 ">
-        <div class="row">
-            <!-- Left sidebar -->
-            <div class="col-md-3">
-                <div class="account-sidebar">
-                    <div class="pb-2">Hello, {{ auth()->user()->name }}</div>
+</head>
 
-                    <h5 class="mt-3">Manage My Account</h5>
-                    <ul class="sidebar-menu ms-3">
-                        <li><a href="">My Profile</a></li>
-                        <li><a href="">Address Book</a></li>
-                        <li><a href="">My Payment Options</a></li>
+<body>
+    @include('layouts.navbar')
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="mb-4 col-lg-3 mb-lg-0">
+                <!-- Profile Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="user-info">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=0d6efd&color=fff&size=96"
+                            alt="Avatar" class="user-avatar rounded-circle">
+                        <div class="user-name">{{ $user->name }}</div>
+                        <div class="user-email">{{ $user->email }}</div>
+                    </div>
+                    <ul class="profile-nav">
+                        <li><a href="{{ route('profile.index') }}"
+                                class="@if(request()->routeIs('profile.index')) active @endif"><i class="fas fa-user"></i>
+                                Overview</a></li>
+                        <li><a href="{{ route('profile.edit') }}"
+                                class="@if(request()->routeIs('profile.edit')) active @endif"><i class="fas fa-user-edit"></i>
+                                Edit Profile</a></li>
+                        <li><a href="{{ route('profile.address') }}"
+                                class="@if(request()->routeIs('profile.address')) active @endif"><i class="fas fa-map-marker-alt"></i>
+                                Addresses</a></li>
+                        <li><a href="{{ route('profile.orders') }}"
+                                class="@if(request()->routeIs('profile.orders')) active @endif"><i class="fas fa-shopping-bag"></i>
+                                Orders</a></li>
+                        <li><a href="{{ route('profile.wishlist') }}"
+                                class="@if(request()->routeIs('profile.wishlist')) active @endif"><i class="fas fa-heart"></i>
+                                Wishlist</a></li>
+                        <li><a href="{{ route('profile.reviews') }}"
+                                class="@if(request()->routeIs('profile.reviews')) active @endif"><i class="fas fa-star"></i>
+                                Reviews</a></li>
                     </ul>
-
-                    <h5 class="mt-3">My Orders</h5>
-                    <ul class="sidebar-menu ms-3">
-                        <li class="active"><a href="">My Orders</a></li>
-                        <li><a href="">My Returns</a></li>
-                        <li><a href="">My Cancellations</a></li>
-                    </ul>
-
-                    <h5 class="mt-3">My Reviews</h5>
-
-                    <h5 class="mt-3">My Wishlist & Followed Stores</h5>
                 </div>
             </div>
-
-            <!-- Main content area -->
-            <div class="col-md-9">
-                <div class="orders-container">
-                    <h4 class="mb-3">My Orders</h4>
-
-                    <!-- Order tabs -->
-                    <ul class="nav orders-tabs ">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">To Pay</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">To Ship</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">To Receive</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">To Review(s)</a>
-                        </li>
-                    </ul>
-
-                    <!-- Search order -->
-                    <div class="search-order">
-                        <div class="input-group">
-                            <span class="bg-white input-group-text border-end-0">
-                                <i class="bi bi-search"></i>
-                            </span>
-                            <input type="text" class="form-control border-start-0" placeholder="Search by seller name, order ID or product name">
+            <div class="col-lg-9">
+                <!-- Profile Hero -->
+                <div class="profile-hero">
+                    <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=0d6efd&color=fff&size=128"
+                        alt="Avatar" class="profile-avatar">
+                    <div class="profile-name">{{ $user->name }}</div>
+                    <div class="profile-email">{{ $user->email }}</div>
+                    <span class="bg-opacity-75 badge bg-primary profile-badge">Member</span>
+                    <div class="mt-3">
+                        <a href="{{ route('profile.edit') }}"
+                            class="btn btn-outline-primary btn-sm"><i class="fas fa-user-edit me-1"></i> Edit Profile</a>
+                    </div>
+                </div>
+                <!-- Stats -->
+                <div class="mb-4 row g-4">
+                    <div class="col-12 col-md-4">
+                        <div class="py-3 text-center card stat-card">
+                            <div class="mx-auto mb-2 stat-icon stat-orders"><i class="fas fa-shopping-bag"></i></div>
+                            <div class="fw-bold text-uppercase small text-muted">Total Orders</div>
+                            <div class="mb-1 fs-2 fw-bold">{{ $totalOrders }}</div>
+                            <a href="{{ route('profile.orders') }}" class="link-primary small">View Orders</a>
                         </div>
                     </div>
-
-                    <!-- Order items -->
-                    @foreach ($orderItems as $orderItem)
-                    @php
-                    $productId = $orderItem->product_id;
-                    $product = \App\Models\Product::find($productId);
-                    $orderDetails = \App\Models\Order::find($orderItem->order_id);
-
-
-                    @endphp
-                    <x-order-item :product="$product" :orderItem="$orderItem" :orderDetails="$orderDetails" />
-                    @endforeach
+                    <div class="col-12 col-md-4">
+                        <div class="py-3 text-center card stat-card">
+                            <div class="mx-auto mb-2 stat-icon stat-wishlist"><i class="fas fa-heart"></i></div>
+                            <div class="fw-bold text-uppercase small text-muted">Wishlist Items</div>
+                            <div class="mb-1 fs-2 fw-bold">{{ $wishlistCount }}</div>
+                            <a href="{{ route('profile.wishlist') }}" class="link-danger small">View Wishlist</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="py-3 text-center card stat-card">
+                            <div class="mx-auto mb-2 stat-icon stat-reviews"><i class="fas fa-star"></i></div>
+                            <div class="fw-bold text-uppercase small text-muted">Reviews Written</div>
+                            <div class="mb-1 fs-2 fw-bold">{{ $reviewsCount }}</div>
+                            <a href="{{ route('profile.reviews') }}" class="link-warning small">View Reviews</a>
+                        </div>
+                    </div>
                 </div>
+                <!-- Recent Orders -->
+                @if($recentOrders->count() > 0)
+                <div class="card recent-orders-card">
+                    <div class="py-3 bg-white border-0 card-header d-flex align-items-center justify-content-between">
+                        <span class="recent-orders-title">Recent Orders</span>
+                        <a href="{{ route('profile.orders') }}" class="px-3 btn btn-sm btn-primary rounded-pill">View All
+                            Orders</a>
+                    </div>
+                    <div class="p-0 card-body">
+                        <div class="list-group list-group-flush">
+                            @foreach($recentOrders as $order)
+                            <x-order-card :order="$order" />
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
-</x-app-layout>
+    @include('layouts.footer')
+
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.nicescroll.min.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/notyf.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
