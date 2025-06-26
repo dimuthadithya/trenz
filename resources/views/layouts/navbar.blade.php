@@ -46,7 +46,6 @@ $wishlistCount = Wishlist::where('user_id', Auth::id())->count();
                         <li class="{{ Route::currentRouteName() == 'men' ? 'active' : '' }}">
                             <a href="{{ route('men') }}">Men's</a>
                         </li>
-                        <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
