@@ -136,17 +136,6 @@ Product Link: {{ route('product.show', $product->id) }}`;
                         <div class="product__details__widget">
                             <ul>
                                 <li>
-                                    <span>Availability:</span>
-                                    <div class="stock__checkbox">
-                                        <label for="stockin">
-                                            In Stock
-                                            <input type="checkbox" id="stockin">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </li>
-
-                                <li>
                                     <span>Available size:</span>
                                     <div class="size__btn">
                                         <label for="xs-btn" class="active">
@@ -166,10 +155,6 @@ Product Link: {{ route('product.show', $product->id) }}`;
                                             l
                                         </label>
                                     </div>
-                                </li>
-                                <li>
-                                    <span>Promotions:</span>
-                                    <p>Free shipping</p>
                                 </li>
                             </ul>
                         </div>
