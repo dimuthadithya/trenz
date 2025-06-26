@@ -158,7 +158,7 @@ $user = Auth::user();
                             @foreach($order->orderItems as $item)
                             <div class="mb-3 card">
                                 <div class="card-body d-flex align-items-center">
-                                    <img src="{{ $item->product->image ?? 'https://via.placeholder.com/60x60.png?text=Product' }}" class="product-img" alt="Product Image">
+                                    <img src="{{ asset('storage/products/' . ($item->product->image ?? '')) ?? 'https://via.placeholder.com/60x60.png?text=Product' }}" class="product-img" alt="Product Image">
                                     <div>
                                         <div class="mb-1 card-title">{{ $item->product->name ?? 'Product' }}</div>
                                         <div class="card-text text-muted small">Price: Rs. {{ number_format($item->price, 2) }}</div>

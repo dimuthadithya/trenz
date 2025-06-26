@@ -3,6 +3,46 @@ use App\Models\ProductImage;
 @endphp
 
 <x-app-layout>
+    <style>
+        .whatsapp-btn {
+            background-color: #25D366 !important;
+            margin-top: 10px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E !important;
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn i {
+            margin-right: 5px;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInput = document.getElementById('quantityInput');
+            const whatsappLink = document.querySelector('.whatsapp-btn');
+
+            if (quantityInput && whatsappLink) {
+                quantityInput.addEventListener('change', function() {
+                    const quantity = this.value || 1;
+                    const baseUrl = 'https://wa.me/94740069520?text=';
+                    const message = `Hello, I would like to order:
+
+Product: {{ $product->name }}
+Price: Rs. {{ $product->price }}
+Quantity: ${quantity}
+
+Product Link: {{ route('product.show', $product->id) }}`;
+
+                    whatsappLink.href = baseUrl + encodeURIComponent(message);
+                });
+            }
+        });
+    </script>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -29,7 +69,7 @@ use App\Models\ProductImage;
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-main">
-                                <img src="Storage::url{{ $product->image }}" alt="">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="">
                             </a>
                             @php
                             $product_images = ProductImage::where('product_id', $product->id)->get();
@@ -43,9 +83,9 @@ use App\Models\ProductImage;
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-main" class="product__big__img" src="../{{ $product->image }}" alt="">
+                                <img data-hash="product-main" class="product__big__img" src="{{ asset('storage/' . $product->image) }}" alt="">
                                 @foreach ($product_images as $product_image)
-                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="./{{ $product_image->image_path }}" alt="">
+                                <img data-hash="product-{{ $loop->iteration }}" class="product__big__img" src="{{ $product_image->image_path }}" alt="">
                                 @endforeach
                             </div>
                         </div>
@@ -81,8 +121,18 @@ use App\Models\ProductImage;
                                 </div>
                                 <button type="submit" class="border-0 cart-btn"><span class="icon_bag_alt"></span> Add to cart</button>
                             </form>
+                            <a href="https://wa.me/94740069520?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: ' . request()->input('quantity', 1) . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
+                                target="_blank"
+                                class="cart-btn whatsapp-btn">
+                                <i class="fa fa-whatsapp"></i> Order via WhatsApp
+                            </a>
                             @else
                             <a href="{{ route("login") }}" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <a href="https://wa.me/94740069520?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: 1' . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
+                                target="_blank"
+                                class="cart-btn whatsapp-btn">
+                                <i class="fa fa-whatsapp"></i> Order via WhatsApp
+                            </a>
                             @endauth
                             <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>

@@ -118,7 +118,7 @@ class ProductResource extends Resource
                 Tables\Columns\ImageColumn::make('image')
                     ->circular()
                     ->size(50)
-                    ->url(fn($record) => $record->image ? asset('storage/products/' . $record->image) : null),
+                    ->url(fn($record) => $record->image ? asset('storage/' . $record->image) : null),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

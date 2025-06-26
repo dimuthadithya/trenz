@@ -48,7 +48,7 @@
                         @foreach($order->orderItems as $item)
                         <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
                             <div class="flex-shrink-0">
-                                <img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" class="rounded" style="width: 64px; height: 64px; object-fit: cover;">
+                                <img src="{{ asset('storage/products/' . $item->product->image) }}" alt="{{ $item->product->name }}" class="rounded" style="width: 64px; height: 64px; object-fit: cover;">
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <h6 class="mb-1">{{ $item->product->name }}</h6>

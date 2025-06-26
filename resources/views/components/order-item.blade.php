@@ -9,7 +9,7 @@
             </div>
             <div class="order-content">
                 <div class="order-img">
-                    <img src="{{ $product->image }}" alt="Dialog" class="img-fluid">
+                    <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
                 </div>
                 <div class="order-details">
                     <div class="lowercase order-title">{{ $product->name }}</div>

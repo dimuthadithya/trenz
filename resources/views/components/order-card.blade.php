@@ -19,7 +19,7 @@
             @foreach ($order->orderItems as $item)
             <div class="mb-3 d-flex align-items-start">
                 <div class="flex-shrink-0 me-3" style="width: 60px; height: 60px;">
-                    <img src="{{ asset($item->product->image) }}"
+                    <img src="{{ asset('storage/products/' . $item->product->image) }}"
                         alt="{{ $item->product->name }}"
                         class="border rounded img-fluid"
                         style="width: 60px; height: 60px; object-fit: cover;"

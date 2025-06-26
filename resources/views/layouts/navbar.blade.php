@@ -14,29 +14,12 @@ $wishlistCount = Wishlist::where('user_id', Auth::id())->count();
 <div class="offcanvas-menu-overlay"></div>
 <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__close">+</div>
-    <ul class="offcanvas__widget">
-        <li><span class="icon_search search-switch"></span></li>
-        <li>
-            <a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">{{ $wishlistCount }}</div>
-            </a>
-        </li>
-        <li>
-            <a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">{{ $cartCount }}</div>
-            </a>
-        </li>
-    </ul>
     <div class="offcanvas__logo">
         <a href="{{ route('home') }}">
             <img class="logo" src="{{ asset('assets/img/logo/logo.png') }}" alt="">
         </a>
     </div>
     <div id="mobile-menu-wrap"></div>
-    <div class="offcanvas__auth">
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Register</a>
-    </div>
 </div>
 <!-- Offcanvas Menu End -->
 
@@ -72,42 +55,8 @@ $wishlistCount = Wishlist::where('user_id', Auth::id())->count();
                     <div class="header__right__auth">
                         @auth
                         <a href="{{ route('logout') }}">Logout</a>
-                        @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
                         @endauth
                     </div>
-                    <ul class="header__right__widget">
-                        <li><span class="icon_search search-switch"></span></li>
-                        <li>
-                            <a href="{{ route('wishlist.index') }}"><span class="icon_heart_alt"></span>
-                                <div class="tip">
-                                    @auth
-                                    {{ $wishlistCount }}
-                                    @else
-                                    0
-                                    @endauth
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('cart.index') }}"><span class="icon_bag_alt"></span>
-                                <div class="tip">
-                                    @auth
-                                    {{ $cartCount }}
-                                    @else
-                                    0
-                                    @endauth
-                                </div>
-                            </a>
-                        </li>
-                        @auth
-                        <li>
-                            <a href="{{ route('profile.index') }}"><span class="fa-regular fa-user"></span>
-                            </a>
-                        </li>
-                        @endauth
-                    </ul>
                 </div>
             </div>
         </div>

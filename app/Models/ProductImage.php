@@ -11,7 +11,7 @@ class ProductImage extends Model
     public function getImagePathAttribute($value)
     {
         if (empty($value)) return null;
-        return asset('storage/' . $value);
+        return asset('storage/products/gallery/' . $value);
     }
 
     public function product()
