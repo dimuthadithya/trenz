@@ -25,22 +25,46 @@ use App\Models\ProductImage;
         document.addEventListener('DOMContentLoaded', function() {
             const quantityInput = document.getElementById('quantityInput');
             const whatsappLink = document.querySelector('.whatsapp-btn');
+            const sizeInputs = document.querySelectorAll('input[name="size"]');
 
-            if (quantityInput && whatsappLink) {
-                quantityInput.addEventListener('change', function() {
-                    const quantity = this.value || 1;
+            function updateWhatsAppLink() {
+                if (whatsappLink) {
+                    const quantity = quantityInput ? (quantityInput.value || 1) : 1;
+                    const selectedSize = document.querySelector('input[name="size"]:checked').value;
                     const baseUrl = 'https://wa.me/94740069520?text=';
                     const message = `Hello, I would like to order:
 
 Product: {{ $product->name }}
 Price: Rs. {{ $product->price }}
+Size: ${selectedSize}
 Quantity: ${quantity}
 
 Product Link: {{ route('product.show', $product->id) }}`;
 
                     whatsappLink.href = baseUrl + encodeURIComponent(message);
-                });
+                }
             }
+
+            // Update link when quantity changes
+            if (quantityInput) {
+                quantityInput.addEventListener('change', updateWhatsAppLink);
+            }
+
+            // Update link when size changes
+            sizeInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Remove active class from all labels
+                    document.querySelectorAll('.size__btn label').forEach(label => {
+                        label.classList.remove('active');
+                    });
+                    // Add active class to selected label
+                    this.parentElement.classList.add('active');
+                    updateWhatsAppLink();
+                });
+            });
+
+            // Initial update
+            updateWhatsAppLink();
         });
     </script>
     <!-- Breadcrumb Begin -->
@@ -108,6 +132,31 @@ Product Link: {{ route('product.show', $product->id) }}`;
                         </div>
                         <div class="product__details__price">LKR {{ $product->price }} <span>LKR {{ $product->price+10 }}.00</span></div>
                         <p>{{ $product->description }}</p>
+                        <div class="mb-3 product__details__widget">
+                            <ul>
+                                <li>
+                                    <span>Select size:</span>
+                                    <div class="size__btn">
+                                        <label for="xs-btn" class="active">
+                                            <input type="radio" id="xs-btn" name="size" value="XS" checked>
+                                            xs
+                                        </label>
+                                        <label for="s-btn">
+                                            <input type="radio" id="s-btn" name="size" value="S">
+                                            s
+                                        </label>
+                                        <label for="m-btn">
+                                            <input type="radio" id="m-btn" name="size" value="M">
+                                            m
+                                        </label>
+                                        <label for="l-btn">
+                                            <input type="radio" id="l-btn" name="size" value="L">
+                                            l
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="product__details__button">
                             @auth
                             <form action="" method="post" id="addToCartForm">
@@ -132,31 +181,6 @@ Product Link: {{ route('product.show', $product->id) }}`;
                                 <i class="fa fa-whatsapp"></i> Order via WhatsApp
                             </a>
                             @endauth
-                        </div>
-                        <div class="product__details__widget">
-                            <ul>
-                                <li>
-                                    <span>Available size:</span>
-                                    <div class="size__btn">
-                                        <label for="xs-btn" class="active">
-                                            <input type="radio" id="xs-btn">
-                                            xs
-                                        </label>
-                                        <label for="s-btn">
-                                            <input type="radio" id="s-btn">
-                                            s
-                                        </label>
-                                        <label for="m-btn">
-                                            <input type="radio" id="m-btn">
-                                            m
-                                        </label>
-                                        <label for="l-btn">
-                                            <input type="radio" id="l-btn">
-                                            l
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
