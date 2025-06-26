@@ -8,7 +8,9 @@
                         <a href="./index.html"><img src="img/logo.png" alt="" /></a>
                     </div>
                     <p>
-                        At TRENZ, we blend timeless style with modern trends, offering high-quality apparel for confident, everyday style.
+                        High Quality & Trending Fashion Brand | Island-wide Delivery in Sri Lanka
+                        Follow us on social media for the latest collections and offers.
+                        📍 Designed for style. Delivered with care.
                     </p>
                     <div class="footer__payment">
                         <a href="#"><img src="img/payment/payment-1.png" alt="" /></a>
@@ -20,40 +22,17 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
-                <div class="footer__widget">
-                    <h6>Quick links</h6>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <div class="footer__widget">
-                    <h6>Account</h6>
-                    <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                    </ul>
-                </div>
             </div>
             <div class="col-lg-4 col-md-8 col-sm-8">
                 <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email" />
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
+                    <h6>Contact</h6>
                     <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        <a href="https://www.facebook.com/share/1EEcPgEMy7/"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@vellarofashion?_t=ZS-8weLyKoxWTw&_r=1"><i class="fa fa-tiktok"></i></a>
+                        <a href="https://wa.me/94776775814"><i class="fa fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/vellarofashion?igsh=MTlsZWtkZHNzc2N4Zw=="><i class="fa fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -63,7 +42,7 @@
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 <div class="footer__copyright__text">
                     <p>
-                        Copyright &copy;
+                        © 2025 Vellaro &copy;
                         <script>
                             document.write(new Date().getFullYear());
                         </script>

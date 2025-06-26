@@ -110,7 +110,7 @@ Product Link: {{ route('product.show', $product->id) }}`;
                         <p>{{ $product->description }}</p>
                         <div class="product__details__button">
                             @auth
-                            <form action="{{ route("cart.store") }}" method="post" id="addToCartForm">
+                            <form action="" method="post" id="addToCartForm">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <div class="quantity">
@@ -119,7 +119,6 @@ Product Link: {{ route('product.show', $product->id) }}`;
                                         <input type="text" name="quantity" value="1" id="quantityInput">
                                     </div>
                                 </div>
-                                <button type="submit" class="border-0 cart-btn"><span class="icon_bag_alt"></span> Add to cart</button>
                             </form>
                             <a href="https://wa.me/94740069520?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: ' . request()->input('quantity', 1) . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
                                 target="_blank"
@@ -127,17 +126,12 @@ Product Link: {{ route('product.show', $product->id) }}`;
                                 <i class="fa fa-whatsapp"></i> Order via WhatsApp
                             </a>
                             @else
-                            <a href="{{ route("login") }}" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
                             <a href="https://wa.me/94740069520?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: 1' . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
                                 target="_blank"
                                 class="cart-btn whatsapp-btn">
                                 <i class="fa fa-whatsapp"></i> Order via WhatsApp
                             </a>
                             @endauth
-                            <ul>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
-                            </ul>
                         </div>
                         <div class="product__details__widget">
                             <ul>
