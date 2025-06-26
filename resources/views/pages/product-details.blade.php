@@ -31,7 +31,7 @@ use App\Models\ProductImage;
                 if (whatsappLink) {
                     const quantity = quantityInput ? (quantityInput.value || 1) : 1;
                     const selectedSize = document.querySelector('input[name="size"]:checked').value;
-                    const baseUrl = 'https://wa.me/94740069520?text=';
+                    const baseUrl = 'https://wa.me/94776775814?text=';
                     const message = `Hello, I would like to order:
 
 Product: {{ $product->name }}
@@ -169,13 +169,13 @@ Product Link: {{ route('product.show', $product->id) }}`;
                                     </div>
                                 </div>
                             </form>
-                            <a href="https://wa.me/94740069520?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: ' . request()->input('quantity', 1) . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
+                            <a href="https://wa.me/94776775814?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: ' . request()->input('quantity', 1) . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
                                 target="_blank"
                                 class="cart-btn whatsapp-btn">
                                 <i class="fa fa-whatsapp"></i> Order via WhatsApp
                             </a>
                             @else
-                            <a href="https://wa.me/94740069520?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: 1' . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
+                            <a href="https://wa.me/94776775814?text={{ urlencode('Hello, I would like to order:' . "\n\n" . 'Product: ' . $product->name . "\n" . 'Price: Rs. ' . $product->price . "\n" . 'Quantity: 1' . "\n\n" . 'Product Link: ' . route('product.show', $product->id)) }}"
                                 target="_blank"
                                 class="cart-btn whatsapp-btn">
                                 <i class="fa fa-whatsapp"></i> Order via WhatsApp

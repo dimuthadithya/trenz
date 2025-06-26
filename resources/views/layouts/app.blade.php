@@ -7,12 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/logo/favicon_io/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/favicon_io/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/logo/favicon_io/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('assets/img/logo/favicon_io/site.webmanifest') }}">
+    <link rel="stylesheet" href="{{ asset('assets/img/logo/logo.png') }}" type="image/png" sizes="180x180">
 
-    <title>Trenz</title>
+    <title>Vellaro</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
